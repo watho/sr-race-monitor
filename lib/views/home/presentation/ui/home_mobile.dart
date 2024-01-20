@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+import 'package:smart_race_monitor/views/home/presentation/ui/dashboard/race_state_table.dart';
+import 'package:smart_race_monitor/views/home/presentation/ui/dashboard/lap_table.dart';
+import 'package:smart_race_monitor/util/temp_box.dart';
+
+class HomeMobile extends StatelessWidget {
+  const HomeMobile({super.key, required this.drawer});
+
+  final Widget drawer;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          title: Row(
+        children: [
+          Image.asset(
+            'assets/icon.png',
+            semanticLabel: "Logo",
+            height: 32,
+            width: 32,
+          ),
+          const Text(" Mobile"),
+        ],
+      )),
+      drawer: drawer,
+      body: const Column(
+        children: [
+          RaceStatusTableBox(flexValue: 2),
+          LapTableBox(
+            flexValue: 2,
+            columnCount: 1,
+          ),
+          TempBox(
+            title: "Istwerte 2",
+            flexValue: 1,
+          ),
+          TempBox(
+            title: "Trendmodul",
+            flexValue: 2,
+          ),
+          TempBox(
+            title: "Alarmliste",
+            flexValue: 1,
+          ),
+        ],
+      ),
+    );
+  }
+}
