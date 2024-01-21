@@ -1,26 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:shelf/shelf.dart';
-import 'package:shelf/shelf_io.dart' as shelf_io;
+import 'package:shelf_plus/shelf_plus.dart' as shelf_plus;
+import 'package:shelf_cors_headers/shelf_cors_headers.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smart_race_monitor/event_model/race_event.dart';
 import 'package:smart_race_monitor/util/routing/router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() async {
-  var handler =
-      const Pipeline().addMiddleware(logRequests()).addHandler(_echoRequest);
+void main() {
+  var receiver_app = shelf_plus.shelfRun(init, defaultBindAddress: '0.0.0.0', defaultBindPort: 8085, defaultEnableHotReload: false);
+  runApp(MyApp());
+}
 
-  var server = await shelf_io.serve(handler, 'localhost', 8085);
+shelf_plus.Handler init() {
+  //var handler =
+  //    const Pipeline().addMiddleware(logRequests()).addHandler(_echoRequest);
+
+  //var server = await shelf_io.serve(handler, '0.0.0.0', 8085);
 
   // Enable content compression
-  server.autoCompress = true;
+  //server.autoCompress = true;
 
-  print('Serving at http://${server.address.host}:${server.port}');
+  //print('Starting receiving endpoint at http://${server.address.host}:${server.port}');
 
-  runApp(MyApp());
+  var postReceiver = shelf_plus.Router().plus;
+  postReceiver.use(shelf_plus.logRequests());
+  postReceiver.use(corsHeaders());
+  //postReceiver.post('/', (request) => '"${request.method}" at "${request.url}" with length "${request.contentLength}" ');
+  postReceiver.get('/<ignored|.*>', (request) => 'Congratulation! This works and you can enter this url in the smartrace-app settings.');
+
+  /// Receive RaceEvent
+  postReceiver.post('/<ignored|.*>', (shelf_plus.Request request) async {
+    //var newPerson = await request.body.as(Person.fromJson);
+    //var body = await request.body.as(RaceEvent.fromJson);
+    Map<String, dynamic> body = await request.body.asJson;
+    if (body.containsKey("event_type")) {
+      print("Yeah");
+      // TODO Switch-case event_type and create TypeObjects.
+    }
+    return body;
+  });
+  return postReceiver;
 }
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
+
+
 
   // This widget is the root of your application.
   @override
@@ -44,8 +69,10 @@ class MyApp extends StatelessWidget {
   );
 }
 
-Response _echoRequest(Request request) =>
-    Response.ok('Request for "${request.url}"');
+// Response _echoRequest(Request request) {
+//
+//   return Response.ok('"${request.method}" at "${request.url}" with length "${request.contentLength}" ');
+// }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
