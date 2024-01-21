@@ -4,12 +4,19 @@ part 'race_event.g.dart';
 
 @JsonSerializable()
 class RaceEvent {
-  final String timestamp;
+  final int time;
+
+  @JsonKey(name: 'event_type')
   final String? eventType;
 
+  @JsonKey(name: 'event_data')
+  final Map<String, dynamic> eventData;
+
+
   RaceEvent({
-    required this.timestamp,
+    required this.time,
     this.eventType,
+    required this.eventData
   });
 
   Map<String, dynamic> toJson() => _$RaceEventToJson(this);

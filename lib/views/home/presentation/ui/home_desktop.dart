@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_race_monitor/event_model/bloc/race_event_bloc.dart';
 import 'package:smart_race_monitor/views/home/presentation/bloc/race_status_bloc.dart';
 import 'package:smart_race_monitor/views/home/presentation/ui/dashboard/race_state_table.dart';
 import 'package:smart_race_monitor/views/home/presentation/ui/dashboard/lap_table.dart';
@@ -13,7 +14,7 @@ class HomeDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => RaceStatusBloc(),
+      create: (_) => RaceEventBloc(),
       child: Scaffold(
         body: Row(
           children: [
