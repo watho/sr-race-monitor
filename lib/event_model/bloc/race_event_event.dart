@@ -1,6 +1,6 @@
 part of 'race_event_bloc.dart';
 
-enum RaceStatus { running, ended }
+enum RaceStatus { unknown, running, ended }
 
 abstract class RaceEventEvent {
   const RaceEventEvent();

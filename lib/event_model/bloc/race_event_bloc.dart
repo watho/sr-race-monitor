@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +6,12 @@ part 'race_event_event.dart';
 part 'race_event_state.dart';
 
 class RaceEventBloc extends Bloc<RaceEventEvent, RaceEventState> {
-  RaceEventBloc() : super(const RaceEventInitial(RaceEventType.unknown)) {
+  RaceStatus _oldState = RaceStatus.unknown;
+  RaceStatus _newState = RaceStatus.unknown;
+
+  RaceEventBloc()
+      : super(const RaceEventInitial(
+            RaceEventType.unknown, RaceStatus.unknown, RaceStatus.unknown)) {
     on<RaceStarted>(_onRaceStarted);
     on<RaceEnded>(_onRaceEnded);
     on<UiLapUpdated>(_onUiLapUpdated);
@@ -16,19 +19,22 @@ class RaceEventBloc extends Bloc<RaceEventEvent, RaceEventState> {
   }
 
   void _onRaceStarted(RaceStarted event, Emitter<RaceEventState> emit) {
-    emit(const RaceEventEventStart(RaceEventType.eventStart));
+    emit(RaceEventEventStart(RaceEventType.eventStart, _oldState, _newState));
   }
 
   void _onRaceEnded(RaceEnded event, Emitter<RaceEventState> emit) {
-    emit(const RaceEventEventEnd(RaceEventType.eventEnd));
+    emit(RaceEventEventEnd(RaceEventType.eventEnd, _oldState, _newState));
   }
 
   void _onUiLapUpdated(UiLapUpdated event, Emitter<RaceEventState> emit) {
-    emit(const RaceEventUiLapUpdate(RaceEventType.uiLapUpdate));
+    emit(RaceEventUiLapUpdate(RaceEventType.uiLapUpdate, _oldState, _newState));
   }
 
   void _onEventChangeStatus(
       RaceStatusChanged event, Emitter<RaceEventState> emit) {
-    emit(const RaceEventEventChangeStatus(RaceEventType.eventChangeStatus));
+    _oldState = event.oldState;
+    _newState = event.newState;
+    emit(RaceEventEventChangeStatus(
+        RaceEventType.eventChangeStatus, event.oldState, event.newState));
   }
 }

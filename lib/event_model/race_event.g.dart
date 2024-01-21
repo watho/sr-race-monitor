@@ -7,11 +7,13 @@ part of 'race_event.dart';
 // **************************************************************************
 
 RaceEvent _$RaceEventFromJson(Map<String, dynamic> json) => RaceEvent(
-      timestamp: json['timestamp'] as String,
-      eventType: json['eventType'] as String?,
+      time: json['time'] as int,
+      eventType: json['event_type'] as String?,
+      eventData: json['event_data'] as Map<String, dynamic>,
     );
 
 Map<String, dynamic> _$RaceEventToJson(RaceEvent instance) => <String, dynamic>{
-      'timestamp': instance.timestamp,
-      'eventType': instance.eventType,
+      'time': instance.time,
+      'event_type': instance.eventType,
+      'event_data': instance.eventData,
     };
