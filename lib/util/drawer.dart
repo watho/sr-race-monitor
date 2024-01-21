@@ -36,6 +36,19 @@ class HomeDrawer extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+            padding: tilePadding,
+            child: InkWell(
+              onTap: () => GameRoute().go(context),
+              child: ListTile(
+                selected: selectedRoute == GameRoute().location,
+                leading: const Icon(Icons.gamepad),
+                title: const Text(
+                  'Game',
+                ),
+              ),
+            ),
+          ),
           // Padding(
           //   padding: tilePadding,
           //   child: InkWell(
