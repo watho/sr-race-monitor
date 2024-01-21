@@ -41,6 +41,9 @@ dependencies:
   dartz: ^0.10.1
   logger: ^1.4.0
   shelf: ^1.4.1
+  shelf_plus: ^1.7.0
+  shelf_cors_headers: ^0.1.5
+  json_annotation: ^4.8.1
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +57,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   freezed: ^2.4.0
   go_router_builder: ^2.2.1
+  json_serializable: any
   #RUN: dart run build_runner build --delete-conflicting-outputs
   build_runner: ^2.4.6
   build_verify: ^3.1.0
