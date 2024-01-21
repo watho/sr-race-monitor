@@ -8,6 +8,7 @@ part of 'router.dart';
 
 List<RouteBase> get $appRoutes => [
       $homeScreenRoute,
+      $gameRoute,
       $aboutRoute,
     ];
 
@@ -21,6 +22,28 @@ extension $HomeScreenRouteExtension on HomeScreenRoute {
 
   String get location => GoRouteData.$location(
         '/',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $gameRoute => GoRouteData.$route(
+      path: '/game',
+      factory: $GameRouteExtension._fromState,
+    );
+
+extension $GameRouteExtension on GameRoute {
+  static GameRoute _fromState(GoRouterState state) => GameRoute();
+
+  String get location => GoRouteData.$location(
+        '/game',
       );
 
   void go(BuildContext context) => context.go(location);
