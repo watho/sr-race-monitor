@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_race_monitor/views/home/presentation/ui/dashboard/race_state_table.dart';
+import 'package:smart_race_monitor/ui/race_state_table.dart';
 import 'package:smart_race_monitor/views/home/presentation/ui/dashboard/lap_table.dart';
 import 'package:smart_race_monitor/util/temp_box.dart';
 
@@ -26,7 +26,7 @@ class HomeMobile extends StatelessWidget {
       drawer: drawer,
       body: const Column(
         children: [
-          RaceStatusTableBox(flexValue: 2),
+          RaceStatusTableBox(),
           LapTableBox(
             flexValue: 2,
             columnCount: 1,

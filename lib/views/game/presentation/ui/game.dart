@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_race_monitor/ui/race_state_table.dart';
 import 'package:smart_race_monitor/views/game/presentation/bloc/game_state_bloc.dart';
 import 'package:smart_race_monitor/views/game/presentation/ui/game_actions.dart';
 import 'package:smart_race_monitor/views/game/service/Timer.dart';
@@ -21,6 +22,7 @@ class GamePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                RaceStatusTableBox(),
                 const Text(
                   "SR Race Game",
                   textScaler: TextScaler.linear(4),
