@@ -11,29 +11,26 @@ class LapTableBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // context = context;
-    return Flexible(
-      flex: flexValue,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          decoration: BoxDecoration(
-            color: const Color.fromRGBO(112, 113, 115, 0.4),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            children: [
-              const Center(
-                  child: Text(
-                "Race Monitor",
-                textScaler: TextScaler.linear(1.5),
-              )),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: createTable(context),
-                ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color.fromRGBO(112, 113, 115, 0.4),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          children: [
+            const Center(
+                child: Text(
+              "Race Monitor",
+              textScaler: TextScaler.linear(1.5),
+            )),
+            Expanded(
+              child: SingleChildScrollView(
+                child: createTable(context),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
