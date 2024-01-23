@@ -9,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:smart_race_monitor/event_model/bloc/race_event_bloc.dart';
+import 'package:smart_race_monitor/model/driver_model.dart';
 import 'package:smart_race_monitor/util/simple_bloc_observer.dart';
 
 void main() {
@@ -39,7 +40,16 @@ void main() {
         act: (bloc) => _postTestData('ui.lap_update_1.json'),
         expect: () => [
               const RaceEventUiLapUpdate("2", "0:10.608",
-                  Color.fromRGBO(254, 56, 39, 1.0), Colors.white)
+                  Color.fromRGBO(254, 56, 39, 1.0), Colors.white),
+              const RaceEventDriversChanged([
+                Driver(
+                  id: 1,
+                  name: "osc",
+                  shortName: "os",
+                  bgColor: Color.fromRGBO(254, 56, 39, 1),
+                  textColor: Color.fromRGBO(255, 255, 255, 1),
+                )
+              ]),
             ]);
   });
 }

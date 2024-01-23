@@ -9,8 +9,8 @@
     "lap_pb": true,
     "driver_data": {
       "id": 1,
-      "name": "os",
-      "name_short": "",
+      "name": "osc",
+      "name_short": "os",
       "name_tts": "Der os",
       "team": 1,
       "image": "file:///data/user/0/com.trademarc.smartrace/files/1704221389451.jpg",

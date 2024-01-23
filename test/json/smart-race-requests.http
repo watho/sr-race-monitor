@@ -1,0 +1,59 @@
+### Event.change_status 1
+POST http://{{host}}:{{port}}/
+Content-Type: application/json
+
+< ./event.change_status_1.json
+
+### Event.change_status 2
+POST http://{{host}}:{{port}}/
+Content-Type: application/json
+
+< ./event.change_status_2.json
+
+### Event.end 1
+POST https://{{host}}:{{port}}/
+Content-Type: application/json
+
+< ./event.end_1.json
+
+### Event.start 1
+POST https://{{host}}:{{port}}/
+Content-Type: application/json
+
+< ./event.start_1.json
+
+### Event.start 2
+POST https://{{host}}:{{port}}/
+Content-Type: application/json
+
+< ./event.start_2.json
+
+### Event.empty
+POST https://{{host}}:{{port}}/
+Content-Type: application/json
+
+< ./event.empty.json
+
+### invalid request
+POST http://{{host}}:{{port}}/api
+Content-Type: application/json
+
+< ./event.empty.json
+
+### Event.change_status 1
+POST http://{{host}}:{{port}}/api
+Content-Type: application/json
+
+< ./event.change_status_1.json
+
+### ui.lap_update 1
+POST http://{{host}}:{{port}}/api
+Content-Type: application/json
+
+< ./ui.lap_update_1.json
+
+### ui.lap_update 2
+POST http://{{host}}:{{port}}/api
+Content-Type: application/json
+
+< ./ui.lap_update_2.json

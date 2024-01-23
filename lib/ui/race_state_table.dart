@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_race_monitor/event_model/bloc/race_event_bloc.dart';
+import 'package:smart_race_monitor/model/driver_model.dart';
 
 class RaceStatusTableBox extends StatelessWidget {
   const RaceStatusTableBox({super.key});
@@ -11,7 +12,7 @@ class RaceStatusTableBox extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         width: double.infinity,
-        height: 100,
+        height: 120,
         decoration: BoxDecoration(
           color: const Color.fromRGBO(112, 113, 115, 0.4),
           borderRadius: BorderRadius.circular(16),
@@ -31,20 +32,19 @@ class RaceStatusTableBox extends StatelessWidget {
                   0: FixedColumnWidth(60),
                   1: FlexColumnWidth(),
                 },
-                children: [createStatusRow(Colors.white, "unbekannt")],
+                children: const [
+                  TableRow(children: [
+                    RaceStateBox(),
+                    RaceStateText(),
+                  ]),
+                  TableRow(children: [Text("Fahrer:"), DriversBox()])
+                ],
               ),
             ),
           ],
         ),
       ),
     );
-  }
-
-  TableRow createStatusRow(Color c1, String status1) {
-    return const TableRow(children: [
-      RaceStateBox(),
-      RaceStateText(),
-    ]);
   }
 }
 
@@ -86,6 +86,32 @@ class RaceStateText extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(label),
+        );
+      },
+    );
+  }
+}
+
+class DriversBox extends StatelessWidget {
+  const DriversBox({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> driversList = [];
+    return BlocBuilder<RaceEventBloc, RaceEventBlocState>(
+      buildWhen: (previous, current) =>
+          previous != current && current is RaceEventDriversChanged,
+      builder: (context, state) {
+        // FIXME Only RaceEventUiLapUpdate not RaceEventDriversChanged
+        print("state $state");
+        List<Driver> drivers = switch (state) {
+          RaceEventDriversChanged() => state.driverList,
+          _ => []
+        };
+        print("DriversList: $driversList");
+        List<Widget> driverWidgets = drivers.map((e) => Text(e.name)).toList();
+        return Row(
+          children: driverWidgets,
         );
       },
     );
