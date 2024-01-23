@@ -12,27 +12,31 @@ enum RaceStatus {
 }
 
 abstract class RaceEventBlocEvent {
-  const RaceEventBlocEvent();
+  final DateTime timestamp;
+
+  const RaceEventBlocEvent(this.timestamp);
 }
 
 final class RaceStarted extends RaceEventBlocEvent {
-  const RaceStarted();
+  const RaceStarted(super.timestamp);
 }
 
 final class RaceEnded extends RaceEventBlocEvent {
-  const RaceEnded();
+  const RaceEnded(super.timestamp);
 }
 
 final class RaceStatusChanged extends RaceEventBlocEvent {
-  const RaceStatusChanged({required this.oldState, required this.newState});
+  const RaceStatusChanged(super.timestamp,
+      {required this.oldState, required this.newState});
 
   final RaceStatus oldState;
   final RaceStatus newState;
 }
 
 final class UiLapUpdated extends RaceEventBlocEvent {
-  const UiLapUpdated({required this.controllerColor, required this.lapTime});
+  const UiLapUpdated(super.timestamp,
+      {required this.controllerColor, required this.laptime});
 
   final Color controllerColor;
-  final String lapTime;
+  final String laptime;
 }

@@ -20,6 +20,10 @@ void main() {
       raceEventBloc = RaceEventBloc();
     });
 
+    tearDown(() {
+      //raceEventBloc.close();
+    });
+
     blocTest<RaceEventBloc, RaceEventBlocState>(
         'emits [RaceEventEventChangeStatus]',
         build: () => raceEventBloc,
@@ -29,9 +33,10 @@ void main() {
                   RaceStatus.running, RaceStatus.ended)
             ]);
 
-    tearDown(() {
-      raceEventBloc.close();
-    });
+    blocTest<RaceEventBloc, RaceEventBlocState>('emits [RaceEventUiLapUpdate]',
+        build: () => raceEventBloc,
+        act: (bloc) => _postTestData('ui.lap_update_1.json'),
+        expect: () => [const RaceEventUiLapUpdate()]);
   });
 }
 
