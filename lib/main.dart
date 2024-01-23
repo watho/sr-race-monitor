@@ -5,6 +5,7 @@ import 'package:smart_race_monitor/event_model/bloc/race_event_bloc.dart';
 
 import 'package:smart_race_monitor/util/routing/router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_race_monitor/util/simple_bloc_observer.dart';
 
 void main() {
   Bloc.observer = SimpleBlocObserver();
@@ -34,36 +35,4 @@ class MyApp extends StatelessWidget {
   final GoRouter _router = GoRouter(
     routes: $appRoutes,
   );
-}
-
-class SimpleBlocObserver extends BlocObserver {
-  @override
-  void onEvent(Bloc bloc, Object? event) {
-    print(event);
-    super.onEvent(bloc, event);
-  }
-
-  @override
-  void onTransition(Bloc bloc, Transition transition) {
-    super.onTransition(bloc, transition);
-    print(transition);
-  }
-
-  @override
-  void onChange(BlocBase bloc, Change change) {
-    super.onChange(bloc, change);
-    print(change);
-  }
-
-  @override
-  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
-    print(error);
-    super.onError(bloc, error, stackTrace);
-  }
-
-  @override
-  void onCreate(BlocBase bloc) {
-    super.onCreate(bloc);
-    print("Bloc created: $bloc");
-  }
 }
