@@ -55,16 +55,8 @@ class RaceEventBloc extends Bloc<RaceEventBlocEvent, RaceEventBlocState> {
 
     /// Receive RaceEvent
     postReceiver.post('/<ignored|.*>', (shelf_plus.Request request) async {
-      //var newPerson = await request.body.as(Person.fromJson);
-      //var body = await request.body.as(RaceEvent.fromJson);
       RaceEvent raceEvent = await request.body.as(RaceEvent.fromJson);
       log.d("Post request received: ${raceEvent.toJson()}.");
-      // if (body.containsKey("event_type")) {
-      //   var eventType = body['event_type'].toString();
-      //   print(eventType);
-      //   if (eventType == 'event.change_status') {
-      //     print("We have a event.");
-      //   }
       switch (raceEvent.eventType) {
         case 'event.change_status':
           EventChangeStatus ecs =
