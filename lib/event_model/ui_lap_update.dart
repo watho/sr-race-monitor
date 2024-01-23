@@ -6,10 +6,15 @@ part 'ui_lap_update.g.dart';
 class UiLapUpdate {
   // @JsonKey(name: 'old')
   final String controllerId;
-  final ControllerData controllerData;
   final String laptime;
+  final ControllerData controllerData;
+  final DriverData driverData;
 
-  UiLapUpdate(this.controllerData, this.laptime, {required this.controllerId});
+  UiLapUpdate(
+      {required this.controllerData,
+      required this.laptime,
+      required this.controllerId,
+      required this.driverData});
 
   Map<String, dynamic> toJson() => _$UiLapUpdateToJson(this);
 
@@ -28,4 +33,18 @@ class ControllerData {
 
   static ControllerData fromJson(Map<String, dynamic> json) =>
       _$ControllerDataFromJson(json);
+}
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class DriverData {
+  final int id;
+  final String name;
+  final String nameShort;
+
+  DriverData({required this.id, required this.name, required this.nameShort});
+
+  Map<String, dynamic> toJson() => _$DriverDataToJson(this);
+
+  static DriverData fromJson(Map<String, dynamic> json) =>
+      _$DriverDataFromJson(json);
 }

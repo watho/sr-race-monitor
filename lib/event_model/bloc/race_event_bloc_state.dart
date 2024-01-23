@@ -33,6 +33,15 @@ class RaceEventUiLapUpdate extends RaceEventBlocState {
       [controllerId, laptime, controllerBgColor, controllerTextColor];
 }
 
+class RaceEventDriversChanged extends RaceEventBlocState {
+  const RaceEventDriversChanged(this.driverList);
+
+  final List<Driver> driverList;
+
+  @override
+  List<Object> get props => [driverList.hashCode];
+}
+
 class RaceEventEventStart extends RaceEventBlocState {
   const RaceEventEventStart();
 }

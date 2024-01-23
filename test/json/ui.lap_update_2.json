@@ -2,15 +2,15 @@
   "time": 1705706117436,
   "event_type": "ui.lap_update",
   "event_data": {
-    "controller_id": "2",
+    "controller_id": "1",
     "lap": 7,
     "laptime": "0:13.292",
     "laptime_raw": 13292,
     "driver_data": {
       "id": 1,
-      "name": "os",
-      "name_short": "",
-      "name_tts": "Der os",
+      "name": "fri",
+      "name_short": "fr",
+      "name_tts": "",
       "team": 1,
       "image": "file:///data/user/0/com.trademarc.smartrace/files/1704221389451.jpg",
       "start_no": 1,
@@ -52,7 +52,7 @@
       "tags": "[]"
     },
     "controller_data": {
-      "color_bg": "rgb(254, 56, 39)",
+      "color_bg": "rgb(25, 56, 39)",
       "color_text": "rgb(255, 255, 255)"
     }
   }

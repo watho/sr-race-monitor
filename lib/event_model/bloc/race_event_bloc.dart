@@ -7,6 +7,7 @@ import 'package:shelf_plus/shelf_plus.dart' as shelf_plus;
 import 'package:smart_race_monitor/event_model/event_change_status.dart';
 import 'package:smart_race_monitor/event_model/race_event.dart';
 import 'package:smart_race_monitor/event_model/ui_lap_update.dart';
+import 'package:smart_race_monitor/model/driver_model.dart';
 import 'package:smart_race_monitor/util/color_util.dart';
 
 part 'race_event_bloc_event.dart';
@@ -14,6 +15,7 @@ part 'race_event_bloc_state.dart';
 
 class RaceEventBloc extends Bloc<RaceEventBlocEvent, RaceEventBlocState> {
   var log = Logger(printer: PrettyPrinter(methodCount: 1));
+  Map<int, Driver> driversList = {};
   late Future<shelf_plus.ShelfRunContext> postReceiver;
 
   RaceEventBloc() : super(const RaceEventInitial()) {
@@ -39,6 +41,12 @@ class RaceEventBloc extends Bloc<RaceEventBlocEvent, RaceEventBlocState> {
   void _onUiLapUpdated(UiLapUpdated event, Emitter<RaceEventBlocState> emit) {
     emit(RaceEventUiLapUpdate(event.controllerId, event.laptime,
         event.controllerBgColor, event.controllerTextColor));
+    // Create driver object and add to list
+    Driver driver = event.driver;
+    if (!driversList.containsKey(driver.id)) {
+      driversList.putIfAbsent(driver.id, () => driver);
+      emit(RaceEventDriversChanged(driversList.values.toList()));
+    }
   }
 
   void _onEventChangeStatus(
@@ -75,12 +83,20 @@ class RaceEventBloc extends Bloc<RaceEventBlocEvent, RaceEventBlocState> {
           break;
         case 'ui.lap_update':
           UiLapUpdate ulu = UiLapUpdate.fromJson(raceEvent.eventData);
-          add(UiLapUpdated(timestamp,
-              controllerId: ulu.controllerId,
-              controllerBgColor: hexOrRGBToColor(ulu.controllerData.colorBg),
-              controllerTextColor:
-                  hexOrRGBToColor(ulu.controllerData.colorText),
-              laptime: ulu.laptime));
+          add(UiLapUpdated(
+            timestamp,
+            controllerId: ulu.controllerId,
+            controllerBgColor: hexOrRGBToColor(ulu.controllerData.colorBg),
+            controllerTextColor: hexOrRGBToColor(ulu.controllerData.colorText),
+            laptime: ulu.laptime,
+            driver: Driver(
+              id: ulu.driverData.id,
+              name: ulu.driverData.name,
+              shortName: ulu.driverData.nameShort,
+              textColor: hexOrRGBToColor(ulu.controllerData.colorText),
+              bgColor: hexOrRGBToColor(ulu.controllerData.colorBg),
+            ),
+          ));
           break;
         case _:
           log.e("Unknown event type received: ${raceEvent.eventType}");
