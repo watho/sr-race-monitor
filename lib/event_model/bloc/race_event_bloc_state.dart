@@ -9,37 +9,34 @@ enum RaceEventType {
 }
 
 sealed class RaceEventBlocState extends Equatable {
-  const RaceEventBlocState(this.raceEventType);
-
-  final RaceEventType raceEventType;
+  const RaceEventBlocState();
 
   @override
-  List<Object> get props => [raceEventType];
+  List<Object> get props => [];
 }
 
 class RaceEventInitial extends RaceEventBlocState {
-  const RaceEventInitial(super.raceEventType);
+  const RaceEventInitial();
 }
 
 class RaceEventUiLapUpdate extends RaceEventBlocState {
-  const RaceEventUiLapUpdate(super.raceEventType);
+  const RaceEventUiLapUpdate();
 }
 
 class RaceEventEventStart extends RaceEventBlocState {
-  const RaceEventEventStart(super.raceEventType);
+  const RaceEventEventStart();
 }
 
 class RaceEventEventEnd extends RaceEventBlocState {
-  const RaceEventEventEnd(super.raceEventType);
+  const RaceEventEventEnd();
 }
 
 class RaceEventEventChangeStatus extends RaceEventBlocState {
-  const RaceEventEventChangeStatus(
-      super.raceEventType, this.oldState, this.newState);
+  const RaceEventEventChangeStatus(this.oldState, this.newState);
 
   final RaceStatus oldState;
   final RaceStatus newState;
 
   @override
-  List<Object> get props => [raceEventType, oldState, newState];
+  List<Object> get props => [oldState, newState];
 }

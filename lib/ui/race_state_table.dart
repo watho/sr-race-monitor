@@ -31,7 +31,7 @@ class RaceStatusTableBox extends StatelessWidget {
                   0: FixedColumnWidth(60),
                   1: FlexColumnWidth(),
                 },
-                children: [createStatusRow(Colors.green, "running")],
+                children: [createStatusRow(Colors.white, "unbekannt")],
               ),
             ),
           ],
@@ -49,7 +49,7 @@ class RaceStatusTableBox extends StatelessWidget {
 }
 
 class RaceStateBox extends StatelessWidget {
-  const RaceStateBox({Key? key}) : super(key: key);
+  const RaceStateBox({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class RaceStateBox extends StatelessWidget {
 }
 
 class RaceStateText extends StatelessWidget {
-  const RaceStateText({Key? key}) : super(key: key);
+  const RaceStateText({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class RaceStateText extends StatelessWidget {
         String label = switch (state) {
           RaceEventEventChangeStatus() =>
             raceStatusToColor(state.newState).label,
-          _ => ''
+          _ => 'unbekannt'
         };
         return Padding(
           padding: const EdgeInsets.all(8.0),
