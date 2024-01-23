@@ -41,8 +41,8 @@ class RaceStatusTableBox extends StatelessWidget {
   }
 
   TableRow createStatusRow(Color c1, String status1) {
-    return TableRow(children: [
-      const RaceStateBox(),
+    return const TableRow(children: [
+      RaceStateBox(),
       RaceStateText(),
     ]);
   }
@@ -53,17 +53,12 @@ class RaceStateBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RaceEventBloc, RaceEventState>(
+    return BlocBuilder<RaceEventBloc, RaceEventBlocState>(
       builder: (context, state) {
-        Color c1 = switch (state.newState) {
-          RaceStatus.unknown => Colors.grey,
-          RaceStatus.running => Colors.green,
-          RaceStatus.ended => Colors.red,
-          RaceStatus.prepare_for_start => Colors.yellow,
-          RaceStatus.starting => Colors.yellow,
-          RaceStatus.jumpstart => Colors.deepOrangeAccent,
-          RaceStatus.suspended => Colors.red,
-          RaceStatus.restarting => Colors.yellow,
+        Color c1 = switch (state) {
+          RaceEventEventChangeStatus() =>
+            raceStatusToColor(state.newState).color,
+          _ => Colors.grey
         };
         return Center(
             child: Container(
@@ -77,15 +72,38 @@ class RaceStateBox extends StatelessWidget {
 }
 
 class RaceStateText extends StatelessWidget {
-  RaceStateText({Key? key}) : super(key: key);
+  const RaceStateText({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final newRaceState =
-        context.select((RaceEventBloc bloc) => bloc.state.newState);
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(newRaceState.toString()),
+    return BlocBuilder<RaceEventBloc, RaceEventBlocState>(
+      builder: (context, state) {
+        String label = switch (state) {
+          RaceEventEventChangeStatus() =>
+            raceStatusToColor(state.newState).label,
+          _ => ''
+        };
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(label),
+        );
+      },
     );
   }
+}
+
+({MaterialColor color, String label}) raceStatusToColor(RaceStatus raceStatus) {
+  return switch (raceStatus) {
+    RaceStatus.running => (color: Colors.green, label: 'Läuft'),
+    RaceStatus.ended => (color: Colors.red, label: 'Beendet'),
+    RaceStatus.prepare_for_start => (
+        color: Colors.yellow,
+        label: 'Startvorbereitung'
+      ),
+    RaceStatus.starting => (color: Colors.yellow, label: 'Startet'),
+    RaceStatus.jumpstart => (color: Colors.deepOrange, label: 'Fehlstart'),
+    RaceStatus.suspended => (color: Colors.red, label: 'Rennunterbrechung'),
+    RaceStatus.restarting => (color: Colors.yellow, label: 'Neustart'),
+    _ => (color: Colors.grey, label: 'Unbekannt')
+  };
 }

@@ -6,6 +6,7 @@ class LapTableBox extends StatelessWidget {
 
   final int flexValue;
   final int columnCount;
+
   // BuildContext context;
 
   @override
@@ -14,6 +15,8 @@ class LapTableBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
+        width: double.infinity,
+        height: 500,
         decoration: BoxDecoration(
           color: const Color.fromRGBO(112, 113, 115, 0.4),
           borderRadius: BorderRadius.circular(16),

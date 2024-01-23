@@ -5,8 +5,8 @@ import 'package:smart_race_monitor/views/game/presentation/bloc/game_state_bloc.
 import 'package:smart_race_monitor/views/game/presentation/ui/game_actions.dart';
 import 'package:smart_race_monitor/views/game/service/Timer.dart';
 
-class GamePage extends StatelessWidget {
-  const GamePage({super.key, required this.drawer});
+class GameTabletPage extends StatelessWidget {
+  const GameTabletPage({super.key, required this.drawer});
 
   final Widget drawer;
 
@@ -107,6 +107,7 @@ class GamePage extends StatelessWidget {
 
 class TimerText extends StatelessWidget {
   const TimerText({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final duration =
@@ -123,6 +124,7 @@ class TimerText extends StatelessWidget {
 
 class Background extends StatelessWidget {
   const Background({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(

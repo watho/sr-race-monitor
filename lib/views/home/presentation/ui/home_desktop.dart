@@ -24,10 +24,6 @@ class HomeDesktop extends StatelessWidget {
                     columnCount: 1,
                   ),
                 ),
-                TempBox(
-                  title: "ConnectionState",
-                  flexValue: 1,
-                ),
               ],
             ),
           ),
