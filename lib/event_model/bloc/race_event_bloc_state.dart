@@ -20,7 +20,17 @@ class RaceEventInitial extends RaceEventBlocState {
 }
 
 class RaceEventUiLapUpdate extends RaceEventBlocState {
-  const RaceEventUiLapUpdate();
+  const RaceEventUiLapUpdate(this.controllerId, this.laptime,
+      this.controllerBgColor, this.controllerTextColor);
+
+  final String controllerId;
+  final String laptime;
+  final Color controllerBgColor;
+  final Color controllerTextColor;
+
+  @override
+  List<Object> get props =>
+      [controllerId, laptime, controllerBgColor, controllerTextColor];
 }
 
 class RaceEventEventStart extends RaceEventBlocState {
