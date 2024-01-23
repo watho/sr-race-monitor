@@ -1,0 +1,8 @@
+{
+  "time": 1684769957969,
+  "event_type": "event.change_status",
+  "event_data": {
+    "old": "running",
+    "new": "ended"
+  }
+}

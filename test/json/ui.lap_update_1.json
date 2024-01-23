@@ -1,0 +1,60 @@
+{
+  "time": 1705705743676,
+  "event_type": "ui.lap_update",
+  "event_data": {
+    "controller_id": "2",
+    "lap": 2,
+    "laptime": "0:10.608",
+    "laptime_raw": 10608,
+    "lap_pb": true,
+    "driver_data": {
+      "id": 1,
+      "name": "os",
+      "name_short": "",
+      "name_tts": "Der os",
+      "team": 1,
+      "image": "file:///data/user/0/com.trademarc.smartrace/files/1704221389451.jpg",
+      "start_no": 1,
+      "start_no_color_background": "",
+      "start_no_color_text": "",
+      "start_no_color_border": "",
+      "start_no_text_style": "normal",
+      "active": "yes",
+      "team_data": {
+        "id": 1,
+        "name": "fa",
+        "location": "",
+        "comment": "",
+        "image": "file:///data/user/0/com.trademarc.smartrace/files/1703497414506.jpg"
+      }
+    },
+    "car_data": {
+      "id": 4,
+      "name": "BMW M4",
+      "manufacturer": "Carrera",
+      "scale": "1:32",
+      "tyres": "Original",
+      "color": "",
+      "decoder_type": "Carrera (default)",
+      "magnets": "yes",
+      "digital_analog": "digital",
+      "active": "yes",
+      "logo": "bmw.png",
+      "image": "file:///data/user/0/com.trademarc.smartrace/files/1703521585890.jpg",
+      "speed": 0,
+      "brakes": 13,
+      "fuel": 9,
+      "changed_on": "2024-01-19 19:27:48",
+      "laps": 1639,
+      "interval": 0,
+      "interval_counter": 1637,
+      "comment": "",
+      "sound": "-",
+      "tags": "[]"
+    },
+    "controller_data": {
+      "color_bg": "rgb(254, 56, 39)",
+      "color_text": "rgb(255, 255, 255)"
+    }
+  }
+}

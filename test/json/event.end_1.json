@@ -1,0 +1,42 @@
+{
+  "time": 1684769957969,
+  "event_type": "event.end",
+  "event_data": {
+    "type": "race",
+    "result": {
+      "1": {
+        "driver_id": 2,
+        "car_id": 39,
+        "controller_id": 1,
+        "laps": 33,
+        "best_laptime": 4915,
+        "pitstops": 0,
+        "gap": "",
+        "disqualified": false,
+        "retired": false
+      },
+      "2": {
+        "driver_id": 2,
+        "car_id": 3,
+        "controller_id": 3,
+        "laps": 29,
+        "best_laptime": 4914,
+        "pitstops": 1,
+        "gap": "+4 Lap(s)",
+        "disqualified": false,
+        "retired": false
+      },
+      "3": {
+        "driver_id": 14,
+        "car_id": 33,
+        "controller_id": 4,
+        "laps": 27,
+        "best_laptime": 4925,
+        "pitstops": 0,
+        "gap": "+6 Lap(s)",
+        "disqualified": false,
+        "retired": false
+      }
+    }
+  }
+}
