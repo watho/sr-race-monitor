@@ -35,8 +35,13 @@ final class RaceStatusChanged extends RaceEventBlocEvent {
 
 final class UiLapUpdated extends RaceEventBlocEvent {
   const UiLapUpdated(super.timestamp,
-      {required this.controllerColor, required this.laptime});
+      {required this.controllerId,
+      required this.controllerBgColor,
+      required this.controllerTextColor,
+      required this.laptime});
 
-  final Color controllerColor;
+  final String controllerId;
+  final Color controllerBgColor;
+  final Color controllerTextColor;
   final String laptime;
 }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_race_monitor/ui/race_state_table.dart';
 import 'package:smart_race_monitor/views/game/presentation/bloc/game_state_bloc.dart';
 import 'package:smart_race_monitor/views/game/presentation/ui/game_actions.dart';
+import 'package:smart_race_monitor/views/game/presentation/ui/game_page_widgets.dart';
 
 class GameMobilePage extends StatelessWidget {
   const GameMobilePage({super.key, required this.drawer});
@@ -25,75 +26,11 @@ class GameMobilePage extends StatelessWidget {
         ],
       )),
       drawer: drawer,
-      body: Column(
+      body: const Column(
         children: [
-          const RaceStatusTableBox(),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Container(
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(112, 113, 115, 0.4),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Table(
-                  // border: TableBorder.all(),
-                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                  columnWidths: const {
-                    0: IntrinsicColumnWidth(),
-                    1: FlexColumnWidth(),
-                  },
-                  children: [
-                    const TableRow(children: [
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text("Zeit"),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: TimerText(),
-                      )
-                    ]),
-                    TableRow(children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text("Letzte Zieldurchfahrt"),
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                color: Color.fromRGBO(255, 322, 11, 1)),
-                          ))
-                    ]),
-                    TableRow(children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text("Nächste Farbe"),
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                                color: Color.fromRGBO(2, 342, 1, 1)),
-                          ))
-                    ]),
-                    TableRow(children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text("Punkte"),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text("data"),
-                      )
-                    ]),
-                  ]),
-            ),
-          ),
-          const GameActions(),
+          RaceStatusTableBox(),
+          GameBox(),
+          GameActions(),
         ],
       ),
     );

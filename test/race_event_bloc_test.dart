@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
@@ -36,7 +37,10 @@ void main() {
     blocTest<RaceEventBloc, RaceEventBlocState>('emits [RaceEventUiLapUpdate]',
         build: () => raceEventBloc,
         act: (bloc) => _postTestData('ui.lap_update_1.json'),
-        expect: () => [const RaceEventUiLapUpdate()]);
+        expect: () => [
+              const RaceEventUiLapUpdate("2", "0:10.608",
+                  Color.fromRGBO(254, 56, 39, 1.0), Colors.white)
+            ]);
   });
 }
 

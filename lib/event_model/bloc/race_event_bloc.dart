@@ -37,7 +37,8 @@ class RaceEventBloc extends Bloc<RaceEventBlocEvent, RaceEventBlocState> {
   }
 
   void _onUiLapUpdated(UiLapUpdated event, Emitter<RaceEventBlocState> emit) {
-    emit(const RaceEventUiLapUpdate());
+    emit(RaceEventUiLapUpdate(event.controllerId, event.laptime,
+        event.controllerBgColor, event.controllerTextColor));
   }
 
   void _onEventChangeStatus(
@@ -75,7 +76,10 @@ class RaceEventBloc extends Bloc<RaceEventBlocEvent, RaceEventBlocState> {
         case 'ui.lap_update':
           UiLapUpdate ulu = UiLapUpdate.fromJson(raceEvent.eventData);
           add(UiLapUpdated(timestamp,
-              controllerColor: hexOrRGBToColor(ulu.controllerData.colorBg),
+              controllerId: ulu.controllerId,
+              controllerBgColor: hexOrRGBToColor(ulu.controllerData.colorBg),
+              controllerTextColor:
+                  hexOrRGBToColor(ulu.controllerData.colorText),
               laptime: ulu.laptime));
           break;
         case _:
@@ -84,10 +88,5 @@ class RaceEventBloc extends Bloc<RaceEventBlocEvent, RaceEventBlocState> {
       return raceEvent.toJson();
     });
     return postReceiver.call;
-  }
-
-  @override
-  Future<void> close() {
-    return super.close();
   }
 }
