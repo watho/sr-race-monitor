@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:equatable/equatable.dart';
@@ -22,10 +23,10 @@ void main() {
     blocTest<RaceEventBloc, RaceEventBlocState>(
         'emits [RaceEventEventChangeStatus]',
         build: () => raceEventBloc,
-        act: (bloc) => _postTestData(),
+        act: (bloc) => _postTestData('event.change_status_1.json'),
         expect: () => [
               const RaceEventEventChangeStatus(
-                  RaceStatus.unknown, RaceStatus.running)
+                  RaceStatus.running, RaceStatus.ended)
             ]);
 
     tearDown(() {
@@ -34,23 +35,26 @@ void main() {
   });
 }
 
-Future<void> _postTestData() async {
+Future<void> _postTestData(String testJsonFileName) async {
   var log = Logger(printer: PrettyPrinter());
   try {
-    final response = await http.post(
-      Uri.parse("http://localhost:8085/api"),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, dynamic>{
-        'time': 1684769957969,
-        'event_type': 'event.change_status',
-        'event_data': {
-          'old': 'unknown',
-          'new': 'running',
-        }
-      }),
-    );
+    //var jsonObject = jsonDecode(<String, dynamic>jsonString);
+    //log.e(jsonObject);
+    final response = await http.post(Uri.parse("http://localhost:8085/api"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: File("${Directory.current.path}/test/json/$testJsonFileName")
+            .readAsStringSync()
+        // body: jsonEncode(<String, dynamic>{
+        //   'time': 1684769957969,
+        //   'event_type': 'event.change_status',
+        //   'event_data': {
+        //     'old': 'unknown',
+        //     'new': 'running',
+        //   }
+        // }),
+        );
 
     if (response.statusCode == 200) {
       // Successful POST request, handle the response here

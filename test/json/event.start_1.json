@@ -1,0 +1,8 @@
+{
+  "time": 1684769957969,
+  "event_type": "event.start",
+  "event_data": {
+    "type": "race",
+    "duration": "600"
+  }
+}
