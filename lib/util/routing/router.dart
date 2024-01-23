@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:smart_race_monitor/util/drawer.dart';
 import 'package:smart_race_monitor/views/about/presentation/ui/about_page.dart';
-import 'package:smart_race_monitor/views/game/presentation/ui/game.dart';
+import 'package:smart_race_monitor/views/game/presentation/ui/game_page.dart';
 import 'package:smart_race_monitor/views/home/presentation/ui/home_page.dart';
-import 'package:go_router/go_router.dart';
 
 part 'router.g.dart';
 
@@ -25,10 +25,7 @@ class HomeScreenRoute extends GoRouteData {
 class GameRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return GamePage(
-        drawer: HomeDrawer(
-      selectedRoute: GameRoute().location,
-    ));
+    return const GamePage();
   }
 }
 

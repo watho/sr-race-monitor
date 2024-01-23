@@ -11,26 +11,28 @@ enum RaceStatus {
   ended,
 }
 
-abstract class RaceEventEvent {
-  const RaceEventEvent();
+abstract class RaceEventBlocEvent {
+  const RaceEventBlocEvent();
 }
 
-final class RaceStarted extends RaceEventEvent {
+final class RaceStarted extends RaceEventBlocEvent {
   const RaceStarted();
 }
 
-final class RaceEnded extends RaceEventEvent {
+final class RaceEnded extends RaceEventBlocEvent {
   const RaceEnded();
 }
 
-final class RaceStatusChanged extends RaceEventEvent {
+final class RaceStatusChanged extends RaceEventBlocEvent {
   const RaceStatusChanged({required this.oldState, required this.newState});
+
   final RaceStatus oldState;
   final RaceStatus newState;
 }
 
-final class UiLapUpdated extends RaceEventEvent {
+final class UiLapUpdated extends RaceEventBlocEvent {
   const UiLapUpdated({required this.controllerColor, required this.lapTime});
+
   final Color controllerColor;
   final String lapTime;
 }

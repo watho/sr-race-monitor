@@ -1,21 +1,19 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shelf_plus/shelf_plus.dart' as shelf_plus;
 import 'package:shelf_cors_headers/shelf_cors_headers.dart';
+import 'package:shelf_plus/shelf_plus.dart' as shelf_plus;
 import 'package:smart_race_monitor/event_model/event_change_status.dart';
 import 'package:smart_race_monitor/event_model/race_event.dart';
 
-part 'race_event_event.dart';
-part 'race_event_state.dart';
+part 'race_event_bloc_event.dart';
+part 'race_event_bloc_state.dart';
 
-class RaceEventBloc extends Bloc<RaceEventEvent, RaceEventState> {
+class RaceEventBloc extends Bloc<RaceEventBlocEvent, RaceEventBlocState> {
   RaceStatus _oldState = RaceStatus.unknown;
   RaceStatus _newState = RaceStatus.unknown;
 
-  RaceEventBloc()
-      : super(const RaceEventInitial(
-            RaceEventType.unknown, RaceStatus.unknown, RaceStatus.unknown)) {
+  RaceEventBloc() : super(const RaceEventInitial(RaceEventType.unknown)) {
     var postReceiver = shelf_plus.shelfRun(init,
         defaultBindAddress: '0.0.0.0',
         defaultBindPort: 8085,
@@ -27,22 +25,20 @@ class RaceEventBloc extends Bloc<RaceEventEvent, RaceEventState> {
     on<RaceStatusChanged>(_onEventChangeStatus);
   }
 
-  void _onRaceStarted(RaceStarted event, Emitter<RaceEventState> emit) {
-    emit(RaceEventEventStart(RaceEventType.eventStart, _oldState, _newState));
+  void _onRaceStarted(RaceStarted event, Emitter<RaceEventBlocState> emit) {
+    emit(const RaceEventEventStart(RaceEventType.eventStart));
   }
 
-  void _onRaceEnded(RaceEnded event, Emitter<RaceEventState> emit) {
-    emit(RaceEventEventEnd(RaceEventType.eventEnd, _oldState, _newState));
+  void _onRaceEnded(RaceEnded event, Emitter<RaceEventBlocState> emit) {
+    emit(const RaceEventEventEnd(RaceEventType.eventEnd));
   }
 
-  void _onUiLapUpdated(UiLapUpdated event, Emitter<RaceEventState> emit) {
-    emit(RaceEventUiLapUpdate(RaceEventType.uiLapUpdate, _oldState, _newState));
+  void _onUiLapUpdated(UiLapUpdated event, Emitter<RaceEventBlocState> emit) {
+    emit(const RaceEventUiLapUpdate(RaceEventType.uiLapUpdate));
   }
 
   void _onEventChangeStatus(
-      RaceStatusChanged event, Emitter<RaceEventState> emit) {
-    _oldState = event.oldState;
-    _newState = event.newState;
+      RaceStatusChanged event, Emitter<RaceEventBlocState> emit) {
     emit(RaceEventEventChangeStatus(
         RaceEventType.eventChangeStatus, event.oldState, event.newState));
   }
