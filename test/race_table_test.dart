@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smart_race_monitor/event_model/bloc/race_event_bloc.dart';
-import 'package:smart_race_monitor/event_model/race_event.dart';
 import 'package:smart_race_monitor/ui/race_state_table.dart';
 import 'package:smart_race_monitor/util/simple_bloc_observer.dart';
 
@@ -27,6 +26,10 @@ void main() {
           find.byWidgetPredicate((Widget widget) =>
               widget is Container && widget.color == Colors.grey),
           findsOneWidget);
+      expect(
+          find.byWidgetPredicate((Widget widget) =>
+              widget is Container && widget.color == Colors.green),
+          findsNothing);
       // Add Event to bloc
       raceEventBloc.add(const RaceStatusChanged(
           oldState: RaceStatus.unknown, newState: RaceStatus.running));
@@ -40,6 +43,10 @@ void main() {
           find.byWidgetPredicate((Widget widget) =>
               widget is Container && widget.color == Colors.green),
           findsOneWidget);
+      expect(
+          find.byWidgetPredicate((Widget widget) =>
+              widget is Container && widget.color == Colors.grey),
+          findsNothing);
     });
   });
 }

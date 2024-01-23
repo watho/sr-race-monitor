@@ -4,10 +4,10 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:smart_race_monitor/event_model/bloc/race_event_bloc.dart';
 import 'package:smart_race_monitor/util/simple_bloc_observer.dart';
-import 'package:http/http.dart' as http;
 
 void main() {
   group('Test RaceEventBloc', () {
@@ -45,7 +45,10 @@ Future<void> _postTestData() async {
       body: jsonEncode(<String, dynamic>{
         'time': 1684769957969,
         'event_type': 'event.change_status',
-        'event_data': {'old': 'unknown', 'new': 'running'}
+        'event_data': {
+          'old': 'unknown',
+          'new': 'running',
+        }
       }),
     );
 
