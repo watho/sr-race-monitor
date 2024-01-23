@@ -31,7 +31,7 @@ void main() {
               widget is Container && widget.color == Colors.green),
           findsNothing);
       // Add Event to bloc
-      raceEventBloc.add(const RaceStatusChanged(
+      raceEventBloc.add(RaceStatusChanged(DateTime.now(),
           oldState: RaceStatus.unknown, newState: RaceStatus.running));
       // Wait for all changes and animations finished
       await tester.pumpAndSettle();
