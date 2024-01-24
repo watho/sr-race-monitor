@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smart_race_monitor/event_model/bloc/race_event_bloc.dart';
+import 'package:smart_race_monitor/event_model/bloc/incoming_race_message_bloc.dart';
 import 'package:smart_race_monitor/views/game/presentation/bloc/game_state_bloc.dart';
 
 class GameBox extends StatelessWidget {
@@ -79,12 +79,12 @@ class LastControllerColor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RaceEventBloc, RaceEventBlocState>(
-      buildWhen: (prev, curr) => prev != curr && curr is RaceEventUiLapUpdate,
+    return BlocBuilder<IncomingRaceMessageBloc, IncomingRaceMessageState>(
+      buildWhen: (prev, curr) => prev != curr && curr is RaceUiLapUpdate,
       builder: (context, state) {
         ({Color bgColor, Color textColor, String label}) stateData =
             switch (state) {
-          RaceEventUiLapUpdate() => (
+          RaceUiLapUpdate() => (
               bgColor: state.controllerBgColor,
               textColor: state.controllerTextColor,
               label: state.controllerId
@@ -114,11 +114,11 @@ class DesiredControllerColor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RaceEventBloc, RaceEventBlocState>(
-      buildWhen: (context, state) => true,
+    return BlocBuilder<IncomingRaceMessageBloc, IncomingRaceMessageState>(
+      buildWhen: (prev, curr) => prev != curr && curr is RaceUiLapUpdate,
       builder: (context, state) {
         Color controllerColor = switch (state) {
-          RaceEventUiLapUpdate() => state.controllerBgColor,
+          RaceUiLapUpdate() => state.controllerBgColor,
           _ => Colors.green
         };
         return Container(

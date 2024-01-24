@@ -33,7 +33,7 @@ enum RaceEventType {
   eventEnd
 }
 
-@Injectable()
+@Singleton()
 class IncomingRaceMessageBloc
     extends Bloc<IncomingRaceMessageEvent, IncomingRaceMessageState> {
   var log = Logger(printer: PrettyPrinter(methodCount: 1));

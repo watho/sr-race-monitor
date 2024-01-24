@@ -23,16 +23,14 @@ class HomeMobile extends StatelessWidget {
         ],
       )),
       drawer: drawer,
-      body: const Expanded(
-        child: Column(
-          children: [
-            RaceStatusTableBox(),
-            LapTableBox(
-              flexValue: 2,
-              columnCount: 1,
-            ),
-          ],
-        ),
+      body: const Column(
+        children: [
+          RaceStatusTableBox(),
+          LapTableBox(
+            flexValue: 2,
+            columnCount: 1,
+          ),
+        ],
       ),
     );
   }

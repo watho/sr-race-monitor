@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:smart_race_monitor/event_model/bloc/race_event_bloc.dart';
+import 'package:smart_race_monitor/event_model/bloc/incoming_race_message_bloc.dart';
+import 'package:smart_race_monitor/event_model/event_change_status.dart';
 import 'package:smart_race_monitor/ui/race_state_table.dart';
 import 'package:smart_race_monitor/util/simple_bloc_observer.dart';
 
@@ -10,11 +11,11 @@ void main() {
     Bloc.observer = SimpleBlocObserver();
     testWidgets('Test RaceStatusTable', (WidgetTester tester) async {
       // Wrap the widget to test with MaterialApp to provide directional hints + bloc;
-      var raceEventBloc = RaceEventBloc();
+      var irmBloc = IncomingRaceMessageBloc();
       await tester.pumpWidget(MaterialApp(
           home: BlocProvider(
         create: (context) {
-          return raceEventBloc;
+          return irmBloc;
         },
         child: const RaceStatusTableBox(),
       )));
@@ -31,8 +32,9 @@ void main() {
               widget is Container && widget.color == Colors.green),
           findsNothing);
       // Add Event to bloc
-      raceEventBloc.add(RaceStatusChanged(DateTime.now(),
-          oldState: RaceStatus.unknown, newState: RaceStatus.running));
+      irmBloc.add(IncomingRaceMessageEvent.eventStatusChanged(DateTime.now(),
+          EventChangeStatus(oldState: "unknown", newState: "running")));
+
       // Wait for all changes and animations finished
       await tester.pumpAndSettle();
       // Expect changed ui.
