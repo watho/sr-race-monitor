@@ -10,6 +10,8 @@ import 'package:smart_race_monitor/event_model/ui_lap_update.dart';
 import 'package:smart_race_monitor/model/driver_model.dart';
 import 'package:smart_race_monitor/util/color_util.dart';
 
+import 'incoming_race_message_bloc.dart';
+
 part 'race_event_bloc_event.dart';
 part 'race_event_bloc_state.dart';
 

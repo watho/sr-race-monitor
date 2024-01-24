@@ -56,8 +56,7 @@ class RaceStateBox extends StatelessWidget {
     return BlocBuilder<IncomingRaceMessageBloc, IncomingRaceMessageState>(
       builder: (context, state) {
         Color c1 = switch (state) {
-          IncomingRaceMessageEvent.eventStatusChanged =>
-            raceStatusToColor(state).color,
+          RaceEventStatusChange() => raceStatusToColor(state.newState).color,
           _ => Colors.grey
         };
         return Center(
@@ -76,11 +75,10 @@ class RaceStateText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RaceEventBloc, RaceEventBlocState>(
+    return BlocBuilder<IncomingRaceMessageBloc, IncomingRaceMessageState>(
       builder: (context, state) {
         String label = switch (state) {
-          RaceEventEventChangeStatus() =>
-            raceStatusToColor(state.newState).label,
+          RaceEventStatusChange() => raceStatusToColor(state.newState).label,
           _ => 'unbekannt'
         };
         return Padding(
@@ -98,14 +96,13 @@ class DriversBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> driversList = [];
-    return BlocBuilder<RaceEventBloc, RaceEventBlocState>(
+    return BlocBuilder<IncomingRaceMessageBloc, IncomingRaceMessageState>(
       buildWhen: (previous, current) =>
-          previous != current && current is RaceEventDriversChanged,
+          previous != current && current is RaceUpdateDriversList,
       builder: (context, state) {
         // FIXME Only RaceEventUiLapUpdate not RaceEventDriversChanged
-        print("state $state");
         List<Driver> drivers = switch (state) {
-          RaceEventDriversChanged() => state.driverList,
+          RaceUpdateDriversList() => state.driversList,
           _ => []
         };
         print("DriversList: $driversList");

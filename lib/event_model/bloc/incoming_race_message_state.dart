@@ -1,22 +1,22 @@
 part of 'incoming_race_message_bloc.dart';
 
 @freezed
-class IncomingRaceMessageState with _$IncomingRaceMessageState {
-  const factory IncomingRaceMessageState.initial() = _Initial;
+sealed class IncomingRaceMessageState with _$IncomingRaceMessageState {
+  factory IncomingRaceMessageState.initial() = _Initial;
 
-  const factory IncomingRaceMessageState.raceEventStatusChange(
+  factory IncomingRaceMessageState.raceEventStatusChange(
     RaceStatus oldState,
     RaceStatus newState,
-  ) = _RaceEventStatusChange;
+  ) = RaceEventStatusChange;
 
-  const factory IncomingRaceMessageState.raceUiLapUpdate(
+  factory IncomingRaceMessageState.raceUiLapUpdate(
     String controllerId,
     String laptime,
     Color controllerBgColor,
     Color controllerTextColor,
-  ) = _RaceUiLapUpdate;
+  ) = RaceUiLapUpdate;
 
-  const factory IncomingRaceMessageState.updateDriversList(
-    List<Driver> driver,
-  ) = _RaceUpdateDriversList;
+  factory IncomingRaceMessageState.updateDriversList(
+    List<Driver> driversList,
+  ) = RaceUpdateDriversList;
 }
