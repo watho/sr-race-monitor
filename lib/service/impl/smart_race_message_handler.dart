@@ -1,3 +1,4 @@
+import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:shelf_cors_headers/shelf_cors_headers.dart';
@@ -9,13 +10,16 @@ import 'package:smart_race_monitor/service/i_smart_race_message_handler.dart';
 
 import '../../event_model/ui_lap_update.dart';
 
-@Injectable(as: SmartRaceMessageHandler)
+final getIt = GetIt.instance;
+
+@Singleton(as: SmartRaceMessageHandler)
 class SmartRaceMessageHandlerImpl implements SmartRaceMessageHandler {
   var log = Logger(printer: PrettyPrinter(methodCount: 1));
-  @override
-  final IncomingRaceMessageBloc bloc;
+  late IncomingRaceMessageBloc bloc;
 
-  SmartRaceMessageHandlerImpl(this.bloc) : super() {
+  SmartRaceMessageHandlerImpl({IncomingRaceMessageBloc? bloc}) : super() {
+    this.bloc = bloc ?? getIt.get<IncomingRaceMessageBloc>();
+    log.i("Starting post receiver on 8085");
     shelf_plus.shelfRun(init,
         defaultBindAddress: '0.0.0.0',
         defaultBindPort: 8085,
