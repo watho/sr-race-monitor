@@ -1,16 +1,5 @@
 part of 'race_event_bloc.dart';
 
-enum RaceStatus {
-  unknown,
-  prepare_for_start,
-  starting,
-  jumpstart,
-  running,
-  suspended,
-  restarting,
-  ended,
-}
-
 abstract class RaceEventBlocEvent {
   final DateTime timestamp;
 
