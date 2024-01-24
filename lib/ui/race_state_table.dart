@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smart_race_monitor/event_model/bloc/race_event_bloc.dart';
+import 'package:smart_race_monitor/event_model/bloc/incoming_race_message_bloc.dart';
 import 'package:smart_race_monitor/model/driver_model.dart';
 
 class RaceStatusTableBox extends StatelessWidget {
@@ -53,11 +53,11 @@ class RaceStateBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RaceEventBloc, RaceEventBlocState>(
+    return BlocBuilder<IncomingRaceMessageBloc, IncomingRaceMessageState>(
       builder: (context, state) {
         Color c1 = switch (state) {
-          RaceEventEventChangeStatus() =>
-            raceStatusToColor(state.newState).color,
+          IncomingRaceMessageEvent.eventStatusChanged =>
+            raceStatusToColor(state).color,
           _ => Colors.grey
         };
         return Center(
