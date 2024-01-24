@@ -19,31 +19,29 @@ mixin _$IncomingRaceMessageEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String controllerId, Color controllerBgColor,
-            Color controllerTextColor, String laptime, Driver driver)
+    required TResult Function(DateTime timestamp, UiLapUpdate eventData)
         uiLapUpdated,
-    required TResult Function(RaceStatus oldState, RaceStatus newState)
+    required TResult Function(DateTime timestamp, EventChangeStatus eventData)
         eventStatusChanged,
+    required TResult Function() eventStart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String controllerId, Color controllerBgColor,
-            Color controllerTextColor, String laptime, Driver driver)?
-        uiLapUpdated,
-    TResult? Function(RaceStatus oldState, RaceStatus newState)?
+    TResult? Function(DateTime timestamp, UiLapUpdate eventData)? uiLapUpdated,
+    TResult? Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
+    TResult? Function()? eventStart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String controllerId, Color controllerBgColor,
-            Color controllerTextColor, String laptime, Driver driver)?
-        uiLapUpdated,
-    TResult Function(RaceStatus oldState, RaceStatus newState)?
+    TResult Function(DateTime timestamp, UiLapUpdate eventData)? uiLapUpdated,
+    TResult Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
+    TResult Function()? eventStart,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -53,6 +51,7 @@ mixin _$IncomingRaceMessageEvent {
     required TResult Function(RaceMsgUiLapUpdated value) uiLapUpdated,
     required TResult Function(RaceMsgEventStatusChanged value)
         eventStatusChanged,
+    required TResult Function(RaceMsgEventStart value) eventStart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +59,7 @@ mixin _$IncomingRaceMessageEvent {
     TResult? Function(RaceMsgStarted value)? started,
     TResult? Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult? Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
+    TResult? Function(RaceMsgEventStart value)? eventStart,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,6 +67,7 @@ mixin _$IncomingRaceMessageEvent {
     TResult Function(RaceMsgStarted value)? started,
     TResult Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
+    TResult Function(RaceMsgEventStart value)? eventStart,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -130,11 +131,11 @@ class _$RaceMsgStartedImpl implements RaceMsgStarted {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String controllerId, Color controllerBgColor,
-            Color controllerTextColor, String laptime, Driver driver)
+    required TResult Function(DateTime timestamp, UiLapUpdate eventData)
         uiLapUpdated,
-    required TResult Function(RaceStatus oldState, RaceStatus newState)
+    required TResult Function(DateTime timestamp, EventChangeStatus eventData)
         eventStatusChanged,
+    required TResult Function() eventStart,
   }) {
     return started();
   }
@@ -143,11 +144,10 @@ class _$RaceMsgStartedImpl implements RaceMsgStarted {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String controllerId, Color controllerBgColor,
-            Color controllerTextColor, String laptime, Driver driver)?
-        uiLapUpdated,
-    TResult? Function(RaceStatus oldState, RaceStatus newState)?
+    TResult? Function(DateTime timestamp, UiLapUpdate eventData)? uiLapUpdated,
+    TResult? Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
+    TResult? Function()? eventStart,
   }) {
     return started?.call();
   }
@@ -156,11 +156,10 @@ class _$RaceMsgStartedImpl implements RaceMsgStarted {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String controllerId, Color controllerBgColor,
-            Color controllerTextColor, String laptime, Driver driver)?
-        uiLapUpdated,
-    TResult Function(RaceStatus oldState, RaceStatus newState)?
+    TResult Function(DateTime timestamp, UiLapUpdate eventData)? uiLapUpdated,
+    TResult Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
+    TResult Function()? eventStart,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -176,6 +175,7 @@ class _$RaceMsgStartedImpl implements RaceMsgStarted {
     required TResult Function(RaceMsgUiLapUpdated value) uiLapUpdated,
     required TResult Function(RaceMsgEventStatusChanged value)
         eventStatusChanged,
+    required TResult Function(RaceMsgEventStart value) eventStart,
   }) {
     return started(this);
   }
@@ -186,6 +186,7 @@ class _$RaceMsgStartedImpl implements RaceMsgStarted {
     TResult? Function(RaceMsgStarted value)? started,
     TResult? Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult? Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
+    TResult? Function(RaceMsgEventStart value)? eventStart,
   }) {
     return started?.call(this);
   }
@@ -196,6 +197,7 @@ class _$RaceMsgStartedImpl implements RaceMsgStarted {
     TResult Function(RaceMsgStarted value)? started,
     TResult Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
+    TResult Function(RaceMsgEventStart value)? eventStart,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -215,12 +217,7 @@ abstract class _$$RaceMsgUiLapUpdatedImplCopyWith<$Res> {
           $Res Function(_$RaceMsgUiLapUpdatedImpl) then) =
       __$$RaceMsgUiLapUpdatedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {String controllerId,
-      Color controllerBgColor,
-      Color controllerTextColor,
-      String laptime,
-      Driver driver});
+  $Res call({DateTime timestamp, UiLapUpdate eventData});
 }
 
 /// @nodoc
@@ -235,33 +232,18 @@ class __$$RaceMsgUiLapUpdatedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? controllerId = null,
-    Object? controllerBgColor = null,
-    Object? controllerTextColor = null,
-    Object? laptime = null,
-    Object? driver = null,
+    Object? timestamp = null,
+    Object? eventData = null,
   }) {
     return _then(_$RaceMsgUiLapUpdatedImpl(
-      null == controllerId
-          ? _value.controllerId
-          : controllerId // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == controllerBgColor
-          ? _value.controllerBgColor
-          : controllerBgColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-      null == controllerTextColor
-          ? _value.controllerTextColor
-          : controllerTextColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-      null == laptime
-          ? _value.laptime
-          : laptime // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == driver
-          ? _value.driver
-          : driver // ignore: cast_nullable_to_non_nullable
-              as Driver,
+      null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      null == eventData
+          ? _value.eventData
+          : eventData // ignore: cast_nullable_to_non_nullable
+              as UiLapUpdate,
     ));
   }
 }
@@ -269,23 +251,16 @@ class __$$RaceMsgUiLapUpdatedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RaceMsgUiLapUpdatedImpl implements RaceMsgUiLapUpdated {
-  const _$RaceMsgUiLapUpdatedImpl(this.controllerId, this.controllerBgColor,
-      this.controllerTextColor, this.laptime, this.driver);
+  const _$RaceMsgUiLapUpdatedImpl(this.timestamp, this.eventData);
 
   @override
-  final String controllerId;
+  final DateTime timestamp;
   @override
-  final Color controllerBgColor;
-  @override
-  final Color controllerTextColor;
-  @override
-  final String laptime;
-  @override
-  final Driver driver;
+  final UiLapUpdate eventData;
 
   @override
   String toString() {
-    return 'IncomingRaceMessageEvent.uiLapUpdated(controllerId: $controllerId, controllerBgColor: $controllerBgColor, controllerTextColor: $controllerTextColor, laptime: $laptime, driver: $driver)';
+    return 'IncomingRaceMessageEvent.uiLapUpdated(timestamp: $timestamp, eventData: $eventData)';
   }
 
   @override
@@ -293,19 +268,14 @@ class _$RaceMsgUiLapUpdatedImpl implements RaceMsgUiLapUpdated {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RaceMsgUiLapUpdatedImpl &&
-            (identical(other.controllerId, controllerId) ||
-                other.controllerId == controllerId) &&
-            (identical(other.controllerBgColor, controllerBgColor) ||
-                other.controllerBgColor == controllerBgColor) &&
-            (identical(other.controllerTextColor, controllerTextColor) ||
-                other.controllerTextColor == controllerTextColor) &&
-            (identical(other.laptime, laptime) || other.laptime == laptime) &&
-            (identical(other.driver, driver) || other.driver == driver));
+            (identical(other.timestamp, timestamp) ||
+                other.timestamp == timestamp) &&
+            (identical(other.eventData, eventData) ||
+                other.eventData == eventData));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, controllerId, controllerBgColor,
-      controllerTextColor, laptime, driver);
+  int get hashCode => Object.hash(runtimeType, timestamp, eventData);
 
   @JsonKey(ignore: true)
   @override
@@ -318,44 +288,39 @@ class _$RaceMsgUiLapUpdatedImpl implements RaceMsgUiLapUpdated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String controllerId, Color controllerBgColor,
-            Color controllerTextColor, String laptime, Driver driver)
+    required TResult Function(DateTime timestamp, UiLapUpdate eventData)
         uiLapUpdated,
-    required TResult Function(RaceStatus oldState, RaceStatus newState)
+    required TResult Function(DateTime timestamp, EventChangeStatus eventData)
         eventStatusChanged,
+    required TResult Function() eventStart,
   }) {
-    return uiLapUpdated(
-        controllerId, controllerBgColor, controllerTextColor, laptime, driver);
+    return uiLapUpdated(timestamp, eventData);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String controllerId, Color controllerBgColor,
-            Color controllerTextColor, String laptime, Driver driver)?
-        uiLapUpdated,
-    TResult? Function(RaceStatus oldState, RaceStatus newState)?
+    TResult? Function(DateTime timestamp, UiLapUpdate eventData)? uiLapUpdated,
+    TResult? Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
+    TResult? Function()? eventStart,
   }) {
-    return uiLapUpdated?.call(
-        controllerId, controllerBgColor, controllerTextColor, laptime, driver);
+    return uiLapUpdated?.call(timestamp, eventData);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String controllerId, Color controllerBgColor,
-            Color controllerTextColor, String laptime, Driver driver)?
-        uiLapUpdated,
-    TResult Function(RaceStatus oldState, RaceStatus newState)?
+    TResult Function(DateTime timestamp, UiLapUpdate eventData)? uiLapUpdated,
+    TResult Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
+    TResult Function()? eventStart,
     required TResult orElse(),
   }) {
     if (uiLapUpdated != null) {
-      return uiLapUpdated(controllerId, controllerBgColor, controllerTextColor,
-          laptime, driver);
+      return uiLapUpdated(timestamp, eventData);
     }
     return orElse();
   }
@@ -367,6 +332,7 @@ class _$RaceMsgUiLapUpdatedImpl implements RaceMsgUiLapUpdated {
     required TResult Function(RaceMsgUiLapUpdated value) uiLapUpdated,
     required TResult Function(RaceMsgEventStatusChanged value)
         eventStatusChanged,
+    required TResult Function(RaceMsgEventStart value) eventStart,
   }) {
     return uiLapUpdated(this);
   }
@@ -377,6 +343,7 @@ class _$RaceMsgUiLapUpdatedImpl implements RaceMsgUiLapUpdated {
     TResult? Function(RaceMsgStarted value)? started,
     TResult? Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult? Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
+    TResult? Function(RaceMsgEventStart value)? eventStart,
   }) {
     return uiLapUpdated?.call(this);
   }
@@ -387,6 +354,7 @@ class _$RaceMsgUiLapUpdatedImpl implements RaceMsgUiLapUpdated {
     TResult Function(RaceMsgStarted value)? started,
     TResult Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
+    TResult Function(RaceMsgEventStart value)? eventStart,
     required TResult orElse(),
   }) {
     if (uiLapUpdated != null) {
@@ -398,17 +366,11 @@ class _$RaceMsgUiLapUpdatedImpl implements RaceMsgUiLapUpdated {
 
 abstract class RaceMsgUiLapUpdated implements IncomingRaceMessageEvent {
   const factory RaceMsgUiLapUpdated(
-      final String controllerId,
-      final Color controllerBgColor,
-      final Color controllerTextColor,
-      final String laptime,
-      final Driver driver) = _$RaceMsgUiLapUpdatedImpl;
+          final DateTime timestamp, final UiLapUpdate eventData) =
+      _$RaceMsgUiLapUpdatedImpl;
 
-  String get controllerId;
-  Color get controllerBgColor;
-  Color get controllerTextColor;
-  String get laptime;
-  Driver get driver;
+  DateTime get timestamp;
+  UiLapUpdate get eventData;
   @JsonKey(ignore: true)
   _$$RaceMsgUiLapUpdatedImplCopyWith<_$RaceMsgUiLapUpdatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -421,7 +383,7 @@ abstract class _$$RaceMsgEventStatusChangedImplCopyWith<$Res> {
           $Res Function(_$RaceMsgEventStatusChangedImpl) then) =
       __$$RaceMsgEventStatusChangedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({RaceStatus oldState, RaceStatus newState});
+  $Res call({DateTime timestamp, EventChangeStatus eventData});
 }
 
 /// @nodoc
@@ -437,18 +399,18 @@ class __$$RaceMsgEventStatusChangedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? oldState = null,
-    Object? newState = null,
+    Object? timestamp = null,
+    Object? eventData = null,
   }) {
     return _then(_$RaceMsgEventStatusChangedImpl(
-      null == oldState
-          ? _value.oldState
-          : oldState // ignore: cast_nullable_to_non_nullable
-              as RaceStatus,
-      null == newState
-          ? _value.newState
-          : newState // ignore: cast_nullable_to_non_nullable
-              as RaceStatus,
+      null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      null == eventData
+          ? _value.eventData
+          : eventData // ignore: cast_nullable_to_non_nullable
+              as EventChangeStatus,
     ));
   }
 }
@@ -456,16 +418,16 @@ class __$$RaceMsgEventStatusChangedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RaceMsgEventStatusChangedImpl implements RaceMsgEventStatusChanged {
-  const _$RaceMsgEventStatusChangedImpl(this.oldState, this.newState);
+  const _$RaceMsgEventStatusChangedImpl(this.timestamp, this.eventData);
 
   @override
-  final RaceStatus oldState;
+  final DateTime timestamp;
   @override
-  final RaceStatus newState;
+  final EventChangeStatus eventData;
 
   @override
   String toString() {
-    return 'IncomingRaceMessageEvent.eventStatusChanged(oldState: $oldState, newState: $newState)';
+    return 'IncomingRaceMessageEvent.eventStatusChanged(timestamp: $timestamp, eventData: $eventData)';
   }
 
   @override
@@ -473,14 +435,14 @@ class _$RaceMsgEventStatusChangedImpl implements RaceMsgEventStatusChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RaceMsgEventStatusChangedImpl &&
-            (identical(other.oldState, oldState) ||
-                other.oldState == oldState) &&
-            (identical(other.newState, newState) ||
-                other.newState == newState));
+            (identical(other.timestamp, timestamp) ||
+                other.timestamp == timestamp) &&
+            (identical(other.eventData, eventData) ||
+                other.eventData == eventData));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, oldState, newState);
+  int get hashCode => Object.hash(runtimeType, timestamp, eventData);
 
   @JsonKey(ignore: true)
   @override
@@ -493,41 +455,39 @@ class _$RaceMsgEventStatusChangedImpl implements RaceMsgEventStatusChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String controllerId, Color controllerBgColor,
-            Color controllerTextColor, String laptime, Driver driver)
+    required TResult Function(DateTime timestamp, UiLapUpdate eventData)
         uiLapUpdated,
-    required TResult Function(RaceStatus oldState, RaceStatus newState)
+    required TResult Function(DateTime timestamp, EventChangeStatus eventData)
         eventStatusChanged,
+    required TResult Function() eventStart,
   }) {
-    return eventStatusChanged(oldState, newState);
+    return eventStatusChanged(timestamp, eventData);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String controllerId, Color controllerBgColor,
-            Color controllerTextColor, String laptime, Driver driver)?
-        uiLapUpdated,
-    TResult? Function(RaceStatus oldState, RaceStatus newState)?
+    TResult? Function(DateTime timestamp, UiLapUpdate eventData)? uiLapUpdated,
+    TResult? Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
+    TResult? Function()? eventStart,
   }) {
-    return eventStatusChanged?.call(oldState, newState);
+    return eventStatusChanged?.call(timestamp, eventData);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String controllerId, Color controllerBgColor,
-            Color controllerTextColor, String laptime, Driver driver)?
-        uiLapUpdated,
-    TResult Function(RaceStatus oldState, RaceStatus newState)?
+    TResult Function(DateTime timestamp, UiLapUpdate eventData)? uiLapUpdated,
+    TResult Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
+    TResult Function()? eventStart,
     required TResult orElse(),
   }) {
     if (eventStatusChanged != null) {
-      return eventStatusChanged(oldState, newState);
+      return eventStatusChanged(timestamp, eventData);
     }
     return orElse();
   }
@@ -539,6 +499,7 @@ class _$RaceMsgEventStatusChangedImpl implements RaceMsgEventStatusChanged {
     required TResult Function(RaceMsgUiLapUpdated value) uiLapUpdated,
     required TResult Function(RaceMsgEventStatusChanged value)
         eventStatusChanged,
+    required TResult Function(RaceMsgEventStart value) eventStart,
   }) {
     return eventStatusChanged(this);
   }
@@ -549,6 +510,7 @@ class _$RaceMsgEventStatusChangedImpl implements RaceMsgEventStatusChanged {
     TResult? Function(RaceMsgStarted value)? started,
     TResult? Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult? Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
+    TResult? Function(RaceMsgEventStart value)? eventStart,
   }) {
     return eventStatusChanged?.call(this);
   }
@@ -559,6 +521,7 @@ class _$RaceMsgEventStatusChangedImpl implements RaceMsgEventStatusChanged {
     TResult Function(RaceMsgStarted value)? started,
     TResult Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
+    TResult Function(RaceMsgEventStart value)? eventStart,
     required TResult orElse(),
   }) {
     if (eventStatusChanged != null) {
@@ -570,14 +533,134 @@ class _$RaceMsgEventStatusChangedImpl implements RaceMsgEventStatusChanged {
 
 abstract class RaceMsgEventStatusChanged implements IncomingRaceMessageEvent {
   const factory RaceMsgEventStatusChanged(
-          final RaceStatus oldState, final RaceStatus newState) =
+          final DateTime timestamp, final EventChangeStatus eventData) =
       _$RaceMsgEventStatusChangedImpl;
 
-  RaceStatus get oldState;
-  RaceStatus get newState;
+  DateTime get timestamp;
+  EventChangeStatus get eventData;
   @JsonKey(ignore: true)
   _$$RaceMsgEventStatusChangedImplCopyWith<_$RaceMsgEventStatusChangedImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$RaceMsgEventStartImplCopyWith<$Res> {
+  factory _$$RaceMsgEventStartImplCopyWith(_$RaceMsgEventStartImpl value,
+          $Res Function(_$RaceMsgEventStartImpl) then) =
+      __$$RaceMsgEventStartImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RaceMsgEventStartImplCopyWithImpl<$Res>
+    extends _$IncomingRaceMessageEventCopyWithImpl<$Res,
+        _$RaceMsgEventStartImpl>
+    implements _$$RaceMsgEventStartImplCopyWith<$Res> {
+  __$$RaceMsgEventStartImplCopyWithImpl(_$RaceMsgEventStartImpl _value,
+      $Res Function(_$RaceMsgEventStartImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RaceMsgEventStartImpl implements RaceMsgEventStart {
+  const _$RaceMsgEventStartImpl();
+
+  @override
+  String toString() {
+    return 'IncomingRaceMessageEvent.eventStart()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$RaceMsgEventStartImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(DateTime timestamp, UiLapUpdate eventData)
+        uiLapUpdated,
+    required TResult Function(DateTime timestamp, EventChangeStatus eventData)
+        eventStatusChanged,
+    required TResult Function() eventStart,
+  }) {
+    return eventStart();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(DateTime timestamp, UiLapUpdate eventData)? uiLapUpdated,
+    TResult? Function(DateTime timestamp, EventChangeStatus eventData)?
+        eventStatusChanged,
+    TResult? Function()? eventStart,
+  }) {
+    return eventStart?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(DateTime timestamp, UiLapUpdate eventData)? uiLapUpdated,
+    TResult Function(DateTime timestamp, EventChangeStatus eventData)?
+        eventStatusChanged,
+    TResult Function()? eventStart,
+    required TResult orElse(),
+  }) {
+    if (eventStart != null) {
+      return eventStart();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(RaceMsgStarted value) started,
+    required TResult Function(RaceMsgUiLapUpdated value) uiLapUpdated,
+    required TResult Function(RaceMsgEventStatusChanged value)
+        eventStatusChanged,
+    required TResult Function(RaceMsgEventStart value) eventStart,
+  }) {
+    return eventStart(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(RaceMsgStarted value)? started,
+    TResult? Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
+    TResult? Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
+    TResult? Function(RaceMsgEventStart value)? eventStart,
+  }) {
+    return eventStart?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(RaceMsgStarted value)? started,
+    TResult Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
+    TResult Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
+    TResult Function(RaceMsgEventStart value)? eventStart,
+    required TResult orElse(),
+  }) {
+    if (eventStart != null) {
+      return eventStart(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RaceMsgEventStart implements IncomingRaceMessageEvent {
+  const factory RaceMsgEventStart() = _$RaceMsgEventStartImpl;
 }
 
 /// @nodoc
@@ -590,7 +673,7 @@ mixin _$IncomingRaceMessageState {
     required TResult Function(String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)
         raceUiLapUpdate,
-    required TResult Function(List<Driver> driver) updateDriversList,
+    required TResult Function(List<Driver> driversList) updateDriversList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -601,7 +684,7 @@ mixin _$IncomingRaceMessageState {
     TResult? Function(String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
-    TResult? Function(List<Driver> driver)? updateDriversList,
+    TResult? Function(List<Driver> driversList)? updateDriversList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -612,33 +695,33 @@ mixin _$IncomingRaceMessageState {
     TResult Function(String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
-    TResult Function(List<Driver> driver)? updateDriversList,
+    TResult Function(List<Driver> driversList)? updateDriversList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_RaceEventStatusChange value)
+    required TResult Function(RaceEventStatusChange value)
         raceEventStatusChange,
-    required TResult Function(_RaceUiLapUpdate value) raceUiLapUpdate,
-    required TResult Function(_RaceUpdateDriversList value) updateDriversList,
+    required TResult Function(RaceUiLapUpdate value) raceUiLapUpdate,
+    required TResult Function(RaceUpdateDriversList value) updateDriversList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_RaceEventStatusChange value)? raceEventStatusChange,
-    TResult? Function(_RaceUiLapUpdate value)? raceUiLapUpdate,
-    TResult? Function(_RaceUpdateDriversList value)? updateDriversList,
+    TResult? Function(RaceEventStatusChange value)? raceEventStatusChange,
+    TResult? Function(RaceUiLapUpdate value)? raceUiLapUpdate,
+    TResult? Function(RaceUpdateDriversList value)? updateDriversList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_RaceEventStatusChange value)? raceEventStatusChange,
-    TResult Function(_RaceUiLapUpdate value)? raceUiLapUpdate,
-    TResult Function(_RaceUpdateDriversList value)? updateDriversList,
+    TResult Function(RaceEventStatusChange value)? raceEventStatusChange,
+    TResult Function(RaceUiLapUpdate value)? raceUiLapUpdate,
+    TResult Function(RaceUpdateDriversList value)? updateDriversList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -682,7 +765,7 @@ class __$$InitialImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
+  _$InitialImpl();
 
   @override
   String toString() {
@@ -707,7 +790,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)
         raceUiLapUpdate,
-    required TResult Function(List<Driver> driver) updateDriversList,
+    required TResult Function(List<Driver> driversList) updateDriversList,
   }) {
     return initial();
   }
@@ -721,7 +804,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
-    TResult? Function(List<Driver> driver)? updateDriversList,
+    TResult? Function(List<Driver> driversList)? updateDriversList,
   }) {
     return initial?.call();
   }
@@ -735,7 +818,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
-    TResult Function(List<Driver> driver)? updateDriversList,
+    TResult Function(List<Driver> driversList)? updateDriversList,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -748,10 +831,10 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_RaceEventStatusChange value)
+    required TResult Function(RaceEventStatusChange value)
         raceEventStatusChange,
-    required TResult Function(_RaceUiLapUpdate value) raceUiLapUpdate,
-    required TResult Function(_RaceUpdateDriversList value) updateDriversList,
+    required TResult Function(RaceUiLapUpdate value) raceUiLapUpdate,
+    required TResult Function(RaceUpdateDriversList value) updateDriversList,
   }) {
     return initial(this);
   }
@@ -760,9 +843,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_RaceEventStatusChange value)? raceEventStatusChange,
-    TResult? Function(_RaceUiLapUpdate value)? raceUiLapUpdate,
-    TResult? Function(_RaceUpdateDriversList value)? updateDriversList,
+    TResult? Function(RaceEventStatusChange value)? raceEventStatusChange,
+    TResult? Function(RaceUiLapUpdate value)? raceUiLapUpdate,
+    TResult? Function(RaceUpdateDriversList value)? updateDriversList,
   }) {
     return initial?.call(this);
   }
@@ -771,9 +854,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_RaceEventStatusChange value)? raceEventStatusChange,
-    TResult Function(_RaceUiLapUpdate value)? raceUiLapUpdate,
-    TResult Function(_RaceUpdateDriversList value)? updateDriversList,
+    TResult Function(RaceEventStatusChange value)? raceEventStatusChange,
+    TResult Function(RaceUiLapUpdate value)? raceUiLapUpdate,
+    TResult Function(RaceUpdateDriversList value)? updateDriversList,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -784,7 +867,7 @@ class _$InitialImpl implements _Initial {
 }
 
 abstract class _Initial implements IncomingRaceMessageState {
-  const factory _Initial() = _$InitialImpl;
+  factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
@@ -827,8 +910,8 @@ class __$$RaceEventStatusChangeImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RaceEventStatusChangeImpl implements _RaceEventStatusChange {
-  const _$RaceEventStatusChangeImpl(this.oldState, this.newState);
+class _$RaceEventStatusChangeImpl implements RaceEventStatusChange {
+  _$RaceEventStatusChangeImpl(this.oldState, this.newState);
 
   @override
   final RaceStatus oldState;
@@ -870,7 +953,7 @@ class _$RaceEventStatusChangeImpl implements _RaceEventStatusChange {
     required TResult Function(String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)
         raceUiLapUpdate,
-    required TResult Function(List<Driver> driver) updateDriversList,
+    required TResult Function(List<Driver> driversList) updateDriversList,
   }) {
     return raceEventStatusChange(oldState, newState);
   }
@@ -884,7 +967,7 @@ class _$RaceEventStatusChangeImpl implements _RaceEventStatusChange {
     TResult? Function(String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
-    TResult? Function(List<Driver> driver)? updateDriversList,
+    TResult? Function(List<Driver> driversList)? updateDriversList,
   }) {
     return raceEventStatusChange?.call(oldState, newState);
   }
@@ -898,7 +981,7 @@ class _$RaceEventStatusChangeImpl implements _RaceEventStatusChange {
     TResult Function(String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
-    TResult Function(List<Driver> driver)? updateDriversList,
+    TResult Function(List<Driver> driversList)? updateDriversList,
     required TResult orElse(),
   }) {
     if (raceEventStatusChange != null) {
@@ -911,10 +994,10 @@ class _$RaceEventStatusChangeImpl implements _RaceEventStatusChange {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_RaceEventStatusChange value)
+    required TResult Function(RaceEventStatusChange value)
         raceEventStatusChange,
-    required TResult Function(_RaceUiLapUpdate value) raceUiLapUpdate,
-    required TResult Function(_RaceUpdateDriversList value) updateDriversList,
+    required TResult Function(RaceUiLapUpdate value) raceUiLapUpdate,
+    required TResult Function(RaceUpdateDriversList value) updateDriversList,
   }) {
     return raceEventStatusChange(this);
   }
@@ -923,9 +1006,9 @@ class _$RaceEventStatusChangeImpl implements _RaceEventStatusChange {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_RaceEventStatusChange value)? raceEventStatusChange,
-    TResult? Function(_RaceUiLapUpdate value)? raceUiLapUpdate,
-    TResult? Function(_RaceUpdateDriversList value)? updateDriversList,
+    TResult? Function(RaceEventStatusChange value)? raceEventStatusChange,
+    TResult? Function(RaceUiLapUpdate value)? raceUiLapUpdate,
+    TResult? Function(RaceUpdateDriversList value)? updateDriversList,
   }) {
     return raceEventStatusChange?.call(this);
   }
@@ -934,9 +1017,9 @@ class _$RaceEventStatusChangeImpl implements _RaceEventStatusChange {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_RaceEventStatusChange value)? raceEventStatusChange,
-    TResult Function(_RaceUiLapUpdate value)? raceUiLapUpdate,
-    TResult Function(_RaceUpdateDriversList value)? updateDriversList,
+    TResult Function(RaceEventStatusChange value)? raceEventStatusChange,
+    TResult Function(RaceUiLapUpdate value)? raceUiLapUpdate,
+    TResult Function(RaceUpdateDriversList value)? updateDriversList,
     required TResult orElse(),
   }) {
     if (raceEventStatusChange != null) {
@@ -946,8 +1029,8 @@ class _$RaceEventStatusChangeImpl implements _RaceEventStatusChange {
   }
 }
 
-abstract class _RaceEventStatusChange implements IncomingRaceMessageState {
-  const factory _RaceEventStatusChange(
+abstract class RaceEventStatusChange implements IncomingRaceMessageState {
+  factory RaceEventStatusChange(
           final RaceStatus oldState, final RaceStatus newState) =
       _$RaceEventStatusChangeImpl;
 
@@ -1010,9 +1093,9 @@ class __$$RaceUiLapUpdateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RaceUiLapUpdateImpl implements _RaceUiLapUpdate {
-  const _$RaceUiLapUpdateImpl(this.controllerId, this.laptime,
-      this.controllerBgColor, this.controllerTextColor);
+class _$RaceUiLapUpdateImpl implements RaceUiLapUpdate {
+  _$RaceUiLapUpdateImpl(this.controllerId, this.laptime, this.controllerBgColor,
+      this.controllerTextColor);
 
   @override
   final String controllerId;
@@ -1062,7 +1145,7 @@ class _$RaceUiLapUpdateImpl implements _RaceUiLapUpdate {
     required TResult Function(String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)
         raceUiLapUpdate,
-    required TResult Function(List<Driver> driver) updateDriversList,
+    required TResult Function(List<Driver> driversList) updateDriversList,
   }) {
     return raceUiLapUpdate(
         controllerId, laptime, controllerBgColor, controllerTextColor);
@@ -1077,7 +1160,7 @@ class _$RaceUiLapUpdateImpl implements _RaceUiLapUpdate {
     TResult? Function(String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
-    TResult? Function(List<Driver> driver)? updateDriversList,
+    TResult? Function(List<Driver> driversList)? updateDriversList,
   }) {
     return raceUiLapUpdate?.call(
         controllerId, laptime, controllerBgColor, controllerTextColor);
@@ -1092,7 +1175,7 @@ class _$RaceUiLapUpdateImpl implements _RaceUiLapUpdate {
     TResult Function(String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
-    TResult Function(List<Driver> driver)? updateDriversList,
+    TResult Function(List<Driver> driversList)? updateDriversList,
     required TResult orElse(),
   }) {
     if (raceUiLapUpdate != null) {
@@ -1106,10 +1189,10 @@ class _$RaceUiLapUpdateImpl implements _RaceUiLapUpdate {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_RaceEventStatusChange value)
+    required TResult Function(RaceEventStatusChange value)
         raceEventStatusChange,
-    required TResult Function(_RaceUiLapUpdate value) raceUiLapUpdate,
-    required TResult Function(_RaceUpdateDriversList value) updateDriversList,
+    required TResult Function(RaceUiLapUpdate value) raceUiLapUpdate,
+    required TResult Function(RaceUpdateDriversList value) updateDriversList,
   }) {
     return raceUiLapUpdate(this);
   }
@@ -1118,9 +1201,9 @@ class _$RaceUiLapUpdateImpl implements _RaceUiLapUpdate {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_RaceEventStatusChange value)? raceEventStatusChange,
-    TResult? Function(_RaceUiLapUpdate value)? raceUiLapUpdate,
-    TResult? Function(_RaceUpdateDriversList value)? updateDriversList,
+    TResult? Function(RaceEventStatusChange value)? raceEventStatusChange,
+    TResult? Function(RaceUiLapUpdate value)? raceUiLapUpdate,
+    TResult? Function(RaceUpdateDriversList value)? updateDriversList,
   }) {
     return raceUiLapUpdate?.call(this);
   }
@@ -1129,9 +1212,9 @@ class _$RaceUiLapUpdateImpl implements _RaceUiLapUpdate {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_RaceEventStatusChange value)? raceEventStatusChange,
-    TResult Function(_RaceUiLapUpdate value)? raceUiLapUpdate,
-    TResult Function(_RaceUpdateDriversList value)? updateDriversList,
+    TResult Function(RaceEventStatusChange value)? raceEventStatusChange,
+    TResult Function(RaceUiLapUpdate value)? raceUiLapUpdate,
+    TResult Function(RaceUpdateDriversList value)? updateDriversList,
     required TResult orElse(),
   }) {
     if (raceUiLapUpdate != null) {
@@ -1141,8 +1224,8 @@ class _$RaceUiLapUpdateImpl implements _RaceUiLapUpdate {
   }
 }
 
-abstract class _RaceUiLapUpdate implements IncomingRaceMessageState {
-  const factory _RaceUiLapUpdate(
+abstract class RaceUiLapUpdate implements IncomingRaceMessageState {
+  factory RaceUiLapUpdate(
       final String controllerId,
       final String laptime,
       final Color controllerBgColor,
@@ -1164,7 +1247,7 @@ abstract class _$$RaceUpdateDriversListImplCopyWith<$Res> {
           $Res Function(_$RaceUpdateDriversListImpl) then) =
       __$$RaceUpdateDriversListImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Driver> driver});
+  $Res call({List<Driver> driversList});
 }
 
 /// @nodoc
@@ -1179,12 +1262,12 @@ class __$$RaceUpdateDriversListImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? driver = null,
+    Object? driversList = null,
   }) {
     return _then(_$RaceUpdateDriversListImpl(
-      null == driver
-          ? _value._driver
-          : driver // ignore: cast_nullable_to_non_nullable
+      null == driversList
+          ? _value._driversList
+          : driversList // ignore: cast_nullable_to_non_nullable
               as List<Driver>,
     ));
   }
@@ -1192,21 +1275,21 @@ class __$$RaceUpdateDriversListImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RaceUpdateDriversListImpl implements _RaceUpdateDriversList {
-  const _$RaceUpdateDriversListImpl(final List<Driver> driver)
-      : _driver = driver;
+class _$RaceUpdateDriversListImpl implements RaceUpdateDriversList {
+  _$RaceUpdateDriversListImpl(final List<Driver> driversList)
+      : _driversList = driversList;
 
-  final List<Driver> _driver;
+  final List<Driver> _driversList;
   @override
-  List<Driver> get driver {
-    if (_driver is EqualUnmodifiableListView) return _driver;
+  List<Driver> get driversList {
+    if (_driversList is EqualUnmodifiableListView) return _driversList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_driver);
+    return EqualUnmodifiableListView(_driversList);
   }
 
   @override
   String toString() {
-    return 'IncomingRaceMessageState.updateDriversList(driver: $driver)';
+    return 'IncomingRaceMessageState.updateDriversList(driversList: $driversList)';
   }
 
   @override
@@ -1214,12 +1297,13 @@ class _$RaceUpdateDriversListImpl implements _RaceUpdateDriversList {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RaceUpdateDriversListImpl &&
-            const DeepCollectionEquality().equals(other._driver, _driver));
+            const DeepCollectionEquality()
+                .equals(other._driversList, _driversList));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_driver));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_driversList));
 
   @JsonKey(ignore: true)
   @override
@@ -1237,9 +1321,9 @@ class _$RaceUpdateDriversListImpl implements _RaceUpdateDriversList {
     required TResult Function(String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)
         raceUiLapUpdate,
-    required TResult Function(List<Driver> driver) updateDriversList,
+    required TResult Function(List<Driver> driversList) updateDriversList,
   }) {
-    return updateDriversList(driver);
+    return updateDriversList(driversList);
   }
 
   @override
@@ -1251,9 +1335,9 @@ class _$RaceUpdateDriversListImpl implements _RaceUpdateDriversList {
     TResult? Function(String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
-    TResult? Function(List<Driver> driver)? updateDriversList,
+    TResult? Function(List<Driver> driversList)? updateDriversList,
   }) {
-    return updateDriversList?.call(driver);
+    return updateDriversList?.call(driversList);
   }
 
   @override
@@ -1265,11 +1349,11 @@ class _$RaceUpdateDriversListImpl implements _RaceUpdateDriversList {
     TResult Function(String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
-    TResult Function(List<Driver> driver)? updateDriversList,
+    TResult Function(List<Driver> driversList)? updateDriversList,
     required TResult orElse(),
   }) {
     if (updateDriversList != null) {
-      return updateDriversList(driver);
+      return updateDriversList(driversList);
     }
     return orElse();
   }
@@ -1278,10 +1362,10 @@ class _$RaceUpdateDriversListImpl implements _RaceUpdateDriversList {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_RaceEventStatusChange value)
+    required TResult Function(RaceEventStatusChange value)
         raceEventStatusChange,
-    required TResult Function(_RaceUiLapUpdate value) raceUiLapUpdate,
-    required TResult Function(_RaceUpdateDriversList value) updateDriversList,
+    required TResult Function(RaceUiLapUpdate value) raceUiLapUpdate,
+    required TResult Function(RaceUpdateDriversList value) updateDriversList,
   }) {
     return updateDriversList(this);
   }
@@ -1290,9 +1374,9 @@ class _$RaceUpdateDriversListImpl implements _RaceUpdateDriversList {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_RaceEventStatusChange value)? raceEventStatusChange,
-    TResult? Function(_RaceUiLapUpdate value)? raceUiLapUpdate,
-    TResult? Function(_RaceUpdateDriversList value)? updateDriversList,
+    TResult? Function(RaceEventStatusChange value)? raceEventStatusChange,
+    TResult? Function(RaceUiLapUpdate value)? raceUiLapUpdate,
+    TResult? Function(RaceUpdateDriversList value)? updateDriversList,
   }) {
     return updateDriversList?.call(this);
   }
@@ -1301,9 +1385,9 @@ class _$RaceUpdateDriversListImpl implements _RaceUpdateDriversList {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_RaceEventStatusChange value)? raceEventStatusChange,
-    TResult Function(_RaceUiLapUpdate value)? raceUiLapUpdate,
-    TResult Function(_RaceUpdateDriversList value)? updateDriversList,
+    TResult Function(RaceEventStatusChange value)? raceEventStatusChange,
+    TResult Function(RaceUiLapUpdate value)? raceUiLapUpdate,
+    TResult Function(RaceUpdateDriversList value)? updateDriversList,
     required TResult orElse(),
   }) {
     if (updateDriversList != null) {
@@ -1313,11 +1397,11 @@ class _$RaceUpdateDriversListImpl implements _RaceUpdateDriversList {
   }
 }
 
-abstract class _RaceUpdateDriversList implements IncomingRaceMessageState {
-  const factory _RaceUpdateDriversList(final List<Driver> driver) =
+abstract class RaceUpdateDriversList implements IncomingRaceMessageState {
+  factory RaceUpdateDriversList(final List<Driver> driversList) =
       _$RaceUpdateDriversListImpl;
 
-  List<Driver> get driver;
+  List<Driver> get driversList;
   @JsonKey(ignore: true)
   _$$RaceUpdateDriversListImplCopyWith<_$RaceUpdateDriversListImpl>
       get copyWith => throw _privateConstructorUsedError;

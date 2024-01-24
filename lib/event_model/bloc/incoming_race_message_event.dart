@@ -5,15 +5,12 @@ class IncomingRaceMessageEvent with _$IncomingRaceMessageEvent {
   const factory IncomingRaceMessageEvent.started() = RaceMsgStarted;
 
   const factory IncomingRaceMessageEvent.uiLapUpdated(
-    final String controllerId,
-    final Color controllerBgColor,
-    final Color controllerTextColor,
-    final String laptime,
-    final Driver driver,
-  ) = RaceMsgUiLapUpdated;
+          final DateTime timestamp, final UiLapUpdate eventData) =
+      RaceMsgUiLapUpdated;
 
   const factory IncomingRaceMessageEvent.eventStatusChanged(
-    RaceStatus oldState,
-    RaceStatus newState,
-  ) = RaceMsgEventStatusChanged;
+          final DateTime timestamp, EventChangeStatus eventData) =
+      RaceMsgEventStatusChanged;
+
+  const factory IncomingRaceMessageEvent.eventStart() = RaceMsgEventStart;
 }
