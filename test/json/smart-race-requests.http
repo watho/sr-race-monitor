@@ -11,25 +11,25 @@ Content-Type: application/json
 < ./event.change_status_2.json
 
 ### Event.end 1
-POST https://{{host}}:{{port}}/
+POST http://{{host}}:{{port}}/
 Content-Type: application/json
 
 < ./event.end_1.json
 
 ### Event.start 1
-POST https://{{host}}:{{port}}/
+POST http://{{host}}:{{port}}/
 Content-Type: application/json
 
 < ./event.start_1.json
 
 ### Event.start 2
-POST https://{{host}}:{{port}}/
+POST http://{{host}}:{{port}}/
 Content-Type: application/json
 
 < ./event.start_2.json
 
 ### Event.empty
-POST https://{{host}}:{{port}}/
+POST http://{{host}}:{{port}}/
 Content-Type: application/json
 
 < ./event.empty.json

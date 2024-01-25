@@ -1,0 +1,5 @@
+### ui.lap_update 2
+POST http://{{host}}:{{port}}/api
+Content-Type: application/json
+
+< ./ui.lap_update_2.json
