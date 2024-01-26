@@ -10,7 +10,8 @@ sealed class GameStateState with _$GameStateState {
   factory GameStateState.pointUpdate(final int points) = PointUpdate;
 
   factory GameStateState.newDesiredColor(
-      final Color color, final String driverName) = NewDesiredColor;
+          final Color color, final Color driverColor, final String driverName) =
+      NewDesiredColor;
 
   factory GameStateState.timerRunComplete() = TimerRunComplete;
 }

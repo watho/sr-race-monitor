@@ -156,9 +156,13 @@ class DesiredControllerColor extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous != current && current is NewDesiredColor,
       builder: (context, state) {
-        (Color, String) desiredValues = switch (state) {
-          NewDesiredColor() => (state.color, state.driverName),
-          _ => (Colors.grey, ""),
+        (Color, Color, String) desiredValues = switch (state) {
+          NewDesiredColor() => (
+              state.color,
+              state.driverColor,
+              state.driverName
+            ),
+          _ => (Colors.grey, Colors.grey, ""),
         };
         return AnimatedContainer(
           duration: const Duration(seconds: 1),
@@ -167,8 +171,11 @@ class DesiredControllerColor extends StatelessWidget {
               borderRadius: BorderRadius.circular(10), color: desiredValues.$1),
           child: Center(
             child: Text(
-              desiredValues.$2,
-              style: Theme.of(context).textTheme.displayMedium,
+              desiredValues.$3,
+              style: Theme.of(context)
+                  .textTheme
+                  .displaySmall
+                  ?.copyWith(color: desiredValues.$2),
             ),
           ),
         );
