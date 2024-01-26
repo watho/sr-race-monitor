@@ -13,4 +13,7 @@ class IncomingRaceMessageEvent with _$IncomingRaceMessageEvent {
       RaceMsgEventStatusChanged;
 
   const factory IncomingRaceMessageEvent.eventStart() = RaceMsgEventStart;
+
+  const factory IncomingRaceMessageEvent.resetDriversListPressed() =
+      RaceMsgResetDriversListPressed;
 }

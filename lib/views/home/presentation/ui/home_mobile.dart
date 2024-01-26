@@ -13,13 +13,16 @@ class HomeMobile extends StatelessWidget {
       appBar: AppBar(
           title: Row(
         children: [
-          Image.asset(
-            'assets/icon.png',
-            semanticLabel: "Logo",
-            height: 32,
-            width: 32,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/icon.png',
+              semanticLabel: "Logo",
+              height: 32,
+              width: 32,
+            ),
           ),
-          const Text(" Mobile"),
+          const Text("SR Race Monitor"),
         ],
       )),
       drawer: drawer,

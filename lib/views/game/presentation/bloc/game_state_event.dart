@@ -1,27 +1,19 @@
 part of 'game_state_bloc.dart';
 
-abstract class GameStateEvent {
-  const GameStateEvent();
-}
+@freezed
+sealed class GameStateEvent with _$GameStateEvent {
+  const factory GameStateEvent.started() = GameStarted;
 
-final class TimerStarted extends GameStateEvent {
-  const TimerStarted({required this.duration});
-  final int duration;
-}
+  const factory GameStateEvent.timerStarted(final int duration) = TimerStarted;
 
-final class TimerPaused extends GameStateEvent {
-  const TimerPaused();
-}
+  const factory GameStateEvent.timerPaused() = TimerPaused;
 
-final class TimerResumed extends GameStateEvent {
-  const TimerResumed();
-}
+  const factory GameStateEvent.timerResumed() = TimerResumed;
 
-class TimerReset extends GameStateEvent {
-  const TimerReset();
-}
+  const factory GameStateEvent.timerReset() = TimerReset;
 
-class _TimerTicked extends GameStateEvent {
-  const _TimerTicked({required this.duration});
-  final int duration;
+  const factory GameStateEvent.timerTicked(final int duration) = _TimerTicked;
+
+  const factory GameStateEvent.lapUpdated(final Color actualColor) =
+      _LapUpdated;
 }

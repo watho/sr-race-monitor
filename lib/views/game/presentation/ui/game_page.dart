@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_race_monitor/event_model/bloc/incoming_race_message_bloc.dart';
 import 'package:smart_race_monitor/util/drawer.dart';
 import 'package:smart_race_monitor/util/responsive_layout.dart';
 import 'package:smart_race_monitor/util/routing/router.dart';
@@ -18,7 +19,9 @@ class GamePage extends StatelessWidget {
       selectedRoute: GameRoute().location,
     );
     return BlocProvider(
-      create: (_) => GameStateBloc(timer: const GameTimer()),
+      create: (_) => GameStateBloc(
+          timer: const GameTimer(),
+          messageBloc: context.read<IncomingRaceMessageBloc>()),
       child: ResponsiveLayout(
         mobileBody: GameMobilePage(drawer: drawer),
         tabletBody: GameTabletPage(drawer: drawer),

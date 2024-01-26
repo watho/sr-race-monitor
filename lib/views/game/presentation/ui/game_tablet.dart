@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_race_monitor/event_model/bloc/incoming_race_message_bloc.dart';
 import 'package:smart_race_monitor/ui/race_state_table.dart';
 import 'package:smart_race_monitor/views/game/presentation/bloc/game_state_bloc.dart';
 import 'package:smart_race_monitor/views/game/presentation/ui/game_actions.dart';
@@ -14,7 +15,9 @@ class GameTabletPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => GameStateBloc(timer: const GameTimer()),
+      create: (_) => GameStateBloc(
+          timer: const GameTimer(),
+          messageBloc: context.read<IncomingRaceMessageBloc>()),
       child: Scaffold(
         body: Row(children: [
           drawer,

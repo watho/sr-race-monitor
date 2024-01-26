@@ -12,7 +12,7 @@ class RaceStatusTableBox extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         width: double.infinity,
-        height: 120,
+        height: 140,
         decoration: BoxDecoration(
           color: const Color.fromRGBO(112, 113, 115, 0.4),
           borderRadius: BorderRadius.circular(16),
@@ -20,24 +20,49 @@ class RaceStatusTableBox extends StatelessWidget {
         child: Column(
           children: [
             const Center(
-                child: Text(
-              "Race Status",
-              textScaler: TextScaler.linear(1.5),
+                child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                "Race Status",
+                textScaler: TextScaler.linear(1.5),
+              ),
             )),
             Expanded(
               child: Table(
                 //border: TableBorder.all(),
                 defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                 columnWidths: const {
-                  0: FixedColumnWidth(60),
+                  0: FixedColumnWidth(70),
                   1: FlexColumnWidth(),
+                  2: FixedColumnWidth(50),
                 },
-                children: const [
+                children: [
+                  const TableRow(
+                      children: [RaceStateBox(), RaceStateText(), Text("")]),
                   TableRow(children: [
-                    RaceStateBox(),
-                    RaceStateText(),
-                  ]),
-                  TableRow(children: [Text("Fahrer:"), DriversBox()])
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text("Fahrer:"),
+                    ),
+                    const DriversBox(),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: FittedBox(
+                          child: FloatingActionButton(
+                              tooltip: "Fahrerliste zurücksetzen",
+                              heroTag: "resetDriverList",
+                              onPressed: () => context
+                                  .read<IncomingRaceMessageBloc>()
+                                  .add(const IncomingRaceMessageEvent
+                                      .resetDriversListPressed()),
+                              child: const Icon(Icons.clear_rounded)),
+                        ),
+                      ),
+                    ),
+                  ])
                 ],
               ),
             ),
@@ -61,9 +86,12 @@ class RaceStateBox extends StatelessWidget {
         };
         return Center(
             child: Container(
-          color: c1,
-          width: 20,
-          height: 20,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: c1,
+          ),
+          width: 24,
+          height: 24,
         ));
       },
     );
@@ -95,18 +123,17 @@ class DriversBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> driversList = [];
     return BlocBuilder<IncomingRaceMessageBloc, IncomingRaceMessageState>(
       buildWhen: (previous, current) =>
           previous != current && current is RaceUpdateDriversList,
       builder: (context, state) {
-        // FIXME Only RaceEventUiLapUpdate not RaceEventDriversChanged
         List<Driver> drivers = switch (state) {
           RaceUpdateDriversList() => state.driversList,
           _ => []
         };
-        print("DriversList: $driversList");
-        List<Widget> driverWidgets = drivers.map((e) => Text(e.name)).toList();
+        //print("DriversList: $drivers");
+        List<Widget> driverWidgets =
+            drivers.map((e) => buildSingleDriverBox(e)).toList();
         return Row(
           children: driverWidgets,
         );
@@ -115,18 +142,34 @@ class DriversBox extends StatelessWidget {
   }
 }
 
-({MaterialColor color, String label}) raceStatusToColor(RaceStatus raceStatus) {
-  return switch (raceStatus) {
-    RaceStatus.running => (color: Colors.green, label: 'Läuft'),
-    RaceStatus.ended => (color: Colors.red, label: 'Beendet'),
-    RaceStatus.prepare_for_start => (
-        color: Colors.yellow,
-        label: 'Startvorbereitung'
-      ),
-    RaceStatus.starting => (color: Colors.yellow, label: 'Startet'),
-    RaceStatus.jumpstart => (color: Colors.deepOrange, label: 'Fehlstart'),
-    RaceStatus.suspended => (color: Colors.red, label: 'Rennunterbrechung'),
-    RaceStatus.restarting => (color: Colors.yellow, label: 'Neustart'),
-    _ => (color: Colors.grey, label: 'Unbekannt')
-  };
-}
+({MaterialColor color, String label}) raceStatusToColor(
+        RaceStatus raceStatus) =>
+    switch (raceStatus) {
+      RaceStatus.running => (color: Colors.green, label: 'Läuft'),
+      RaceStatus.ended => (color: Colors.red, label: 'Beendet'),
+      RaceStatus.prepare_for_start => (
+          color: Colors.yellow,
+          label: 'Startvorbereitung'
+        ),
+      RaceStatus.starting => (color: Colors.yellow, label: 'Startet'),
+      RaceStatus.jumpstart => (color: Colors.deepOrange, label: 'Fehlstart'),
+      RaceStatus.suspended => (color: Colors.red, label: 'Rennunterbrechung'),
+      RaceStatus.restarting => (color: Colors.yellow, label: 'Neustart'),
+      _ => (color: Colors.grey, label: 'Unbekannt')
+    };
+
+Widget buildSingleDriverBox(Driver driver) => Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 2.0),
+      child: Container(
+          height: 30,
+          width: 30,
+          decoration: BoxDecoration(
+            color: driver.bgColor,
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: Center(
+              child: Text(
+            driver.shortName,
+            style: TextStyle(color: driver.textColor),
+          ))),
+    );

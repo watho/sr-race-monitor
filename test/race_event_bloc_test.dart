@@ -20,7 +20,6 @@ final GetIt getIt = GetIt.instance;
 void main() {
   group('Test RaceEventBloc', () {
     Bloc.observer = SimpleBlocObserver();
-    late IncomingRaceMessageBloc raceEventBloc;
 
     setUp(() {
       EquatableConfig.stringify = true;
@@ -42,22 +41,79 @@ void main() {
             ]);
 
     blocTest<IncomingRaceMessageBloc, IncomingRaceMessageState>(
-        'emits [RaceEventUiLapUpdate]',
+        'emits single [RaceEventUiLapUpdate, DriverslistChange]',
         build: () => getIt<IncomingRaceMessageBloc>(),
-        act: (bloc) => _postTestData('ui.lap_update_1.json'),
+        act: (bloc) => _postTestData('ui.lap_update_driver_1_1.json'),
         expect: () => [
-              IncomingRaceMessageState.raceUiLapUpdate("2", "0:10.608",
-                  const Color.fromRGBO(254, 56, 39, 1.0), Colors.white),
+              IncomingRaceMessageState.raceUiLapUpdate(
+                  "2",
+                  "0:10.008",
+                  const Color.fromRGBO(254, 56, 39, 1.0),
+                  const Color.fromRGBO(23, 255, 255, 1)),
               IncomingRaceMessageState.updateDriversList([
                 const Driver(
                   id: 1,
                   name: "osc",
                   shortName: "os",
                   bgColor: Color.fromRGBO(254, 56, 39, 1),
-                  textColor: Color.fromRGBO(255, 255, 255, 1),
+                  textColor: Color.fromRGBO(23, 255, 255, 1),
                 )
               ]),
             ]);
+
+    blocTest<IncomingRaceMessageBloc, IncomingRaceMessageState>(
+        'emits two same [RaceEventUiLapUpdate, DriverslistChange]',
+        build: () => getIt<IncomingRaceMessageBloc>(),
+        act: (bloc) {
+          return _postTestData('ui.lap_update_driver_1_1.json')
+              .then((value) => _postTestData('ui.lap_update_driver_1_2.json'));
+        },
+        skip: 2, // skipping one lap_update and one driversChanged
+        expect: () => [
+              IncomingRaceMessageState.raceUiLapUpdate(
+                "2",
+                "0:10.608",
+                const Color.fromRGBO(254, 56, 39, 1.0),
+                const Color.fromRGBO(23, 255, 255, 1),
+              ),
+            ]);
+
+    blocTest<IncomingRaceMessageBloc, IncomingRaceMessageState>(
+      'emits three [RaceEventUiLapUpdate, DriverslistChange]',
+      build: () => getIt<IncomingRaceMessageBloc>(),
+      act: (bloc) {
+        return _postTestData('ui.lap_update_driver_1_1.json').then((value) =>
+            _postTestData('ui.lap_update_driver_1_2.json').then(
+                (value) => _postTestData('ui.lap_update_driver_2_1.json')));
+      },
+      skip: 3,
+      // skipping one lap_update and one driversChanged
+      expect: () => [
+        IncomingRaceMessageState.raceUiLapUpdate(
+          "1",
+          "0:13.292",
+          const Color.fromRGBO(25, 56, 39, 1.0),
+          const Color.fromRGBO(255, 255, 255, 1),
+        ),
+        IncomingRaceMessageState.updateDriversList([
+          const Driver(
+            id: 1,
+            name: "osc",
+            shortName: "os",
+            bgColor: Color.fromRGBO(254, 56, 39, 1),
+            textColor: Color.fromRGBO(23, 255, 255, 1),
+          ),
+          const Driver(
+            id: 2,
+            name: "fri",
+            shortName: "fr",
+            bgColor: Color.fromRGBO(25, 56, 39, 1),
+            textColor: Color.fromRGBO(255, 255, 255, 1),
+          )
+        ])
+      ],
+      verify: (bloc) => bloc.driversList.isNotEmpty,
+    );
   });
 }
 

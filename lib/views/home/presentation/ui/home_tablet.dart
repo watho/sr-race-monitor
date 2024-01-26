@@ -11,7 +11,7 @@ class HomeTablet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Tablet"),
+        title: const Text("SR Race Monitor"),
       ),
       drawer: drawer,
       body: const Expanded(

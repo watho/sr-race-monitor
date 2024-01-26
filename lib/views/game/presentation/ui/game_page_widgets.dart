@@ -9,7 +9,7 @@ class GameBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 8.0),
       child: Container(
         decoration: BoxDecoration(
           color: const Color.fromRGBO(112, 113, 115, 0.4),
@@ -22,8 +22,8 @@ class GameBox extends StatelessWidget {
               0: IntrinsicColumnWidth(),
               1: FlexColumnWidth(),
             },
-            children: [
-              const TableRow(children: [
+            children: const [
+              TableRow(children: [
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text("Zeit"),
@@ -33,10 +33,10 @@ class GameBox extends StatelessWidget {
                   child: TimerText(),
                 )
               ]),
-              const TableRow(children: [
+              TableRow(children: [
                 Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text("Letzte Zieldurchfahrt"),
+                  child: Text("Letzte Zieldurchfahrt:"),
                 ),
                 Padding(
                   padding: EdgeInsets.all(8.0),
@@ -44,30 +44,46 @@ class GameBox extends StatelessWidget {
                 )
               ]),
               TableRow(children: [
-                const Padding(
+                Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text("Nächste Farbe"),
+                  child: Text("Nächste Farbe:"),
                 ),
                 Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 50,
-                      decoration: const BoxDecoration(
-                          color: Color.fromRGBO(2, 342, 1, 1)),
-                    ))
+                  padding: EdgeInsets.all(8.0),
+                  child: DesiredControllerColor(),
+                )
               ]),
-              const TableRow(children: [
+              TableRow(children: [
                 Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text("Punkte"),
+                  child: Text("Punkte:"),
                 ),
                 Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text("data"),
+                  child: PointsText(),
                 )
               ]),
             ]),
       ),
+    );
+  }
+}
+
+class PointsText extends StatelessWidget {
+  const PointsText({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<GameStateBloc, GameStateState>(
+      buildWhen: (previous, current) =>
+          previous != current && current is PointUpdate,
+      builder: (context, state) {
+        int points = switch (state) {
+          PointUpdate() => state.points,
+          _ => 0,
+        };
+        return Text('$points');
+      },
     );
   }
 }
@@ -79,7 +95,14 @@ class LastControllerColor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<IncomingRaceMessageBloc, IncomingRaceMessageState>(
+    return BlocConsumer<IncomingRaceMessageBloc, IncomingRaceMessageState>(
+      listener: (context, state) {
+        if (state is RaceUiLapUpdate) {
+          context
+              .read<GameStateBloc>()
+              .add(GameStateEvent.lapUpdated(state.controllerBgColor));
+        }
+      },
       buildWhen: (prev, curr) => prev != curr && curr is RaceUiLapUpdate,
       builder: (context, state) {
         ({Color bgColor, Color textColor, String label}) stateData =
@@ -89,12 +112,13 @@ class LastControllerColor extends StatelessWidget {
               textColor: state.controllerTextColor,
               label: state.controllerId
             ),
-          _ => (bgColor: Colors.green, textColor: Colors.green, label: "-1")
+          _ => (bgColor: Colors.grey, textColor: Colors.grey, label: "")
         };
         return Container(
-          height: 50,
+          height: 40,
           decoration: BoxDecoration(
-              shape: BoxShape.rectangle, color: stateData.bgColor),
+              borderRadius: BorderRadius.circular(10),
+              color: stateData.bgColor),
           child: Center(
             child: Text(
                 textScaler: const TextScaler.linear(2),
@@ -114,18 +138,18 @@ class DesiredControllerColor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<IncomingRaceMessageBloc, IncomingRaceMessageState>(
-      buildWhen: (prev, curr) => prev != curr && curr is RaceUiLapUpdate,
+    return BlocBuilder<GameStateBloc, GameStateState>(
+      buildWhen: (previous, current) =>
+          previous != current && current is NewDesiredColor,
       builder: (context, state) {
-        Color controllerColor = switch (state) {
-          RaceUiLapUpdate() => state.controllerBgColor,
-          _ => Colors.green
+        Color desiredColor = switch (state) {
+          NewDesiredColor() => state.color,
+          _ => Colors.grey,
         };
         return Container(
-          height: 50,
-          decoration:
-              BoxDecoration(shape: BoxShape.rectangle, color: controllerColor),
-          child: Text("1"),
+          height: 40,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), color: desiredColor),
         );
       },
     );
@@ -138,8 +162,17 @@ class TimerText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GameStateBloc, GameStateState>(
+      buildWhen: (previous, current) =>
+          previous != current && current is GameStateInitial ||
+          current is TimerRunInProgress ||
+          current is TimerRunComplete,
       builder: (context, state) {
-        final duration = state.duration;
+        final duration = switch (state) {
+          GameStateInitial() => state.duration,
+          TimerRunInProgress() => state.duration,
+          TimerRunComplete() => 0,
+          _ => -1,
+        };
         final minutesStr =
             ((duration / 60) % 60).floor().toString().padLeft(2, '0');
         final secondsStr = (duration % 60).floor().toString().padLeft(2, '0');

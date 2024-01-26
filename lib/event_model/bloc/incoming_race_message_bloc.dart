@@ -4,11 +4,10 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
+import 'package:smart_race_monitor/event_model/event_change_status.dart';
 import 'package:smart_race_monitor/event_model/ui_lap_update.dart';
 import 'package:smart_race_monitor/model/driver_model.dart';
 import 'package:smart_race_monitor/util/color_util.dart';
-
-import '../event_change_status.dart';
 
 part 'incoming_race_message_bloc.freezed.dart';
 part 'incoming_race_message_event.dart';
@@ -37,12 +36,15 @@ enum RaceEventType {
 class IncomingRaceMessageBloc
     extends Bloc<IncomingRaceMessageEvent, IncomingRaceMessageState> {
   var log = Logger(printer: PrettyPrinter(methodCount: 1));
-  Map<int, Driver> driversList = {};
+
+  // maps controllerId to Driver object
+  Map<String, Driver> driversList = {};
 
   IncomingRaceMessageBloc() : super(IncomingRaceMessageState.initial()) {
     on<RaceMsgStarted>(_onStarted);
     on<RaceMsgEventStatusChanged>(_onEventStatusChanged);
     on<RaceMsgUiLapUpdated>(_onUiLapUpdated);
+    on<RaceMsgResetDriversListPressed>(_onResetDriversListPressed);
   }
 
   void _onStarted(
@@ -59,8 +61,9 @@ class IncomingRaceMessageBloc
 
   void _onUiLapUpdated(
       RaceMsgUiLapUpdated event, Emitter<IncomingRaceMessageState> emit) {
+    var controllerId = event.eventData.controllerId;
     emit(IncomingRaceMessageState.raceUiLapUpdate(
-        event.eventData.controllerId,
+        controllerId,
         event.eventData.laptime,
         hexOrRGBToColor(event.eventData.controllerData.colorBg),
         hexOrRGBToColor(event.eventData.controllerData.colorText)));
@@ -72,11 +75,23 @@ class IncomingRaceMessageBloc
       textColor: hexOrRGBToColor(event.eventData.controllerData.colorText),
       bgColor: hexOrRGBToColor(event.eventData.controllerData.colorBg),
     );
-    if (!driversList.containsKey(driver.id)) {
-      driversList.putIfAbsent(driver.id, () => driver);
+    if (!driversList.containsKey(controllerId)) {
+      // controller not found
+      driversList.putIfAbsent(controllerId, () => driver);
+      emit(IncomingRaceMessageState.updateDriversList(
+          driversList.values.toList()));
+    } else if (driversList[controllerId]?.id != driver.id) {
+      // controller found but driver is new
+      driversList.update(controllerId, (value) => driver);
       emit(IncomingRaceMessageState.updateDriversList(
           driversList.values.toList()));
     }
-    emit(state);
+  }
+
+  void _onResetDriversListPressed(RaceMsgResetDriversListPressed event,
+      Emitter<IncomingRaceMessageState> emit) {
+    driversList.clear();
+    emit(IncomingRaceMessageState.updateDriversList(
+        driversList.values.toList()));
   }
 }
