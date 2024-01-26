@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -64,12 +65,18 @@ class GameStateBloc extends Bloc<GameStateEvent, GameStateState> {
   }
 
   void _onLapUpdated(_LapUpdated event, Emitter<GameStateState> emit) {
-    // if color of lapupdate equals desired color we get a point
-    if (_remainingTime > 0 && event.actualColor == _desiredColor) {
-      _points++;
-      emit(GameStateState.pointUpdate(_points));
-      _desiredColor = _findNextColor();
-      emit(NewDesiredColor(_desiredColor));
+    if (_remainingTime > 0) {
+      // if color of lapupdate equals desired color we get as many points as drivers
+      if (event.actualColor == _desiredColor) {
+        _points = _points + _messageBloc.driversList.length;
+        emit(GameStateState.pointUpdate(_points));
+        _desiredColor = _findNextColor();
+        emit(NewDesiredColor(_desiredColor));
+      } else {
+        // if color not matches decrease points
+        _points = max(0, _points--);
+        emit(GameStateState.pointUpdate(_points));
+      }
     }
   }
 
