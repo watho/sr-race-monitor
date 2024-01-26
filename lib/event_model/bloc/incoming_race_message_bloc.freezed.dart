@@ -850,8 +850,8 @@ mixin _$IncomingRaceMessageState {
     required TResult Function() initial,
     required TResult Function(RaceStatus oldState, RaceStatus newState)
         raceEventStatusChange,
-    required TResult Function(String controllerId, String laptime,
-            Color controllerBgColor, Color controllerTextColor)
+    required TResult Function(DateTime timeStamp, String controllerId,
+            String laptime, Color controllerBgColor, Color controllerTextColor)
         raceUiLapUpdate,
     required TResult Function(List<Driver> driversList) updateDriversList,
   }) =>
@@ -861,7 +861,7 @@ mixin _$IncomingRaceMessageState {
     TResult? Function()? initial,
     TResult? Function(RaceStatus oldState, RaceStatus newState)?
         raceEventStatusChange,
-    TResult? Function(String controllerId, String laptime,
+    TResult? Function(DateTime timeStamp, String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
     TResult? Function(List<Driver> driversList)? updateDriversList,
@@ -872,7 +872,7 @@ mixin _$IncomingRaceMessageState {
     TResult Function()? initial,
     TResult Function(RaceStatus oldState, RaceStatus newState)?
         raceEventStatusChange,
-    TResult Function(String controllerId, String laptime,
+    TResult Function(DateTime timeStamp, String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
     TResult Function(List<Driver> driversList)? updateDriversList,
@@ -967,8 +967,8 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function(RaceStatus oldState, RaceStatus newState)
         raceEventStatusChange,
-    required TResult Function(String controllerId, String laptime,
-            Color controllerBgColor, Color controllerTextColor)
+    required TResult Function(DateTime timeStamp, String controllerId,
+            String laptime, Color controllerBgColor, Color controllerTextColor)
         raceUiLapUpdate,
     required TResult Function(List<Driver> driversList) updateDriversList,
   }) {
@@ -981,7 +981,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function(RaceStatus oldState, RaceStatus newState)?
         raceEventStatusChange,
-    TResult? Function(String controllerId, String laptime,
+    TResult? Function(DateTime timeStamp, String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
     TResult? Function(List<Driver> driversList)? updateDriversList,
@@ -995,7 +995,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function(RaceStatus oldState, RaceStatus newState)?
         raceEventStatusChange,
-    TResult Function(String controllerId, String laptime,
+    TResult Function(DateTime timeStamp, String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
     TResult Function(List<Driver> driversList)? updateDriversList,
@@ -1130,8 +1130,8 @@ class _$RaceEventStatusChangeImpl implements RaceEventStatusChange {
     required TResult Function() initial,
     required TResult Function(RaceStatus oldState, RaceStatus newState)
         raceEventStatusChange,
-    required TResult Function(String controllerId, String laptime,
-            Color controllerBgColor, Color controllerTextColor)
+    required TResult Function(DateTime timeStamp, String controllerId,
+            String laptime, Color controllerBgColor, Color controllerTextColor)
         raceUiLapUpdate,
     required TResult Function(List<Driver> driversList) updateDriversList,
   }) {
@@ -1144,7 +1144,7 @@ class _$RaceEventStatusChangeImpl implements RaceEventStatusChange {
     TResult? Function()? initial,
     TResult? Function(RaceStatus oldState, RaceStatus newState)?
         raceEventStatusChange,
-    TResult? Function(String controllerId, String laptime,
+    TResult? Function(DateTime timeStamp, String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
     TResult? Function(List<Driver> driversList)? updateDriversList,
@@ -1158,7 +1158,7 @@ class _$RaceEventStatusChangeImpl implements RaceEventStatusChange {
     TResult Function()? initial,
     TResult Function(RaceStatus oldState, RaceStatus newState)?
         raceEventStatusChange,
-    TResult Function(String controllerId, String laptime,
+    TResult Function(DateTime timeStamp, String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
     TResult Function(List<Driver> driversList)? updateDriversList,
@@ -1228,7 +1228,8 @@ abstract class _$$RaceUiLapUpdateImplCopyWith<$Res> {
       __$$RaceUiLapUpdateImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {String controllerId,
+      {DateTime timeStamp,
+      String controllerId,
       String laptime,
       Color controllerBgColor,
       Color controllerTextColor});
@@ -1245,12 +1246,17 @@ class __$$RaceUiLapUpdateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? timeStamp = null,
     Object? controllerId = null,
     Object? laptime = null,
     Object? controllerBgColor = null,
     Object? controllerTextColor = null,
   }) {
     return _then(_$RaceUiLapUpdateImpl(
+      null == timeStamp
+          ? _value.timeStamp
+          : timeStamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       null == controllerId
           ? _value.controllerId
           : controllerId // ignore: cast_nullable_to_non_nullable
@@ -1274,9 +1280,11 @@ class __$$RaceUiLapUpdateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RaceUiLapUpdateImpl implements RaceUiLapUpdate {
-  _$RaceUiLapUpdateImpl(this.controllerId, this.laptime, this.controllerBgColor,
-      this.controllerTextColor);
+  _$RaceUiLapUpdateImpl(this.timeStamp, this.controllerId, this.laptime,
+      this.controllerBgColor, this.controllerTextColor);
 
+  @override
+  final DateTime timeStamp;
   @override
   final String controllerId;
   @override
@@ -1288,7 +1296,7 @@ class _$RaceUiLapUpdateImpl implements RaceUiLapUpdate {
 
   @override
   String toString() {
-    return 'IncomingRaceMessageState.raceUiLapUpdate(controllerId: $controllerId, laptime: $laptime, controllerBgColor: $controllerBgColor, controllerTextColor: $controllerTextColor)';
+    return 'IncomingRaceMessageState.raceUiLapUpdate(timeStamp: $timeStamp, controllerId: $controllerId, laptime: $laptime, controllerBgColor: $controllerBgColor, controllerTextColor: $controllerTextColor)';
   }
 
   @override
@@ -1296,6 +1304,8 @@ class _$RaceUiLapUpdateImpl implements RaceUiLapUpdate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RaceUiLapUpdateImpl &&
+            (identical(other.timeStamp, timeStamp) ||
+                other.timeStamp == timeStamp) &&
             (identical(other.controllerId, controllerId) ||
                 other.controllerId == controllerId) &&
             (identical(other.laptime, laptime) || other.laptime == laptime) &&
@@ -1306,7 +1316,7 @@ class _$RaceUiLapUpdateImpl implements RaceUiLapUpdate {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, controllerId, laptime,
+  int get hashCode => Object.hash(runtimeType, timeStamp, controllerId, laptime,
       controllerBgColor, controllerTextColor);
 
   @JsonKey(ignore: true)
@@ -1322,13 +1332,13 @@ class _$RaceUiLapUpdateImpl implements RaceUiLapUpdate {
     required TResult Function() initial,
     required TResult Function(RaceStatus oldState, RaceStatus newState)
         raceEventStatusChange,
-    required TResult Function(String controllerId, String laptime,
-            Color controllerBgColor, Color controllerTextColor)
+    required TResult Function(DateTime timeStamp, String controllerId,
+            String laptime, Color controllerBgColor, Color controllerTextColor)
         raceUiLapUpdate,
     required TResult Function(List<Driver> driversList) updateDriversList,
   }) {
-    return raceUiLapUpdate(
-        controllerId, laptime, controllerBgColor, controllerTextColor);
+    return raceUiLapUpdate(timeStamp, controllerId, laptime, controllerBgColor,
+        controllerTextColor);
   }
 
   @override
@@ -1337,13 +1347,13 @@ class _$RaceUiLapUpdateImpl implements RaceUiLapUpdate {
     TResult? Function()? initial,
     TResult? Function(RaceStatus oldState, RaceStatus newState)?
         raceEventStatusChange,
-    TResult? Function(String controllerId, String laptime,
+    TResult? Function(DateTime timeStamp, String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
     TResult? Function(List<Driver> driversList)? updateDriversList,
   }) {
-    return raceUiLapUpdate?.call(
-        controllerId, laptime, controllerBgColor, controllerTextColor);
+    return raceUiLapUpdate?.call(timeStamp, controllerId, laptime,
+        controllerBgColor, controllerTextColor);
   }
 
   @override
@@ -1352,15 +1362,15 @@ class _$RaceUiLapUpdateImpl implements RaceUiLapUpdate {
     TResult Function()? initial,
     TResult Function(RaceStatus oldState, RaceStatus newState)?
         raceEventStatusChange,
-    TResult Function(String controllerId, String laptime,
+    TResult Function(DateTime timeStamp, String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
     TResult Function(List<Driver> driversList)? updateDriversList,
     required TResult orElse(),
   }) {
     if (raceUiLapUpdate != null) {
-      return raceUiLapUpdate(
-          controllerId, laptime, controllerBgColor, controllerTextColor);
+      return raceUiLapUpdate(timeStamp, controllerId, laptime,
+          controllerBgColor, controllerTextColor);
     }
     return orElse();
   }
@@ -1406,11 +1416,13 @@ class _$RaceUiLapUpdateImpl implements RaceUiLapUpdate {
 
 abstract class RaceUiLapUpdate implements IncomingRaceMessageState {
   factory RaceUiLapUpdate(
+      final DateTime timeStamp,
       final String controllerId,
       final String laptime,
       final Color controllerBgColor,
       final Color controllerTextColor) = _$RaceUiLapUpdateImpl;
 
+  DateTime get timeStamp;
   String get controllerId;
   String get laptime;
   Color get controllerBgColor;
@@ -1498,8 +1510,8 @@ class _$RaceUpdateDriversListImpl implements RaceUpdateDriversList {
     required TResult Function() initial,
     required TResult Function(RaceStatus oldState, RaceStatus newState)
         raceEventStatusChange,
-    required TResult Function(String controllerId, String laptime,
-            Color controllerBgColor, Color controllerTextColor)
+    required TResult Function(DateTime timeStamp, String controllerId,
+            String laptime, Color controllerBgColor, Color controllerTextColor)
         raceUiLapUpdate,
     required TResult Function(List<Driver> driversList) updateDriversList,
   }) {
@@ -1512,7 +1524,7 @@ class _$RaceUpdateDriversListImpl implements RaceUpdateDriversList {
     TResult? Function()? initial,
     TResult? Function(RaceStatus oldState, RaceStatus newState)?
         raceEventStatusChange,
-    TResult? Function(String controllerId, String laptime,
+    TResult? Function(DateTime timeStamp, String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
     TResult? Function(List<Driver> driversList)? updateDriversList,
@@ -1526,7 +1538,7 @@ class _$RaceUpdateDriversListImpl implements RaceUpdateDriversList {
     TResult Function()? initial,
     TResult Function(RaceStatus oldState, RaceStatus newState)?
         raceEventStatusChange,
-    TResult Function(String controllerId, String laptime,
+    TResult Function(DateTime timeStamp, String controllerId, String laptime,
             Color controllerBgColor, Color controllerTextColor)?
         raceUiLapUpdate,
     TResult Function(List<Driver> driversList)? updateDriversList,

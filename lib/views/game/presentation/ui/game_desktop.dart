@@ -13,22 +13,22 @@ class GameDesktopPage extends StatelessWidget {
     return Scaffold(
       body: Row(children: [
         drawer,
-        const Expanded(
+        Expanded(
             child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-              RaceStatusTableBox(),
-              Text(
+              const Padding(
+                padding: EdgeInsets.only(top: 8.0),
+                child: RaceStatusTableBox(),
+              ),
+              const Text(
                 "SR Race Game",
                 textScaler: TextScaler.linear(4),
               ),
-              Text(
-                "2023",
-                textScaler: TextScaler.linear(2),
-              ),
+              const HelpText(),
               GameBox(),
-              GameActions()
+              const GameActions()
             ]))
       ]),
     );

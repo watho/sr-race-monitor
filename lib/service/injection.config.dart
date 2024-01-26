@@ -29,8 +29,8 @@ extension GetItInjectableX on _i1.GetIt {
       environmentFilter,
     );
     gh.singleton<_i3.IncomingRaceMessageBloc>(_i3.IncomingRaceMessageBloc());
-    gh.singleton<_i4.SmartRaceMessageHandler>(_i5.SmartRaceMessageHandlerImpl(
-        bloc: gh<_i3.IncomingRaceMessageBloc>()));
+    gh.singleton<_i4.SmartRaceMessageHandler>(
+        _i5.SmartRaceMessageHandlerImpl());
     return this;
   }
 }

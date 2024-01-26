@@ -1,4 +1,4 @@
 {
-  "time": 1684769957969,
+  "time": {{$timestamp}},
   "event_type": "event.start"
 }

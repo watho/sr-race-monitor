@@ -24,7 +24,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<IncomingRaceMessageBloc>(),
+      create: (context) {
+        var incomingRaceMessageBloc = getIt<IncomingRaceMessageBloc>();
+        getIt<SmartRaceMessageHandler>().startServer(8085, false);
+        return incomingRaceMessageBloc;
+      },
       child: MaterialApp.router(
         title: 'SR Race Monitor',
         theme: ThemeData(

@@ -12,7 +12,7 @@ sealed class GameStateEvent with _$GameStateEvent {
 
   const factory GameStateEvent.timerReset() = TimerReset;
 
-  const factory GameStateEvent.timerTicked(final int duration) = _TimerTicked;
+  const factory GameStateEvent.timerTicked(final int duration) = TimerTicked;
 
   const factory GameStateEvent.lapUpdated(final Color actualColor) =
       _LapUpdated;

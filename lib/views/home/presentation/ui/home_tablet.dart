@@ -10,24 +10,26 @@ class HomeTablet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("SR Race Monitor"),
-      ),
-      drawer: drawer,
-      body: const Expanded(
-        child: Column(
-          children: [
-            Row(
+      body: Row(
+        children: [
+          drawer,
+          const Expanded(
+            child: Column(
               children: [
-                RaceStatusTableBox(),
-                LapTableBox(
-                  flexValue: 2,
-                  columnCount: 2,
+                Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: RaceStatusTableBox(),
+                ),
+                Expanded(
+                  child: LapTableBox(
+                    flexValue: 2,
+                    columnCount: 1,
+                  ),
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

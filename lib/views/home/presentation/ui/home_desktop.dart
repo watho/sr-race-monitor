@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_race_monitor/ui/race_state_table.dart';
 import 'package:smart_race_monitor/views/home/presentation/ui/dashboard/lap_table.dart';
-import 'package:smart_race_monitor/util/temp_box.dart';
 
 class HomeDesktop extends StatelessWidget {
   const HomeDesktop({super.key, required this.drawer});
@@ -17,7 +16,10 @@ class HomeDesktop extends StatelessWidget {
           const Expanded(
             child: Column(
               children: [
-                RaceStatusTableBox(),
+                Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: RaceStatusTableBox(),
+                ),
                 Expanded(
                   child: LapTableBox(
                     flexValue: 6,
