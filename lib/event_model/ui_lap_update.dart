@@ -7,12 +7,14 @@ class UiLapUpdate {
   // @JsonKey(name: 'old')
   final String controllerId;
   final String laptime;
+  final int lap;
   final ControllerData controllerData;
   final DriverData driverData;
 
   UiLapUpdate(
       {required this.controllerData,
       required this.laptime,
+      required this.lap,
       required this.controllerId,
       required this.driverData});
 

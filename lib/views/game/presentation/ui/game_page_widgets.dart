@@ -29,11 +29,21 @@ class GameBox extends StatelessWidget {
               const TableRow(children: [
                 Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text("Zeit"),
+                  child: Text("Zeit:"),
                 ),
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: TimerText(),
+                )
+              ]),
+              const TableRow(children: [
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text("Punkte:"),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: PointsText(),
                 )
               ]),
               TableRow(children: [
@@ -56,16 +66,6 @@ class GameBox extends StatelessWidget {
                   child: DesiredControllerColor(),
                 )
               ]),
-              const TableRow(children: [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text("Punkte:"),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: PointsText(),
-                )
-              ]),
             ]),
       ),
     );
@@ -85,7 +85,13 @@ class PointsText extends StatelessWidget {
           PointUpdate() => state.points,
           _ => 0,
         };
-        return Text('$points');
+        return Align(
+          alignment: Alignment.centerRight,
+          child: Text(
+            '$points',
+            style: Theme.of(context).textTheme.displayMedium,
+          ),
+        );
       },
     );
   }
@@ -116,12 +122,14 @@ class LastControllerColor extends StatelessWidget {
           RaceUiLapUpdate() => (
               bgColor: state.controllerBgColor,
               textColor: state.controllerTextColor,
-              label: state.controllerId
+              label: state.laps.toString()
             ),
           _ => (bgColor: Colors.grey, textColor: Colors.grey, label: "")
         };
-        return Container(
+        return AnimatedContainer(
+          duration: const Duration(seconds: 1),
           height: 40,
+          width: 40,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: stateData.bgColor),
@@ -148,14 +156,21 @@ class DesiredControllerColor extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous != current && current is NewDesiredColor,
       builder: (context, state) {
-        Color desiredColor = switch (state) {
-          NewDesiredColor() => state.color,
-          _ => Colors.grey,
+        (Color, String) desiredValues = switch (state) {
+          NewDesiredColor() => (state.color, state.driverName),
+          _ => (Colors.grey, ""),
         };
-        return Container(
-          height: 40,
+        return AnimatedContainer(
+          duration: const Duration(seconds: 1),
+          height: 100,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: desiredColor),
+              borderRadius: BorderRadius.circular(10), color: desiredValues.$1),
+          child: Center(
+            child: Text(
+              desiredValues.$2,
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
+          ),
         );
       },
     );
@@ -179,12 +194,20 @@ class TimerText extends StatelessWidget {
           TimerRunComplete() => 0,
           _ => -1,
         };
+        Color color = Colors.green;
+        var style = Theme.of(context).textTheme.displayMedium;
+        if (duration < 60) {
+          style = style?.copyWith(color: Colors.red);
+        }
         final minutesStr =
             ((duration / 60) % 60).floor().toString().padLeft(2, '0');
         final secondsStr = (duration % 60).floor().toString().padLeft(2, '0');
-        return Text(
-          '$minutesStr:$secondsStr',
-          style: Theme.of(context).textTheme.displayLarge,
+        return Align(
+          alignment: Alignment.centerRight,
+          child: Text(
+            '$minutesStr:$secondsStr',
+            style: style,
+          ),
         );
       },
     );
@@ -204,13 +227,14 @@ class HelpText extends StatelessWidget {
           color: Colors.orangeAccent.shade100,
           borderRadius: BorderRadius.circular(16),
         ),
-        child: const Padding(
-          padding: EdgeInsets.all(8.0),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Text(
             """- Mit den Teilnehmern einmal über die Ziellinie fahren, damit sie oben bei Fahrer auftauchen.
 - Spiel starten. Bei 'nächste Farbe' erscheint eine Controllerfarbe.
 - Richtiges Auto muss als nächstes über die Zielline, dann gibt es Punkte. Falsches Auto gibt Minuspunkt.
 - 5 Minuten Zeit zum Punkte sammeln.""",
+            style: Theme.of(context).textTheme.labelSmall,
           ),
         ),
       ),

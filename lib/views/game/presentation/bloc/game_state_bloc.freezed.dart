@@ -1131,7 +1131,7 @@ mixin _$GameStateState {
     required TResult Function(int duration) initial,
     required TResult Function(int duration) timerRunInProgress,
     required TResult Function(int points) pointUpdate,
-    required TResult Function(Color color) newDesiredColor,
+    required TResult Function(Color color, String driverName) newDesiredColor,
     required TResult Function() timerRunComplete,
   }) =>
       throw _privateConstructorUsedError;
@@ -1140,7 +1140,7 @@ mixin _$GameStateState {
     TResult? Function(int duration)? initial,
     TResult? Function(int duration)? timerRunInProgress,
     TResult? Function(int points)? pointUpdate,
-    TResult? Function(Color color)? newDesiredColor,
+    TResult? Function(Color color, String driverName)? newDesiredColor,
     TResult? Function()? timerRunComplete,
   }) =>
       throw _privateConstructorUsedError;
@@ -1149,7 +1149,7 @@ mixin _$GameStateState {
     TResult Function(int duration)? initial,
     TResult Function(int duration)? timerRunInProgress,
     TResult Function(int points)? pointUpdate,
-    TResult Function(Color color)? newDesiredColor,
+    TResult Function(Color color, String driverName)? newDesiredColor,
     TResult Function()? timerRunComplete,
     required TResult orElse(),
   }) =>
@@ -1271,7 +1271,7 @@ class _$GameStateInitialImpl implements GameStateInitial {
     required TResult Function(int duration) initial,
     required TResult Function(int duration) timerRunInProgress,
     required TResult Function(int points) pointUpdate,
-    required TResult Function(Color color) newDesiredColor,
+    required TResult Function(Color color, String driverName) newDesiredColor,
     required TResult Function() timerRunComplete,
   }) {
     return initial(duration);
@@ -1283,7 +1283,7 @@ class _$GameStateInitialImpl implements GameStateInitial {
     TResult? Function(int duration)? initial,
     TResult? Function(int duration)? timerRunInProgress,
     TResult? Function(int points)? pointUpdate,
-    TResult? Function(Color color)? newDesiredColor,
+    TResult? Function(Color color, String driverName)? newDesiredColor,
     TResult? Function()? timerRunComplete,
   }) {
     return initial?.call(duration);
@@ -1295,7 +1295,7 @@ class _$GameStateInitialImpl implements GameStateInitial {
     TResult Function(int duration)? initial,
     TResult Function(int duration)? timerRunInProgress,
     TResult Function(int points)? pointUpdate,
-    TResult Function(Color color)? newDesiredColor,
+    TResult Function(Color color, String driverName)? newDesiredColor,
     TResult Function()? timerRunComplete,
     required TResult orElse(),
   }) {
@@ -1424,7 +1424,7 @@ class _$TimerRunInProgressImpl implements TimerRunInProgress {
     required TResult Function(int duration) initial,
     required TResult Function(int duration) timerRunInProgress,
     required TResult Function(int points) pointUpdate,
-    required TResult Function(Color color) newDesiredColor,
+    required TResult Function(Color color, String driverName) newDesiredColor,
     required TResult Function() timerRunComplete,
   }) {
     return timerRunInProgress(duration);
@@ -1436,7 +1436,7 @@ class _$TimerRunInProgressImpl implements TimerRunInProgress {
     TResult? Function(int duration)? initial,
     TResult? Function(int duration)? timerRunInProgress,
     TResult? Function(int points)? pointUpdate,
-    TResult? Function(Color color)? newDesiredColor,
+    TResult? Function(Color color, String driverName)? newDesiredColor,
     TResult? Function()? timerRunComplete,
   }) {
     return timerRunInProgress?.call(duration);
@@ -1448,7 +1448,7 @@ class _$TimerRunInProgressImpl implements TimerRunInProgress {
     TResult Function(int duration)? initial,
     TResult Function(int duration)? timerRunInProgress,
     TResult Function(int points)? pointUpdate,
-    TResult Function(Color color)? newDesiredColor,
+    TResult Function(Color color, String driverName)? newDesiredColor,
     TResult Function()? timerRunComplete,
     required TResult orElse(),
   }) {
@@ -1575,7 +1575,7 @@ class _$PointUpdateImpl implements PointUpdate {
     required TResult Function(int duration) initial,
     required TResult Function(int duration) timerRunInProgress,
     required TResult Function(int points) pointUpdate,
-    required TResult Function(Color color) newDesiredColor,
+    required TResult Function(Color color, String driverName) newDesiredColor,
     required TResult Function() timerRunComplete,
   }) {
     return pointUpdate(points);
@@ -1587,7 +1587,7 @@ class _$PointUpdateImpl implements PointUpdate {
     TResult? Function(int duration)? initial,
     TResult? Function(int duration)? timerRunInProgress,
     TResult? Function(int points)? pointUpdate,
-    TResult? Function(Color color)? newDesiredColor,
+    TResult? Function(Color color, String driverName)? newDesiredColor,
     TResult? Function()? timerRunComplete,
   }) {
     return pointUpdate?.call(points);
@@ -1599,7 +1599,7 @@ class _$PointUpdateImpl implements PointUpdate {
     TResult Function(int duration)? initial,
     TResult Function(int duration)? timerRunInProgress,
     TResult Function(int points)? pointUpdate,
-    TResult Function(Color color)? newDesiredColor,
+    TResult Function(Color color, String driverName)? newDesiredColor,
     TResult Function()? timerRunComplete,
     required TResult orElse(),
   }) {
@@ -1665,7 +1665,7 @@ abstract class _$$NewDesiredColorImplCopyWith<$Res> {
           $Res Function(_$NewDesiredColorImpl) then) =
       __$$NewDesiredColorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Color color});
+  $Res call({Color color, String driverName});
 }
 
 /// @nodoc
@@ -1680,12 +1680,17 @@ class __$$NewDesiredColorImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? color = null,
+    Object? driverName = null,
   }) {
     return _then(_$NewDesiredColorImpl(
       null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as Color,
+      null == driverName
+          ? _value.driverName
+          : driverName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -1693,14 +1698,16 @@ class __$$NewDesiredColorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$NewDesiredColorImpl implements NewDesiredColor {
-  _$NewDesiredColorImpl(this.color);
+  _$NewDesiredColorImpl(this.color, this.driverName);
 
   @override
   final Color color;
+  @override
+  final String driverName;
 
   @override
   String toString() {
-    return 'GameStateState.newDesiredColor(color: $color)';
+    return 'GameStateState.newDesiredColor(color: $color, driverName: $driverName)';
   }
 
   @override
@@ -1708,11 +1715,13 @@ class _$NewDesiredColorImpl implements NewDesiredColor {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NewDesiredColorImpl &&
-            (identical(other.color, color) || other.color == color));
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.driverName, driverName) ||
+                other.driverName == driverName));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, color);
+  int get hashCode => Object.hash(runtimeType, color, driverName);
 
   @JsonKey(ignore: true)
   @override
@@ -1727,10 +1736,10 @@ class _$NewDesiredColorImpl implements NewDesiredColor {
     required TResult Function(int duration) initial,
     required TResult Function(int duration) timerRunInProgress,
     required TResult Function(int points) pointUpdate,
-    required TResult Function(Color color) newDesiredColor,
+    required TResult Function(Color color, String driverName) newDesiredColor,
     required TResult Function() timerRunComplete,
   }) {
-    return newDesiredColor(color);
+    return newDesiredColor(color, driverName);
   }
 
   @override
@@ -1739,10 +1748,10 @@ class _$NewDesiredColorImpl implements NewDesiredColor {
     TResult? Function(int duration)? initial,
     TResult? Function(int duration)? timerRunInProgress,
     TResult? Function(int points)? pointUpdate,
-    TResult? Function(Color color)? newDesiredColor,
+    TResult? Function(Color color, String driverName)? newDesiredColor,
     TResult? Function()? timerRunComplete,
   }) {
-    return newDesiredColor?.call(color);
+    return newDesiredColor?.call(color, driverName);
   }
 
   @override
@@ -1751,12 +1760,12 @@ class _$NewDesiredColorImpl implements NewDesiredColor {
     TResult Function(int duration)? initial,
     TResult Function(int duration)? timerRunInProgress,
     TResult Function(int points)? pointUpdate,
-    TResult Function(Color color)? newDesiredColor,
+    TResult Function(Color color, String driverName)? newDesiredColor,
     TResult Function()? timerRunComplete,
     required TResult orElse(),
   }) {
     if (newDesiredColor != null) {
-      return newDesiredColor(color);
+      return newDesiredColor(color, driverName);
     }
     return orElse();
   }
@@ -1803,9 +1812,11 @@ class _$NewDesiredColorImpl implements NewDesiredColor {
 }
 
 abstract class NewDesiredColor implements GameStateState {
-  factory NewDesiredColor(final Color color) = _$NewDesiredColorImpl;
+  factory NewDesiredColor(final Color color, final String driverName) =
+      _$NewDesiredColorImpl;
 
   Color get color;
+  String get driverName;
   @JsonKey(ignore: true)
   _$$NewDesiredColorImplCopyWith<_$NewDesiredColorImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1852,7 +1863,7 @@ class _$TimerRunCompleteImpl implements TimerRunComplete {
     required TResult Function(int duration) initial,
     required TResult Function(int duration) timerRunInProgress,
     required TResult Function(int points) pointUpdate,
-    required TResult Function(Color color) newDesiredColor,
+    required TResult Function(Color color, String driverName) newDesiredColor,
     required TResult Function() timerRunComplete,
   }) {
     return timerRunComplete();
@@ -1864,7 +1875,7 @@ class _$TimerRunCompleteImpl implements TimerRunComplete {
     TResult? Function(int duration)? initial,
     TResult? Function(int duration)? timerRunInProgress,
     TResult? Function(int points)? pointUpdate,
-    TResult? Function(Color color)? newDesiredColor,
+    TResult? Function(Color color, String driverName)? newDesiredColor,
     TResult? Function()? timerRunComplete,
   }) {
     return timerRunComplete?.call();
@@ -1876,7 +1887,7 @@ class _$TimerRunCompleteImpl implements TimerRunComplete {
     TResult Function(int duration)? initial,
     TResult Function(int duration)? timerRunInProgress,
     TResult Function(int points)? pointUpdate,
-    TResult Function(Color color)? newDesiredColor,
+    TResult Function(Color color, String driverName)? newDesiredColor,
     TResult Function()? timerRunComplete,
     required TResult orElse(),
   }) {
