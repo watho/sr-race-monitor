@@ -1,11 +1,11 @@
 {
-  "time": 1705705743676,
+  "time": 1705705740000,
   "event_type": "ui.lap_update",
   "event_data": {
     "controller_id": "2",
     "lap": 2,
-    "laptime": "0:10.608",
-    "laptime_raw": 10608,
+    "laptime": "0:10.008",
+    "laptime_raw": 10008,
     "lap_pb": true,
     "driver_data": {
       "id": 1,
@@ -54,7 +54,7 @@
     },
     "controller_data": {
       "color_bg": "rgb(254, 56, 39)",
-      "color_text": "rgb(255, 255, 255)"
+      "color_text": "rgb(23, 255, 255)"
     }
   }
 }

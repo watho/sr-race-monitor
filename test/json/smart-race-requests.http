@@ -50,10 +50,10 @@ Content-Type: application/json
 POST http://{{host}}:{{port}}/api
 Content-Type: application/json
 
-< ./ui.lap_update_1.json
+< ./ui.lap_update_driver_1_2.json
 
 ### ui.lap_update 2
 POST http://{{host}}:{{port}}/api
 Content-Type: application/json
 
-< ./ui.lap_update_2.json
+< ./ui.lap_update_driver_2_1.json

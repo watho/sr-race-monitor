@@ -24,6 +24,7 @@ mixin _$IncomingRaceMessageEvent {
     required TResult Function(DateTime timestamp, EventChangeStatus eventData)
         eventStatusChanged,
     required TResult Function() eventStart,
+    required TResult Function() resetDriversListPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,6 +34,7 @@ mixin _$IncomingRaceMessageEvent {
     TResult? Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
     TResult? Function()? eventStart,
+    TResult? Function()? resetDriversListPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,6 +44,7 @@ mixin _$IncomingRaceMessageEvent {
     TResult Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
     TResult Function()? eventStart,
+    TResult Function()? resetDriversListPressed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -52,6 +55,8 @@ mixin _$IncomingRaceMessageEvent {
     required TResult Function(RaceMsgEventStatusChanged value)
         eventStatusChanged,
     required TResult Function(RaceMsgEventStart value) eventStart,
+    required TResult Function(RaceMsgResetDriversListPressed value)
+        resetDriversListPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +65,8 @@ mixin _$IncomingRaceMessageEvent {
     TResult? Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult? Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
     TResult? Function(RaceMsgEventStart value)? eventStart,
+    TResult? Function(RaceMsgResetDriversListPressed value)?
+        resetDriversListPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,6 +75,8 @@ mixin _$IncomingRaceMessageEvent {
     TResult Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
     TResult Function(RaceMsgEventStart value)? eventStart,
+    TResult Function(RaceMsgResetDriversListPressed value)?
+        resetDriversListPressed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -136,6 +145,7 @@ class _$RaceMsgStartedImpl implements RaceMsgStarted {
     required TResult Function(DateTime timestamp, EventChangeStatus eventData)
         eventStatusChanged,
     required TResult Function() eventStart,
+    required TResult Function() resetDriversListPressed,
   }) {
     return started();
   }
@@ -148,6 +158,7 @@ class _$RaceMsgStartedImpl implements RaceMsgStarted {
     TResult? Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
     TResult? Function()? eventStart,
+    TResult? Function()? resetDriversListPressed,
   }) {
     return started?.call();
   }
@@ -160,6 +171,7 @@ class _$RaceMsgStartedImpl implements RaceMsgStarted {
     TResult Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
     TResult Function()? eventStart,
+    TResult Function()? resetDriversListPressed,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -176,6 +188,8 @@ class _$RaceMsgStartedImpl implements RaceMsgStarted {
     required TResult Function(RaceMsgEventStatusChanged value)
         eventStatusChanged,
     required TResult Function(RaceMsgEventStart value) eventStart,
+    required TResult Function(RaceMsgResetDriversListPressed value)
+        resetDriversListPressed,
   }) {
     return started(this);
   }
@@ -187,6 +201,8 @@ class _$RaceMsgStartedImpl implements RaceMsgStarted {
     TResult? Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult? Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
     TResult? Function(RaceMsgEventStart value)? eventStart,
+    TResult? Function(RaceMsgResetDriversListPressed value)?
+        resetDriversListPressed,
   }) {
     return started?.call(this);
   }
@@ -198,6 +214,8 @@ class _$RaceMsgStartedImpl implements RaceMsgStarted {
     TResult Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
     TResult Function(RaceMsgEventStart value)? eventStart,
+    TResult Function(RaceMsgResetDriversListPressed value)?
+        resetDriversListPressed,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -293,6 +311,7 @@ class _$RaceMsgUiLapUpdatedImpl implements RaceMsgUiLapUpdated {
     required TResult Function(DateTime timestamp, EventChangeStatus eventData)
         eventStatusChanged,
     required TResult Function() eventStart,
+    required TResult Function() resetDriversListPressed,
   }) {
     return uiLapUpdated(timestamp, eventData);
   }
@@ -305,6 +324,7 @@ class _$RaceMsgUiLapUpdatedImpl implements RaceMsgUiLapUpdated {
     TResult? Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
     TResult? Function()? eventStart,
+    TResult? Function()? resetDriversListPressed,
   }) {
     return uiLapUpdated?.call(timestamp, eventData);
   }
@@ -317,6 +337,7 @@ class _$RaceMsgUiLapUpdatedImpl implements RaceMsgUiLapUpdated {
     TResult Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
     TResult Function()? eventStart,
+    TResult Function()? resetDriversListPressed,
     required TResult orElse(),
   }) {
     if (uiLapUpdated != null) {
@@ -333,6 +354,8 @@ class _$RaceMsgUiLapUpdatedImpl implements RaceMsgUiLapUpdated {
     required TResult Function(RaceMsgEventStatusChanged value)
         eventStatusChanged,
     required TResult Function(RaceMsgEventStart value) eventStart,
+    required TResult Function(RaceMsgResetDriversListPressed value)
+        resetDriversListPressed,
   }) {
     return uiLapUpdated(this);
   }
@@ -344,6 +367,8 @@ class _$RaceMsgUiLapUpdatedImpl implements RaceMsgUiLapUpdated {
     TResult? Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult? Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
     TResult? Function(RaceMsgEventStart value)? eventStart,
+    TResult? Function(RaceMsgResetDriversListPressed value)?
+        resetDriversListPressed,
   }) {
     return uiLapUpdated?.call(this);
   }
@@ -355,6 +380,8 @@ class _$RaceMsgUiLapUpdatedImpl implements RaceMsgUiLapUpdated {
     TResult Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
     TResult Function(RaceMsgEventStart value)? eventStart,
+    TResult Function(RaceMsgResetDriversListPressed value)?
+        resetDriversListPressed,
     required TResult orElse(),
   }) {
     if (uiLapUpdated != null) {
@@ -460,6 +487,7 @@ class _$RaceMsgEventStatusChangedImpl implements RaceMsgEventStatusChanged {
     required TResult Function(DateTime timestamp, EventChangeStatus eventData)
         eventStatusChanged,
     required TResult Function() eventStart,
+    required TResult Function() resetDriversListPressed,
   }) {
     return eventStatusChanged(timestamp, eventData);
   }
@@ -472,6 +500,7 @@ class _$RaceMsgEventStatusChangedImpl implements RaceMsgEventStatusChanged {
     TResult? Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
     TResult? Function()? eventStart,
+    TResult? Function()? resetDriversListPressed,
   }) {
     return eventStatusChanged?.call(timestamp, eventData);
   }
@@ -484,6 +513,7 @@ class _$RaceMsgEventStatusChangedImpl implements RaceMsgEventStatusChanged {
     TResult Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
     TResult Function()? eventStart,
+    TResult Function()? resetDriversListPressed,
     required TResult orElse(),
   }) {
     if (eventStatusChanged != null) {
@@ -500,6 +530,8 @@ class _$RaceMsgEventStatusChangedImpl implements RaceMsgEventStatusChanged {
     required TResult Function(RaceMsgEventStatusChanged value)
         eventStatusChanged,
     required TResult Function(RaceMsgEventStart value) eventStart,
+    required TResult Function(RaceMsgResetDriversListPressed value)
+        resetDriversListPressed,
   }) {
     return eventStatusChanged(this);
   }
@@ -511,6 +543,8 @@ class _$RaceMsgEventStatusChangedImpl implements RaceMsgEventStatusChanged {
     TResult? Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult? Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
     TResult? Function(RaceMsgEventStart value)? eventStart,
+    TResult? Function(RaceMsgResetDriversListPressed value)?
+        resetDriversListPressed,
   }) {
     return eventStatusChanged?.call(this);
   }
@@ -522,6 +556,8 @@ class _$RaceMsgEventStatusChangedImpl implements RaceMsgEventStatusChanged {
     TResult Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
     TResult Function(RaceMsgEventStart value)? eventStart,
+    TResult Function(RaceMsgResetDriversListPressed value)?
+        resetDriversListPressed,
     required TResult orElse(),
   }) {
     if (eventStatusChanged != null) {
@@ -588,6 +624,7 @@ class _$RaceMsgEventStartImpl implements RaceMsgEventStart {
     required TResult Function(DateTime timestamp, EventChangeStatus eventData)
         eventStatusChanged,
     required TResult Function() eventStart,
+    required TResult Function() resetDriversListPressed,
   }) {
     return eventStart();
   }
@@ -600,6 +637,7 @@ class _$RaceMsgEventStartImpl implements RaceMsgEventStart {
     TResult? Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
     TResult? Function()? eventStart,
+    TResult? Function()? resetDriversListPressed,
   }) {
     return eventStart?.call();
   }
@@ -612,6 +650,7 @@ class _$RaceMsgEventStartImpl implements RaceMsgEventStart {
     TResult Function(DateTime timestamp, EventChangeStatus eventData)?
         eventStatusChanged,
     TResult Function()? eventStart,
+    TResult Function()? resetDriversListPressed,
     required TResult orElse(),
   }) {
     if (eventStart != null) {
@@ -628,6 +667,8 @@ class _$RaceMsgEventStartImpl implements RaceMsgEventStart {
     required TResult Function(RaceMsgEventStatusChanged value)
         eventStatusChanged,
     required TResult Function(RaceMsgEventStart value) eventStart,
+    required TResult Function(RaceMsgResetDriversListPressed value)
+        resetDriversListPressed,
   }) {
     return eventStart(this);
   }
@@ -639,6 +680,8 @@ class _$RaceMsgEventStartImpl implements RaceMsgEventStart {
     TResult? Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult? Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
     TResult? Function(RaceMsgEventStart value)? eventStart,
+    TResult? Function(RaceMsgResetDriversListPressed value)?
+        resetDriversListPressed,
   }) {
     return eventStart?.call(this);
   }
@@ -650,6 +693,8 @@ class _$RaceMsgEventStartImpl implements RaceMsgEventStart {
     TResult Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
     TResult Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
     TResult Function(RaceMsgEventStart value)? eventStart,
+    TResult Function(RaceMsgResetDriversListPressed value)?
+        resetDriversListPressed,
     required TResult orElse(),
   }) {
     if (eventStart != null) {
@@ -661,6 +706,141 @@ class _$RaceMsgEventStartImpl implements RaceMsgEventStart {
 
 abstract class RaceMsgEventStart implements IncomingRaceMessageEvent {
   const factory RaceMsgEventStart() = _$RaceMsgEventStartImpl;
+}
+
+/// @nodoc
+abstract class _$$RaceMsgResetDriversListPressedImplCopyWith<$Res> {
+  factory _$$RaceMsgResetDriversListPressedImplCopyWith(
+          _$RaceMsgResetDriversListPressedImpl value,
+          $Res Function(_$RaceMsgResetDriversListPressedImpl) then) =
+      __$$RaceMsgResetDriversListPressedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RaceMsgResetDriversListPressedImplCopyWithImpl<$Res>
+    extends _$IncomingRaceMessageEventCopyWithImpl<$Res,
+        _$RaceMsgResetDriversListPressedImpl>
+    implements _$$RaceMsgResetDriversListPressedImplCopyWith<$Res> {
+  __$$RaceMsgResetDriversListPressedImplCopyWithImpl(
+      _$RaceMsgResetDriversListPressedImpl _value,
+      $Res Function(_$RaceMsgResetDriversListPressedImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RaceMsgResetDriversListPressedImpl
+    implements RaceMsgResetDriversListPressed {
+  const _$RaceMsgResetDriversListPressedImpl();
+
+  @override
+  String toString() {
+    return 'IncomingRaceMessageEvent.resetDriversListPressed()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RaceMsgResetDriversListPressedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(DateTime timestamp, UiLapUpdate eventData)
+        uiLapUpdated,
+    required TResult Function(DateTime timestamp, EventChangeStatus eventData)
+        eventStatusChanged,
+    required TResult Function() eventStart,
+    required TResult Function() resetDriversListPressed,
+  }) {
+    return resetDriversListPressed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(DateTime timestamp, UiLapUpdate eventData)? uiLapUpdated,
+    TResult? Function(DateTime timestamp, EventChangeStatus eventData)?
+        eventStatusChanged,
+    TResult? Function()? eventStart,
+    TResult? Function()? resetDriversListPressed,
+  }) {
+    return resetDriversListPressed?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(DateTime timestamp, UiLapUpdate eventData)? uiLapUpdated,
+    TResult Function(DateTime timestamp, EventChangeStatus eventData)?
+        eventStatusChanged,
+    TResult Function()? eventStart,
+    TResult Function()? resetDriversListPressed,
+    required TResult orElse(),
+  }) {
+    if (resetDriversListPressed != null) {
+      return resetDriversListPressed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(RaceMsgStarted value) started,
+    required TResult Function(RaceMsgUiLapUpdated value) uiLapUpdated,
+    required TResult Function(RaceMsgEventStatusChanged value)
+        eventStatusChanged,
+    required TResult Function(RaceMsgEventStart value) eventStart,
+    required TResult Function(RaceMsgResetDriversListPressed value)
+        resetDriversListPressed,
+  }) {
+    return resetDriversListPressed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(RaceMsgStarted value)? started,
+    TResult? Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
+    TResult? Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
+    TResult? Function(RaceMsgEventStart value)? eventStart,
+    TResult? Function(RaceMsgResetDriversListPressed value)?
+        resetDriversListPressed,
+  }) {
+    return resetDriversListPressed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(RaceMsgStarted value)? started,
+    TResult Function(RaceMsgUiLapUpdated value)? uiLapUpdated,
+    TResult Function(RaceMsgEventStatusChanged value)? eventStatusChanged,
+    TResult Function(RaceMsgEventStart value)? eventStart,
+    TResult Function(RaceMsgResetDriversListPressed value)?
+        resetDriversListPressed,
+    required TResult orElse(),
+  }) {
+    if (resetDriversListPressed != null) {
+      return resetDriversListPressed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RaceMsgResetDriversListPressed
+    implements IncomingRaceMessageEvent {
+  const factory RaceMsgResetDriversListPressed() =
+      _$RaceMsgResetDriversListPressedImpl;
 }
 
 /// @nodoc

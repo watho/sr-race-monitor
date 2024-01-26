@@ -8,7 +8,11 @@ class GameActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GameStateBloc, GameStateState>(
-      buildWhen: (prev, state) => prev.runtimeType != state.runtimeType,
+      buildWhen: (previous, current) =>
+          previous != current &&
+          (current is GameStateInitial ||
+              current is TimerRunInProgress ||
+              current is TimerRunComplete),
       builder: (context, state) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -19,7 +23,7 @@ class GameActions extends StatelessWidget {
                     child: const Icon(Icons.play_arrow),
                     onPressed: () => context
                         .read<GameStateBloc>()
-                        .add(TimerStarted(duration: state.duration)),
+                        .add(TimerStarted(state.duration)),
                   ),
                 ],
               TimerRunInProgress() => [
@@ -52,7 +56,9 @@ class GameActions extends StatelessWidget {
                     onPressed: () =>
                         context.read<GameStateBloc>().add(const TimerReset()),
                   ),
-                ]
+                ],
+              PointUpdate() => [],
+              NewDesiredColor() => [],
             }
           ],
         );

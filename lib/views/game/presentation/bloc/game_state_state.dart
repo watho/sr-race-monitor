@@ -1,35 +1,15 @@
 part of 'game_state_bloc.dart';
 
-sealed class GameStateState extends Equatable {
-  const GameStateState(this.duration);
-  final int duration;
+@freezed
+sealed class GameStateState with _$GameStateState {
+  factory GameStateState.initial(final int duration) = GameStateInitial;
 
-  @override
-  List<Object> get props => [duration];
-}
+  factory GameStateState.timerRunInProgress(final int duration) =
+      TimerRunInProgress;
 
-class GameStateInitial extends GameStateState {
-  const GameStateInitial(super.duration);
-  @override
-  String toString() {
-    return 'Timer initial { duration: $duration }';
-  }
-}
+  factory GameStateState.pointUpdate(final int points) = PointUpdate;
 
-class TimerRunInProgress extends GameStateState {
-  const TimerRunInProgress(super.duration);
+  factory GameStateState.newDesiredColor(final Color color) = NewDesiredColor;
 
-  @override
-  String toString() {
-    return "TimerRunInProgress { duration: $duration }";
-  }
-}
-
-class TimerRunComplete extends GameStateState {
-  const TimerRunComplete(super.duration);
-
-  @override
-  String toString() {
-    return "TimerRunComplete { duration: $duration }";
-  }
+  factory GameStateState.timerRunComplete() = TimerRunComplete;
 }

@@ -1,16 +1,17 @@
 {
-  "time": 1705706117436,
+  "time": 1705705743676,
   "event_type": "ui.lap_update",
   "event_data": {
-    "controller_id": "1",
-    "lap": 7,
-    "laptime": "0:13.292",
-    "laptime_raw": 13292,
+    "controller_id": "2",
+    "lap": 2,
+    "laptime": "0:10.608",
+    "laptime_raw": 10608,
+    "lap_pb": true,
     "driver_data": {
       "id": 1,
-      "name": "fri",
-      "name_short": "fr",
-      "name_tts": "",
+      "name": "osc",
+      "name_short": "os",
+      "name_tts": "Der os",
       "team": 1,
       "image": "file:///data/user/0/com.trademarc.smartrace/files/1704221389451.jpg",
       "start_no": 1,
@@ -44,7 +45,7 @@
       "brakes": 13,
       "fuel": 9,
       "changed_on": "2024-01-19 19:27:48",
-      "laps": 1644,
+      "laps": 1639,
       "interval": 0,
       "interval_counter": 1637,
       "comment": "",
@@ -52,8 +53,8 @@
       "tags": "[]"
     },
     "controller_data": {
-      "color_bg": "rgb(25, 56, 39)",
-      "color_text": "rgb(255, 255, 255)"
+      "color_bg": "rgb(254, 56, 39)",
+      "color_text": "rgb(23, 255, 255)"
     }
   }
 }
