@@ -3,7 +3,7 @@
   "event_type": "ui.lap_update",
   "event_data": {
     "controller_id": "2",
-    "lap": 2,
+    "lap": 4,
     "laptime": "0:10.008",
     "laptime_raw": 10008,
     "lap_pb": true,

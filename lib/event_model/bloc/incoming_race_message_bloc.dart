@@ -67,6 +67,7 @@ class IncomingRaceMessageBloc
         event.timestamp,
         controllerId,
         event.eventData.laptime,
+        event.eventData.lap,
         hexOrRGBToColor(event.eventData.controllerData.colorBg),
         hexOrRGBToColor(event.eventData.controllerData.colorText)));
     // Create driver object and add to list

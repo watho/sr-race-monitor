@@ -10,6 +10,7 @@ UiLapUpdate _$UiLapUpdateFromJson(Map<String, dynamic> json) => UiLapUpdate(
       controllerData: ControllerData.fromJson(
           json['controller_data'] as Map<String, dynamic>),
       laptime: json['laptime'] as String,
+      lap: json['lap'] as int,
       controllerId: json['controller_id'] as String,
       driverData:
           DriverData.fromJson(json['driver_data'] as Map<String, dynamic>),
@@ -19,6 +20,7 @@ Map<String, dynamic> _$UiLapUpdateToJson(UiLapUpdate instance) =>
     <String, dynamic>{
       'controller_id': instance.controllerId,
       'laptime': instance.laptime,
+      'lap': instance.lap,
       'controller_data': instance.controllerData.toJson(),
       'driver_data': instance.driverData.toJson(),
     };

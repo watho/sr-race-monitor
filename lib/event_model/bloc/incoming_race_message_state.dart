@@ -13,6 +13,7 @@ sealed class IncomingRaceMessageState with _$IncomingRaceMessageState {
     DateTime timeStamp,
     String controllerId,
     String laptime,
+    int laps,
     Color controllerBgColor,
     Color controllerTextColor,
   ) = RaceUiLapUpdate;
