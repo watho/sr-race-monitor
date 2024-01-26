@@ -10,6 +10,7 @@ sealed class IncomingRaceMessageState with _$IncomingRaceMessageState {
   ) = RaceEventStatusChange;
 
   factory IncomingRaceMessageState.raceUiLapUpdate(
+    DateTime timeStamp,
     String controllerId,
     String laptime,
     Color controllerBgColor,

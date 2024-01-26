@@ -16,14 +16,30 @@ final getIt = GetIt.instance;
 class SmartRaceMessageHandlerImpl implements SmartRaceMessageHandler {
   var log = Logger(printer: PrettyPrinter(methodCount: 1));
   late IncomingRaceMessageBloc bloc;
+  late shelf_plus.ShelfRunContext _context;
 
-  SmartRaceMessageHandlerImpl({IncomingRaceMessageBloc? bloc}) : super() {
+  @override
+  Future startServer(final int port, final bool hotReload,
+      {IncomingRaceMessageBloc? bloc}) async {
+    log.i("Starting post receiver on $port with hot reload $hotReload");
     this.bloc = bloc ?? getIt.get<IncomingRaceMessageBloc>();
-    log.i("Starting post receiver on 8085");
-    shelf_plus.shelfRun(init,
-        defaultBindAddress: '0.0.0.0',
-        defaultBindPort: 8085,
-        defaultEnableHotReload: false);
+    await shelf_plus
+        .shelfRun(
+      init,
+      defaultBindAddress: '0.0.0.0',
+      defaultBindPort: port,
+      defaultEnableHotReload: hotReload,
+    )
+        .then((value) {
+      _context = value;
+      return value;
+    });
+  }
+
+  @override
+  Future stopServer() async {
+    log.i("Closing post receiver.");
+    return bloc.close().then((value) => _context.close());
   }
 
   shelf_plus.Handler init() {
@@ -40,9 +56,9 @@ class SmartRaceMessageHandlerImpl implements SmartRaceMessageHandler {
     /// Receive RaceEvent
     postReceiver.post('/<ignored|.*>', (shelf_plus.Request request) async {
       RaceEvent raceEvent = await request.body.as(RaceEvent.fromJson);
-      log.d("Post request received: ${raceEvent.toJson()}.");
+      log.d("Post request received: ${raceEvent.eventType}.");
       DateTime timestamp =
-          DateTime.fromMillisecondsSinceEpoch((raceEvent.time / 1000).floor());
+          DateTime.fromMillisecondsSinceEpoch((raceEvent.time).floor());
       switch (raceEvent.eventType) {
         case 'event.change_status':
           bloc.add(RaceMsgEventStatusChanged(

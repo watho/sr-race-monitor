@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:logger/logger.dart';
 import 'package:smart_race_monitor/event_model/bloc/incoming_race_message_bloc.dart';
 import 'package:smart_race_monitor/views/game/service/Timer.dart';
 
@@ -12,6 +13,7 @@ part 'game_state_event.dart';
 part 'game_state_state.dart';
 
 class GameStateBloc extends Bloc<GameStateEvent, GameStateState> {
+  final Logger log = Logger(printer: PrettyPrinter(methodCount: 1));
   final GameTimer _timer;
   final IncomingRaceMessageBloc _messageBloc;
   static const int _gameDuration = 60 * 5;
@@ -28,7 +30,7 @@ class GameStateBloc extends Bloc<GameStateEvent, GameStateState> {
         super(GameStateState.initial(_gameDuration)) {
     on<TimerStarted>(_onStarted);
     on<TimerReset>(_onReset);
-    on<_TimerTicked>(_onTicked);
+    on<TimerTicked>(_onTicked);
     on<_LapUpdated>(_onLapUpdated);
   }
 
@@ -49,10 +51,10 @@ class GameStateBloc extends Bloc<GameStateEvent, GameStateState> {
     _timerSubscription?.cancel();
     _timerSubscription = _timer
         .tick(ticks: event.duration)
-        .listen((duration) => add(_TimerTicked(duration)));
+        .listen((duration) => add(TimerTicked(duration)));
   }
 
-  void _onTicked(_TimerTicked event, Emitter<GameStateState> emit) {
+  void _onTicked(TimerTicked event, Emitter<GameStateState> emit) {
     _remainingTime = event.duration;
     emit(event.duration > 0
         ? TimerRunInProgress(event.duration)
@@ -65,6 +67,8 @@ class GameStateBloc extends Bloc<GameStateEvent, GameStateState> {
   }
 
   void _onLapUpdated(_LapUpdated event, Emitter<GameStateState> emit) {
+    log.d(
+        "GameBloc.OnLapUpdate. Remaining time=$_remainingTime; points=$_points; actualColor=${event.actualColor}; desiredColor=$_desiredColor");
     if (_remainingTime > 0) {
       // if color of lapupdate equals desired color we get as many points as drivers
       if (event.actualColor == _desiredColor) {
@@ -74,7 +78,10 @@ class GameStateBloc extends Bloc<GameStateEvent, GameStateState> {
         emit(NewDesiredColor(_desiredColor));
       } else {
         // if color not matches decrease points
-        _points = max(0, _points--);
+        //log.d("Wrong car spotted. Old points: $_points");
+        _points--;
+        _points = max(0, _points);
+        //log.d("Wrong car spotted. New points: $_points");
         emit(GameStateState.pointUpdate(_points));
       }
     }

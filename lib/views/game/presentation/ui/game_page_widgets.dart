@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/logger.dart';
 import 'package:smart_race_monitor/event_model/bloc/incoming_race_message_bloc.dart';
 import 'package:smart_race_monitor/views/game/presentation/bloc/game_state_bloc.dart';
 
 class GameBox extends StatelessWidget {
-  const GameBox({super.key});
+  GameBox({super.key});
+
+  final Logger log = Logger(printer: PrettyPrinter(methodCount: 1));
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +25,8 @@ class GameBox extends StatelessWidget {
               0: IntrinsicColumnWidth(),
               1: FlexColumnWidth(),
             },
-            children: const [
-              TableRow(children: [
+            children: [
+              const TableRow(children: [
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text("Zeit"),
@@ -34,16 +37,16 @@ class GameBox extends StatelessWidget {
                 )
               ]),
               TableRow(children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text("Letzte Zieldurchfahrt:"),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: LastControllerColor(),
                 )
               ]),
-              TableRow(children: [
+              const TableRow(children: [
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text("Nächste Farbe:"),
@@ -53,7 +56,7 @@ class GameBox extends StatelessWidget {
                   child: DesiredControllerColor(),
                 )
               ]),
-              TableRow(children: [
+              const TableRow(children: [
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text("Punkte:"),
@@ -89,7 +92,9 @@ class PointsText extends StatelessWidget {
 }
 
 class LastControllerColor extends StatelessWidget {
-  const LastControllerColor({
+  final Logger log = Logger(printer: PrettyPrinter(methodCount: 1));
+
+  LastControllerColor({
     super.key,
   });
 
@@ -97,6 +102,7 @@ class LastControllerColor extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<IncomingRaceMessageBloc, IncomingRaceMessageState>(
       listener: (context, state) {
+        log.i("LastControllerWidgetBlocListener with state=$state");
         if (state is RaceUiLapUpdate) {
           context
               .read<GameStateBloc>()
@@ -181,6 +187,33 @@ class TimerText extends StatelessWidget {
           style: Theme.of(context).textTheme.displayLarge,
         );
       },
+    );
+  }
+}
+
+class HelpText extends StatelessWidget {
+  const HelpText({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.orangeAccent.shade100,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            """- Mit den Teilnehmern einmal über die Ziellinie fahren, damit sie oben bei Fahrer auftauchen.
+- Spiel starten. Bei 'nächste Farbe' erscheint eine Controllerfarbe.
+- Richtiges Auto muss als nächstes über die Zielline, dann gibt es Punkte. Falsches Auto gibt Minuspunkt.
+- 5 Minuten Zeit zum Punkte sammeln.""",
+          ),
+        ),
+      ),
     );
   }
 }

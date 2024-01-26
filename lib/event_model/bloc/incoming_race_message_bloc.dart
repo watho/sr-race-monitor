@@ -61,8 +61,10 @@ class IncomingRaceMessageBloc
 
   void _onUiLapUpdated(
       RaceMsgUiLapUpdated event, Emitter<IncomingRaceMessageState> emit) {
+    log.i("Irmb._onUiLapUpdated.");
     var controllerId = event.eventData.controllerId;
     emit(IncomingRaceMessageState.raceUiLapUpdate(
+        event.timestamp,
         controllerId,
         event.eventData.laptime,
         hexOrRGBToColor(event.eventData.controllerData.colorBg),

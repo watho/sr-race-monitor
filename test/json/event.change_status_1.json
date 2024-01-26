@@ -1,5 +1,5 @@
 {
-  "time": 1684769957969,
+  "time": {{$timestamp}},
   "event_type": "event.change_status",
   "event_data": {
     "old": "running",

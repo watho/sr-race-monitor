@@ -20,20 +20,26 @@ final GetIt getIt = GetIt.instance;
 void main() {
   group('Test RaceEventBloc', () {
     Bloc.observer = SimpleBlocObserver();
+    late SmartRaceMessageHandler handler;
 
-    setUp(() {
+    setUp(() async {
       EquatableConfig.stringify = true;
       configureDependencies();
-      SmartRaceMessageHandler handler = getIt<SmartRaceMessageHandler>();
     });
 
     tearDown(() async {
+      handler.stopServer();
       await getIt.reset();
     });
 
     blocTest<IncomingRaceMessageBloc, IncomingRaceMessageState>(
         'emits [RaceEventEventChangeStatus]',
-        build: () => getIt<IncomingRaceMessageBloc>(),
+        build: () {
+          var bloc = getIt<IncomingRaceMessageBloc>();
+          handler = getIt<SmartRaceMessageHandler>();
+          handler.startServer(8085, false, bloc: bloc);
+          return bloc;
+        },
         act: (bloc) => _postTestData('event.change_status_1.json'),
         expect: () => [
               IncomingRaceMessageState.raceEventStatusChange(
@@ -42,10 +48,16 @@ void main() {
 
     blocTest<IncomingRaceMessageBloc, IncomingRaceMessageState>(
         'emits single [RaceEventUiLapUpdate, DriverslistChange]',
-        build: () => getIt<IncomingRaceMessageBloc>(),
+        build: () {
+          var bloc = getIt<IncomingRaceMessageBloc>();
+          handler = getIt<SmartRaceMessageHandler>();
+          handler.startServer(8085, false, bloc: bloc);
+          return bloc;
+        },
         act: (bloc) => _postTestData('ui.lap_update_driver_1_1.json'),
         expect: () => [
               IncomingRaceMessageState.raceUiLapUpdate(
+                  DateTime(2024, 1, 1, 0, 0, 0),
                   "2",
                   "0:10.008",
                   const Color.fromRGBO(254, 56, 39, 1.0),
@@ -71,6 +83,7 @@ void main() {
         skip: 2, // skipping one lap_update and one driversChanged
         expect: () => [
               IncomingRaceMessageState.raceUiLapUpdate(
+                DateTime(2024, 1, 1, 0, 0, 0),
                 "2",
                 "0:10.608",
                 const Color.fromRGBO(254, 56, 39, 1.0),
@@ -90,6 +103,7 @@ void main() {
       // skipping one lap_update and one driversChanged
       expect: () => [
         IncomingRaceMessageState.raceUiLapUpdate(
+          DateTime(2024, 1, 1, 0, 0, 0),
           "1",
           "0:13.292",
           const Color.fromRGBO(25, 56, 39, 1.0),

@@ -1,24 +1,32 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
+import 'package:smart_race_monitor/views/game/presentation/bloc/game_state_bloc.dart';
 
 class SimpleBlocObserver extends BlocObserver {
-  var log = Logger(printer: PrettyPrinter(methodCount: 1), level: Level.info);
+  var log =
+      Logger(printer: PrettyPrinter(methodCount: 1), level: Level.warning);
 
   @override
   void onEvent(Bloc bloc, Object? event) {
-    log.d(event.toString());
+    if (event is! TimerTicked) {
+      log.d(event.toString());
+    }
     super.onEvent(bloc, event);
   }
 
   @override
   void onTransition(Bloc bloc, Transition transition) {
-    log.d(transition);
+    if (transition.currentState is! TimerRunInProgress) {
+      log.d(transition);
+    }
     super.onTransition(bloc, transition);
   }
 
   @override
   void onChange(BlocBase bloc, Change change) {
-    log.d(change);
+    if (change.currentState is! TimerRunInProgress) {
+      log.d(change);
+    }
     super.onChange(bloc, change);
   }
 

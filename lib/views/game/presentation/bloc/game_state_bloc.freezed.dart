@@ -57,7 +57,7 @@ mixin _$GameStateEvent {
     required TResult Function(TimerPaused value) timerPaused,
     required TResult Function(TimerResumed value) timerResumed,
     required TResult Function(TimerReset value) timerReset,
-    required TResult Function(_TimerTicked value) timerTicked,
+    required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(_LapUpdated value) lapUpdated,
   }) =>
       throw _privateConstructorUsedError;
@@ -68,7 +68,7 @@ mixin _$GameStateEvent {
     TResult? Function(TimerPaused value)? timerPaused,
     TResult? Function(TimerResumed value)? timerResumed,
     TResult? Function(TimerReset value)? timerReset,
-    TResult? Function(_TimerTicked value)? timerTicked,
+    TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(_LapUpdated value)? lapUpdated,
   }) =>
       throw _privateConstructorUsedError;
@@ -79,7 +79,7 @@ mixin _$GameStateEvent {
     TResult Function(TimerPaused value)? timerPaused,
     TResult Function(TimerResumed value)? timerResumed,
     TResult Function(TimerReset value)? timerReset,
-    TResult Function(_TimerTicked value)? timerTicked,
+    TResult Function(TimerTicked value)? timerTicked,
     TResult Function(_LapUpdated value)? lapUpdated,
     required TResult orElse(),
   }) =>
@@ -193,7 +193,7 @@ class _$GameStartedImpl implements GameStarted {
     required TResult Function(TimerPaused value) timerPaused,
     required TResult Function(TimerResumed value) timerResumed,
     required TResult Function(TimerReset value) timerReset,
-    required TResult Function(_TimerTicked value) timerTicked,
+    required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(_LapUpdated value) lapUpdated,
   }) {
     return started(this);
@@ -207,7 +207,7 @@ class _$GameStartedImpl implements GameStarted {
     TResult? Function(TimerPaused value)? timerPaused,
     TResult? Function(TimerResumed value)? timerResumed,
     TResult? Function(TimerReset value)? timerReset,
-    TResult? Function(_TimerTicked value)? timerTicked,
+    TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(_LapUpdated value)? lapUpdated,
   }) {
     return started?.call(this);
@@ -221,7 +221,7 @@ class _$GameStartedImpl implements GameStarted {
     TResult Function(TimerPaused value)? timerPaused,
     TResult Function(TimerResumed value)? timerResumed,
     TResult Function(TimerReset value)? timerReset,
-    TResult Function(_TimerTicked value)? timerTicked,
+    TResult Function(TimerTicked value)? timerTicked,
     TResult Function(_LapUpdated value)? lapUpdated,
     required TResult orElse(),
   }) {
@@ -352,7 +352,7 @@ class _$TimerStartedImpl implements TimerStarted {
     required TResult Function(TimerPaused value) timerPaused,
     required TResult Function(TimerResumed value) timerResumed,
     required TResult Function(TimerReset value) timerReset,
-    required TResult Function(_TimerTicked value) timerTicked,
+    required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(_LapUpdated value) lapUpdated,
   }) {
     return timerStarted(this);
@@ -366,7 +366,7 @@ class _$TimerStartedImpl implements TimerStarted {
     TResult? Function(TimerPaused value)? timerPaused,
     TResult? Function(TimerResumed value)? timerResumed,
     TResult? Function(TimerReset value)? timerReset,
-    TResult? Function(_TimerTicked value)? timerTicked,
+    TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(_LapUpdated value)? lapUpdated,
   }) {
     return timerStarted?.call(this);
@@ -380,7 +380,7 @@ class _$TimerStartedImpl implements TimerStarted {
     TResult Function(TimerPaused value)? timerPaused,
     TResult Function(TimerResumed value)? timerResumed,
     TResult Function(TimerReset value)? timerReset,
-    TResult Function(_TimerTicked value)? timerTicked,
+    TResult Function(TimerTicked value)? timerTicked,
     TResult Function(_LapUpdated value)? lapUpdated,
     required TResult orElse(),
   }) {
@@ -489,7 +489,7 @@ class _$TimerPausedImpl implements TimerPaused {
     required TResult Function(TimerPaused value) timerPaused,
     required TResult Function(TimerResumed value) timerResumed,
     required TResult Function(TimerReset value) timerReset,
-    required TResult Function(_TimerTicked value) timerTicked,
+    required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(_LapUpdated value) lapUpdated,
   }) {
     return timerPaused(this);
@@ -503,7 +503,7 @@ class _$TimerPausedImpl implements TimerPaused {
     TResult? Function(TimerPaused value)? timerPaused,
     TResult? Function(TimerResumed value)? timerResumed,
     TResult? Function(TimerReset value)? timerReset,
-    TResult? Function(_TimerTicked value)? timerTicked,
+    TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(_LapUpdated value)? lapUpdated,
   }) {
     return timerPaused?.call(this);
@@ -517,7 +517,7 @@ class _$TimerPausedImpl implements TimerPaused {
     TResult Function(TimerPaused value)? timerPaused,
     TResult Function(TimerResumed value)? timerResumed,
     TResult Function(TimerReset value)? timerReset,
-    TResult Function(_TimerTicked value)? timerTicked,
+    TResult Function(TimerTicked value)? timerTicked,
     TResult Function(_LapUpdated value)? lapUpdated,
     required TResult orElse(),
   }) {
@@ -621,7 +621,7 @@ class _$TimerResumedImpl implements TimerResumed {
     required TResult Function(TimerPaused value) timerPaused,
     required TResult Function(TimerResumed value) timerResumed,
     required TResult Function(TimerReset value) timerReset,
-    required TResult Function(_TimerTicked value) timerTicked,
+    required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(_LapUpdated value) lapUpdated,
   }) {
     return timerResumed(this);
@@ -635,7 +635,7 @@ class _$TimerResumedImpl implements TimerResumed {
     TResult? Function(TimerPaused value)? timerPaused,
     TResult? Function(TimerResumed value)? timerResumed,
     TResult? Function(TimerReset value)? timerReset,
-    TResult? Function(_TimerTicked value)? timerTicked,
+    TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(_LapUpdated value)? lapUpdated,
   }) {
     return timerResumed?.call(this);
@@ -649,7 +649,7 @@ class _$TimerResumedImpl implements TimerResumed {
     TResult Function(TimerPaused value)? timerPaused,
     TResult Function(TimerResumed value)? timerResumed,
     TResult Function(TimerReset value)? timerReset,
-    TResult Function(_TimerTicked value)? timerTicked,
+    TResult Function(TimerTicked value)? timerTicked,
     TResult Function(_LapUpdated value)? lapUpdated,
     required TResult orElse(),
   }) {
@@ -753,7 +753,7 @@ class _$TimerResetImpl implements TimerReset {
     required TResult Function(TimerPaused value) timerPaused,
     required TResult Function(TimerResumed value) timerResumed,
     required TResult Function(TimerReset value) timerReset,
-    required TResult Function(_TimerTicked value) timerTicked,
+    required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(_LapUpdated value) lapUpdated,
   }) {
     return timerReset(this);
@@ -767,7 +767,7 @@ class _$TimerResetImpl implements TimerReset {
     TResult? Function(TimerPaused value)? timerPaused,
     TResult? Function(TimerResumed value)? timerResumed,
     TResult? Function(TimerReset value)? timerReset,
-    TResult? Function(_TimerTicked value)? timerTicked,
+    TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(_LapUpdated value)? lapUpdated,
   }) {
     return timerReset?.call(this);
@@ -781,7 +781,7 @@ class _$TimerResetImpl implements TimerReset {
     TResult Function(TimerPaused value)? timerPaused,
     TResult Function(TimerResumed value)? timerResumed,
     TResult Function(TimerReset value)? timerReset,
-    TResult Function(_TimerTicked value)? timerTicked,
+    TResult Function(TimerTicked value)? timerTicked,
     TResult Function(_LapUpdated value)? lapUpdated,
     required TResult orElse(),
   }) {
@@ -829,7 +829,7 @@ class __$$TimerTickedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TimerTickedImpl implements _TimerTicked {
+class _$TimerTickedImpl implements TimerTicked {
   const _$TimerTickedImpl(this.duration);
 
   @override
@@ -912,7 +912,7 @@ class _$TimerTickedImpl implements _TimerTicked {
     required TResult Function(TimerPaused value) timerPaused,
     required TResult Function(TimerResumed value) timerResumed,
     required TResult Function(TimerReset value) timerReset,
-    required TResult Function(_TimerTicked value) timerTicked,
+    required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(_LapUpdated value) lapUpdated,
   }) {
     return timerTicked(this);
@@ -926,7 +926,7 @@ class _$TimerTickedImpl implements _TimerTicked {
     TResult? Function(TimerPaused value)? timerPaused,
     TResult? Function(TimerResumed value)? timerResumed,
     TResult? Function(TimerReset value)? timerReset,
-    TResult? Function(_TimerTicked value)? timerTicked,
+    TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(_LapUpdated value)? lapUpdated,
   }) {
     return timerTicked?.call(this);
@@ -940,7 +940,7 @@ class _$TimerTickedImpl implements _TimerTicked {
     TResult Function(TimerPaused value)? timerPaused,
     TResult Function(TimerResumed value)? timerResumed,
     TResult Function(TimerReset value)? timerReset,
-    TResult Function(_TimerTicked value)? timerTicked,
+    TResult Function(TimerTicked value)? timerTicked,
     TResult Function(_LapUpdated value)? lapUpdated,
     required TResult orElse(),
   }) {
@@ -951,8 +951,8 @@ class _$TimerTickedImpl implements _TimerTicked {
   }
 }
 
-abstract class _TimerTicked implements GameStateEvent {
-  const factory _TimerTicked(final int duration) = _$TimerTickedImpl;
+abstract class TimerTicked implements GameStateEvent {
+  const factory TimerTicked(final int duration) = _$TimerTickedImpl;
 
   int get duration;
   @JsonKey(ignore: true)
@@ -1076,7 +1076,7 @@ class _$LapUpdatedImpl implements _LapUpdated {
     required TResult Function(TimerPaused value) timerPaused,
     required TResult Function(TimerResumed value) timerResumed,
     required TResult Function(TimerReset value) timerReset,
-    required TResult Function(_TimerTicked value) timerTicked,
+    required TResult Function(TimerTicked value) timerTicked,
     required TResult Function(_LapUpdated value) lapUpdated,
   }) {
     return lapUpdated(this);
@@ -1090,7 +1090,7 @@ class _$LapUpdatedImpl implements _LapUpdated {
     TResult? Function(TimerPaused value)? timerPaused,
     TResult? Function(TimerResumed value)? timerResumed,
     TResult? Function(TimerReset value)? timerReset,
-    TResult? Function(_TimerTicked value)? timerTicked,
+    TResult? Function(TimerTicked value)? timerTicked,
     TResult? Function(_LapUpdated value)? lapUpdated,
   }) {
     return lapUpdated?.call(this);
@@ -1104,7 +1104,7 @@ class _$LapUpdatedImpl implements _LapUpdated {
     TResult Function(TimerPaused value)? timerPaused,
     TResult Function(TimerResumed value)? timerResumed,
     TResult Function(TimerReset value)? timerReset,
-    TResult Function(_TimerTicked value)? timerTicked,
+    TResult Function(TimerTicked value)? timerTicked,
     TResult Function(_LapUpdated value)? lapUpdated,
     required TResult orElse(),
   }) {

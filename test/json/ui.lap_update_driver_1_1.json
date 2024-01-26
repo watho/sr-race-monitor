@@ -1,5 +1,5 @@
 {
-  "time": 1705705740000,
+  "time": {{$timestamp}},
   "event_type": "ui.lap_update",
   "event_data": {
     "controller_id": "2",

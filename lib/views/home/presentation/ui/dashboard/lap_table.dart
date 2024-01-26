@@ -28,6 +28,10 @@ class LapTableBox extends StatelessWidget {
               "Race Monitor",
               textScaler: TextScaler.linear(1.5),
             )),
+            const Text(
+              "Does not work yet",
+              style: TextStyle(color: Colors.red),
+            ),
             Expanded(
               child: SingleChildScrollView(
                 child: createTable(context),
@@ -54,11 +58,11 @@ class LapTableBox extends StatelessWidget {
         },
         children: [
           create3ValueRow(
-              createLabel(context, "Oscar", ""),
+              createLabel(context, "Dr1", ""),
               "1:22",
-              createLabel(context, "Emma", ""),
+              createLabel(context, "Dr2", ""),
               "3:44",
-              createLabel(context, "Frida", ""),
+              createLabel(context, "Dr3", ""),
               "0:12"),
           create3ValueRow(
               createLabel(context, "U", "2"),
@@ -143,9 +147,9 @@ class LapTableBox extends StatelessWidget {
         1: FlexColumnWidth(),
       },
       children: [
-        create1ValueRow(createLabel(context, "Oscar", ""), "0:05:12"),
-        create1ValueRow(createLabel(context, "Emma", ""), "0:07:32"),
-        create1ValueRow(createLabel(context, "Frida", ""), "0:12:22"),
+        create1ValueRow(createLabel(context, "Driver 1", ""), "0:05:12"),
+        create1ValueRow(createLabel(context, "Driver 2", ""), "0:07:32"),
+        create1ValueRow(createLabel(context, "Driver 3", ""), "0:12:22"),
       ],
     );
   }

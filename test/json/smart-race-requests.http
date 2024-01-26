@@ -46,13 +46,19 @@ Content-Type: application/json
 
 < ./event.change_status_1.json
 
-### ui.lap_update 1
+### ui.lap_update 1_1
+POST http://{{host}}:{{port}}/api
+Content-Type: application/json
+
+< ./ui.lap_update_driver_1_1.json
+
+### ui.lap_update 1_2
 POST http://{{host}}:{{port}}/api
 Content-Type: application/json
 
 < ./ui.lap_update_driver_1_2.json
 
-### ui.lap_update 2
+### ui.lap_update 2_1
 POST http://{{host}}:{{port}}/api
 Content-Type: application/json
 
