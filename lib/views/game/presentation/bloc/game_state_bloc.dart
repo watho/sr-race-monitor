@@ -20,7 +20,6 @@ class GameStateBloc extends Bloc<GameStateEvent, GameStateState> {
   int _remainingTime = 0;
   int _points = 0;
   Color _desiredColor = Colors.grey;
-  String _desiredDriverName = "";
 
   StreamSubscription<int>? _timerSubscription;
 
@@ -47,9 +46,9 @@ class GameStateBloc extends Bloc<GameStateEvent, GameStateState> {
     _points = 0;
     emit(PointUpdate(_points));
     // Get color from known controller
-    (Color, String) desiredValues = _findNextColor();
+    (Color, Color, String) desiredValues = _findNextColor();
     _desiredColor = desiredValues.$1;
-    emit(NewDesiredColor(_desiredColor, desiredValues.$2));
+    emit(NewDesiredColor(_desiredColor, desiredValues.$2, desiredValues.$3));
     _timerSubscription?.cancel();
     _timerSubscription = _timer
         .tick(ticks: event.duration)
@@ -76,9 +75,10 @@ class GameStateBloc extends Bloc<GameStateEvent, GameStateState> {
       if (event.actualColor == _desiredColor) {
         _points = _points + _messageBloc.driversList.length;
         emit(GameStateState.pointUpdate(_points));
-        (Color, String) desiredValues = _findNextColor();
+        (Color, Color, String) desiredValues = _findNextColor();
         _desiredColor = desiredValues.$1;
-        emit(NewDesiredColor(_desiredColor, desiredValues.$2));
+        emit(
+            NewDesiredColor(_desiredColor, desiredValues.$2, desiredValues.$3));
       } else {
         // if color not matches decrease points
         //log.d("Wrong car spotted. Old points: $_points");
@@ -90,12 +90,12 @@ class GameStateBloc extends Bloc<GameStateEvent, GameStateState> {
     }
   }
 
-  (Color color, String driverName) _findNextColor() {
+  (Color color, Color driverColor, String driverName) _findNextColor() {
     // Get color from known controller
     var colorList = _messageBloc.driversList.values
-        .map((driver) => (driver.bgColor, driver.name))
+        .map((driver) => (driver.bgColor, driver.textColor, driver.name))
         .toList();
     colorList.shuffle();
-    return colorList.firstOrNull ?? (Colors.grey, "");
+    return colorList.firstOrNull ?? (Colors.grey, Colors.grey, "");
   }
 }
