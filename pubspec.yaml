@@ -43,7 +43,7 @@ dependencies:
   logger: ^2.0.2+1
   injectable: ^2.3.2
   shelf: ^1.4.1
-  shelf_plus: ^1.7.0
+  shelf_plus: ^1.8.0
   shelf_cors_headers: ^0.1.5
   json_annotation: ^4.8.1
   equatable: ^2.0.5
