@@ -21,25 +21,23 @@ void main() {
   group('Test RaceEventBloc', () {
     Bloc.observer = SimpleBlocObserver();
     late SmartRaceMessageHandler handler;
+    late IncomingRaceMessageBloc bloc;
 
     setUp(() async {
       EquatableConfig.stringify = true;
       configureDependencies();
+      bloc = getIt<IncomingRaceMessageBloc>();
+      handler = getIt<SmartRaceMessageHandler>();
+      await handler.startServer(8085, false, bloc: bloc);
     });
 
     tearDown(() async {
-      handler.stopServer();
-      await getIt.reset();
+      await handler.stopServer().then((value) => getIt.reset());
     });
 
     blocTest<IncomingRaceMessageBloc, IncomingRaceMessageState>(
         'emits [RaceEventEventChangeStatus]',
-        build: () {
-          var bloc = getIt<IncomingRaceMessageBloc>();
-          handler = getIt<SmartRaceMessageHandler>();
-          handler.startServer(8085, false, bloc: bloc);
-          return bloc;
-        },
+        build: () => bloc,
         act: (bloc) => _postTestData('event.change_status_1.json'),
         expect: () => [
               IncomingRaceMessageState.raceEventStatusChange(
@@ -48,18 +46,14 @@ void main() {
 
     blocTest<IncomingRaceMessageBloc, IncomingRaceMessageState>(
         'emits single [RaceEventUiLapUpdate, DriverslistChange]',
-        build: () {
-          var bloc = getIt<IncomingRaceMessageBloc>();
-          handler = getIt<SmartRaceMessageHandler>();
-          handler.startServer(8085, false, bloc: bloc);
-          return bloc;
-        },
+        build: () => bloc,
         act: (bloc) => _postTestData('ui.lap_update_driver_1_1.json'),
         expect: () => [
               IncomingRaceMessageState.raceUiLapUpdate(
                   DateTime(2024, 1, 1, 0, 0, 0),
                   "2",
                   "0:10.008",
+                  4,
                   const Color.fromRGBO(254, 56, 39, 1.0),
                   const Color.fromRGBO(23, 255, 255, 1)),
               IncomingRaceMessageState.updateDriversList([
@@ -75,7 +69,7 @@ void main() {
 
     blocTest<IncomingRaceMessageBloc, IncomingRaceMessageState>(
         'emits two same [RaceEventUiLapUpdate, DriverslistChange]',
-        build: () => getIt<IncomingRaceMessageBloc>(),
+        build: () => bloc,
         act: (bloc) {
           return _postTestData('ui.lap_update_driver_1_1.json')
               .then((value) => _postTestData('ui.lap_update_driver_1_2.json'));
@@ -86,6 +80,7 @@ void main() {
                 DateTime(2024, 1, 1, 0, 0, 0),
                 "2",
                 "0:10.608",
+                6,
                 const Color.fromRGBO(254, 56, 39, 1.0),
                 const Color.fromRGBO(23, 255, 255, 1),
               ),
@@ -93,7 +88,7 @@ void main() {
 
     blocTest<IncomingRaceMessageBloc, IncomingRaceMessageState>(
       'emits three [RaceEventUiLapUpdate, DriverslistChange]',
-      build: () => getIt<IncomingRaceMessageBloc>(),
+      build: () => bloc,
       act: (bloc) {
         return _postTestData('ui.lap_update_driver_1_1.json').then((value) =>
             _postTestData('ui.lap_update_driver_1_2.json').then(
@@ -106,6 +101,7 @@ void main() {
           DateTime(2024, 1, 1, 0, 0, 0),
           "1",
           "0:13.292",
+          3,
           const Color.fromRGBO(25, 56, 39, 1.0),
           const Color.fromRGBO(255, 255, 255, 1),
         ),
@@ -142,6 +138,8 @@ Future<void> _postTestData(String testJsonFileName) async {
         },
         body: File("${Directory.current.path}/test/json/$testJsonFileName")
             .readAsStringSync()
+            .replaceAll("{{\$timestamp}}",
+                DateTime.now().millisecondsSinceEpoch.toString())
         // body: jsonEncode(<String, dynamic>{
         //   'time': 1684769957969,
         //   'event_type': 'event.change_status',
