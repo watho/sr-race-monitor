@@ -74,6 +74,7 @@ void main() {
           DateTime.now(),
           UiLapUpdate(
               laptime: '00:07:12',
+              lap: 5,
               controllerId: "2",
               controllerData: ControllerData(
                   colorBg: "rgb(254, 56, 39)", colorText: "rgb(255, 255, 255)"),
@@ -107,6 +108,7 @@ void main() {
           DateTime.now(),
           UiLapUpdate(
               laptime: '00:07:12',
+              lap: 5,
               controllerId: "2",
               controllerData: ControllerData(
                   colorBg: "rgb(254, 56, 39)", colorText: "rgb(255, 255, 255)"),
@@ -115,6 +117,7 @@ void main() {
           DateTime.now(),
           UiLapUpdate(
               laptime: '00:08:42',
+              lap: 5,
               controllerId: "2",
               controllerData: ControllerData(
                   colorBg: "rgb(254, 56, 39)", colorText: "rgb(255, 255, 255)"),
@@ -148,6 +151,7 @@ void main() {
           DateTime.now(),
           UiLapUpdate(
               laptime: '00:07:12',
+              lap: 7,
               controllerId: "2",
               controllerData: ControllerData(
                   colorBg: "rgb(254, 56, 39)", colorText: "rgb(255, 255, 255)"),
@@ -156,6 +160,7 @@ void main() {
           DateTime.now(),
           UiLapUpdate(
               laptime: '00:08:42',
+              lap: 8,
               controllerId: "2",
               controllerData: ControllerData(
                   colorBg: "rgb(254, 56, 39)", colorText: "rgb(255, 255, 255)"),
@@ -164,6 +169,7 @@ void main() {
           DateTime.now(),
           UiLapUpdate(
               laptime: '00:08:42',
+              lap: 3,
               controllerId: "1",
               controllerData: ControllerData(
                   colorBg: "rgb(254, 56, 39)", colorText: "rgb(255, 255, 255)"),
