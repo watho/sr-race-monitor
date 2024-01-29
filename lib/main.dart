@@ -7,12 +7,29 @@ import 'package:smart_race_monitor/service/i_smart_race_message_handler.dart';
 import 'package:smart_race_monitor/service/injection.dart';
 import 'package:smart_race_monitor/util/routing/router.dart';
 import 'package:smart_race_monitor/util/simple_bloc_observer.dart';
+import 'package:window_manager/window_manager.dart';
 
 final getIt = GetIt.instance;
 
-void main() {
+void main() async {
   Bloc.observer = SimpleBlocObserver();
   configureDependencies();
+  WidgetsFlutterBinding.ensureInitialized();
+  await windowManager.ensureInitialized();
+
+  WindowOptions windowOptions =
+      const WindowOptions(size: Size(800, 600), minimumSize: Size(400, 700)
+          //center: true,
+          //backgroundColor: Colors.transparent,
+          //skipTaskbar: false,
+          //titleBarStyle: TitleBarStyle.hidden,
+          //windowButtonVisibility: false,
+          );
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
+  });
+
   SmartRaceMessageHandler srmh = getIt<SmartRaceMessageHandler>();
   runApp(MyApp());
 }
