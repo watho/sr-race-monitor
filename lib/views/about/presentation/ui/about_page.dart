@@ -1,40 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:smart_race_monitor/util/routing/router.dart';
+import 'package:smart_race_monitor/util/ui/drawer.dart';
+import 'package:smart_race_monitor/util/ui/responsive_layout.dart';
+import 'package:smart_race_monitor/views/about/presentation/ui/about_desktop.dart';
+import 'package:smart_race_monitor/views/about/presentation/ui/about_mobile.dart';
+
+import 'about_tablet.dart';
 
 class AboutPage extends StatelessWidget {
-  const AboutPage({super.key, required this.drawer});
-
-  final Widget drawer;
+  const AboutPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Row(children: [
-        drawer,
-        Expanded(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              "SR Race Monitor",
-              textScaler: TextScaler.linear(4),
-            ),
-            const Text(
-              "2023",
-              textScaler: TextScaler.linear(2),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Image.asset(
-                'assets/icon.png',
-                semanticLabel: "Logo",
-                height: 300,
-                width: 300,
-              ),
-            )
-          ],
-        ))
-      ]),
+    AppDrawer drawer = AppDrawer(
+      selectedRoute: AboutRoute().location,
+    );
+    return ResponsiveLayout(
+      mobileBody: AboutMobile(
+        drawer: drawer,
+      ),
+      tabletBody: AboutTablet(drawer: drawer),
+      desktopBody: AboutDesktop(drawer: drawer),
     );
   }
 }
