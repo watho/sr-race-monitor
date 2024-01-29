@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:smart_race_monitor/main.dart';
 import 'package:smart_race_monitor/util/routing/router.dart';
 
-class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({super.key, required this.selectedRoute});
+class AppDrawer extends StatelessWidget {
+  const AppDrawer({super.key, required this.selectedRoute});
 
   final String selectedRoute;
 
@@ -49,19 +48,19 @@ class HomeDrawer extends StatelessWidget {
               ),
             ),
           ),
-          // Padding(
-          //   padding: tilePadding,
-          //   child: InkWell(
-          //     onTap: () => SettingsRoute().go(context),
-          //     child: ListTile(
-          //       selected: selectedRoute == SettingsRoute().location,
-          //       leading: const Icon(Icons.settings),
-          //       title: const Text(
-          //         'Einstellungen',
-          //       ),
-          //     ),
-          //   ),
-          // ),
+          Padding(
+            padding: tilePadding,
+            child: InkWell(
+              onTap: () => SettingsRoute().go(context),
+              child: ListTile(
+                selected: selectedRoute == SettingsRoute().location,
+                leading: const Icon(Icons.settings),
+                title: const Text(
+                  'Einstellungen',
+                ),
+              ),
+            ),
+          ),
           Padding(
             padding: tilePadding,
             child: InkWell(

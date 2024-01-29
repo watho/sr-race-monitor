@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_race_monitor/event_model/bloc/incoming_race_message_bloc.dart';
-import 'package:smart_race_monitor/util/drawer.dart';
-import 'package:smart_race_monitor/util/responsive_layout.dart';
 import 'package:smart_race_monitor/util/routing/router.dart';
+import 'package:smart_race_monitor/util/ui/drawer.dart';
+import 'package:smart_race_monitor/util/ui/responsive_layout.dart';
 import 'package:smart_race_monitor/views/game/presentation/bloc/game_state_bloc.dart';
 import 'package:smart_race_monitor/views/game/presentation/ui/game_desktop.dart';
 import 'package:smart_race_monitor/views/game/presentation/ui/game_mobile.dart';
@@ -15,7 +15,7 @@ class GamePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HomeDrawer drawer = HomeDrawer(
+    AppDrawer drawer = AppDrawer(
       selectedRoute: GameRoute().location,
     );
     return BlocProvider(
