@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:smart_race_monitor/event_model/bloc/incoming_race_message_bloc.dart';
 import 'package:smart_race_monitor/event_model/event_change_status.dart';
 import 'package:smart_race_monitor/event_model/ui_lap_update.dart';
-import 'package:smart_race_monitor/ui/race_state_table.dart';
 import 'package:smart_race_monitor/util/simple_bloc_observer.dart';
+import 'package:smart_race_monitor/widgets/race_state_table.dart';
 
 void main() {
   group('Test home view', () {

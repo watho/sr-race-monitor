@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:smart_race_monitor/util/ui/race_state_table.dart';
 import 'package:smart_race_monitor/views/game/presentation/ui/game_actions.dart';
 import 'package:smart_race_monitor/views/game/presentation/ui/game_page_widgets.dart';
+import 'package:smart_race_monitor/widgets/race_state_table.dart';
 
 class GameTabletPage extends StatelessWidget {
   const GameTabletPage({super.key, required this.drawer});
@@ -24,7 +24,7 @@ class GameTabletPage extends StatelessWidget {
               ),
               const Text(
                 "SR Race Game",
-                textScaler: TextScaler.linear(4),
+                textScaler: TextScaler.linear(3),
               ),
               const HelpText(),
               GameBox(),

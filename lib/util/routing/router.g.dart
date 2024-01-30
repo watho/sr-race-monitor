@@ -14,7 +14,7 @@ List<RouteBase> get $appRoutes => [
     ];
 
 RouteBase get $homeScreenRoute => GoRouteData.$route(
-      path: '/',
+      path: '/home',
       factory: $HomeScreenRouteExtension._fromState,
     );
 
@@ -22,7 +22,7 @@ extension $HomeScreenRouteExtension on HomeScreenRoute {
   static HomeScreenRoute _fromState(GoRouterState state) => HomeScreenRoute();
 
   String get location => GoRouteData.$location(
-        '/',
+        '/home',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -36,7 +36,7 @@ extension $HomeScreenRouteExtension on HomeScreenRoute {
 }
 
 RouteBase get $gameRoute => GoRouteData.$route(
-      path: '/game',
+      path: '/',
       factory: $GameRouteExtension._fromState,
     );
 
@@ -44,7 +44,7 @@ extension $GameRouteExtension on GameRoute {
   static GameRoute _fromState(GoRouterState state) => GameRoute();
 
   String get location => GoRouteData.$location(
-        '/game',
+        '/',
       );
 
   void go(BuildContext context) => context.go(location);

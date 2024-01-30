@@ -22,28 +22,28 @@ class AppDrawer extends StatelessWidget {
               width: 300,
             ),
           ),
-          Padding(
-            padding: tilePadding,
-            child: InkWell(
-              onTap: () => HomeScreenRoute().go(context),
-              child: ListTile(
-                selected: selectedRoute == HomeScreenRoute().location,
-                leading: const Icon(Icons.home),
-                title: const Text(
-                  'Home',
-                ),
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: tilePadding,
+          //   child: InkWell(
+          //     onTap: () => HomeScreenRoute().go(context),
+          //     child: ListTile(
+          //       selected: selectedRoute == HomeScreenRoute().location,
+          //       leading: const Icon(Icons.flag),
+          //       title: const Text(
+          //         'Monitor',
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: tilePadding,
             child: InkWell(
               onTap: () => GameRoute().go(context),
               child: ListTile(
                 selected: selectedRoute == GameRoute().location,
-                leading: const Icon(Icons.gamepad),
+                leading: const Icon(Icons.flag),
                 title: const Text(
-                  'Game',
+                  'Spiel',
                 ),
               ),
             ),
