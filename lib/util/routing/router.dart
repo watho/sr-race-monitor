@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:smart_race_monitor/views/about/presentation/ui/about_page.dart';
-import 'package:smart_race_monitor/views/game/presentation/ui/game_page.dart';
-import 'package:smart_race_monitor/views/home/presentation/ui/layout/home_page.dart';
-import 'package:smart_race_monitor/views/settings/presentation/ui/layout/settings_page.dart';
+import 'package:smart_race_monitor/views/about/presentation/ui/layout/about_skeleton.dart';
+import 'package:smart_race_monitor/views/game/presentation/ui/layout/game_skeleton.dart';
+import 'package:smart_race_monitor/views/home/presentation/ui/layout/home_skeleton.dart';
+import 'package:smart_race_monitor/views/settings/presentation/ui/layout/settings_skeleton.dart';
 
 part 'router.g.dart';
 
 @TypedGoRoute<HomeScreenRoute>(
-  path: "/",
+  path: "/home",
 )
 @immutable
 class HomeScreenRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const HomePage();
+    return const HomeSkeleton();
   }
 }
 
 @TypedGoRoute<GameRoute>(
-  path: "/game",
+  path: "/",
 )
 @immutable
 class GameRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const GamePage();
+    return const GameSkeleton();
   }
 }
 
@@ -36,7 +36,7 @@ class GameRoute extends GoRouteData {
 class SettingsRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const SettingsPage();
+    return const SettingsSkeleton();
   }
 }
 
@@ -47,6 +47,6 @@ class SettingsRoute extends GoRouteData {
 class AboutRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const AboutPage();
+    return const AboutSkeleton();
   }
 }

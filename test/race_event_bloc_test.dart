@@ -80,7 +80,7 @@ void main() {
                 DateTime(2024, 1, 1, 0, 0, 0),
                 "2",
                 "0:10.608",
-                6,
+                5,
                 const Color.fromRGBO(254, 56, 39, 1.0),
                 const Color.fromRGBO(23, 255, 255, 1),
               ),
@@ -101,7 +101,7 @@ void main() {
           DateTime(2024, 1, 1, 0, 0, 0),
           "1",
           "0:13.292",
-          3,
+          7,
           const Color.fromRGBO(25, 56, 39, 1.0),
           const Color.fromRGBO(255, 255, 255, 1),
         ),
@@ -139,7 +139,7 @@ Future<void> _postTestData(String testJsonFileName) async {
         body: File("${Directory.current.path}/test/json/$testJsonFileName")
             .readAsStringSync()
             .replaceAll("{{\$timestamp}}",
-                DateTime.now().millisecondsSinceEpoch.toString())
+                DateTime(2024, 1, 1).millisecondsSinceEpoch.toString())
         // body: jsonEncode(<String, dynamic>{
         //   'time': 1684769957969,
         //   'event_type': 'event.change_status',

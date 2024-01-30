@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:smart_race_monitor/util/routing/drawer.dart';
+import 'package:smart_race_monitor/util/routing/responsive_layout.dart';
 import 'package:smart_race_monitor/util/routing/router.dart';
-import 'package:smart_race_monitor/util/ui/drawer.dart';
-import 'package:smart_race_monitor/util/ui/responsive_layout.dart';
 import 'package:smart_race_monitor/views/settings/presentation/ui/layout/settings_desktop.dart';
 import 'package:smart_race_monitor/views/settings/presentation/ui/layout/settings_mobile.dart';
 import 'package:smart_race_monitor/views/settings/presentation/ui/layout/settings_tablet.dart';
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+class SettingsSkeleton extends StatelessWidget {
+  const SettingsSkeleton({super.key});
 
   @override
   Widget build(BuildContext context) {

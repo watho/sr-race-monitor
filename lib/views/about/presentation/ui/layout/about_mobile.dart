@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_race_monitor/views/about/presentation/ui/about_page.dart';
 
 class AboutMobile extends StatelessWidget {
   const AboutMobile({super.key, required this.drawer});
@@ -24,29 +25,7 @@ class AboutMobile extends StatelessWidget {
         ],
       )),
       drawer: drawer,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Text(
-            "SR Race Monitor",
-            textScaler: TextScaler.linear(3),
-          ),
-          const Text(
-            "2023",
-            textScaler: TextScaler.linear(2),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Image.asset(
-              'assets/icon.png',
-              semanticLabel: "Logo",
-              height: 300,
-              width: 300,
-            ),
-          )
-        ],
-      ),
+      body: const AboutPage(),
     );
   }
 }

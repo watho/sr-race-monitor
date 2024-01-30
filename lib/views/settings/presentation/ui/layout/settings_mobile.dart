@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_race_monitor/views/settings/presentation/ui/settings_form.dart';
+import 'package:smart_race_monitor/views/settings/presentation/ui/settings_page.dart';
 
 class SettingsMobile extends StatelessWidget {
   const SettingsMobile({super.key, required this.drawer});
@@ -27,7 +27,7 @@ class SettingsMobile extends StatelessWidget {
       drawer: drawer,
       body: const Column(
         children: [
-          SettingsFormular(),
+          SettingsPage(),
         ],
       ),
     );

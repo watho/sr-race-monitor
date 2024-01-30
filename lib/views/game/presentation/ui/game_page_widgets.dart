@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 import 'package:smart_race_monitor/event_model/bloc/incoming_race_message_bloc.dart';
 import 'package:smart_race_monitor/views/game/presentation/bloc/game_state_bloc.dart';
+import 'package:smart_race_monitor/widgets/help_box.dart';
 
 class GameBox extends StatelessWidget {
   GameBox({super.key});
@@ -226,25 +227,10 @@ class HelpText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.orangeAccent.shade100,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            """- Mit den Teilnehmern einmal über die Ziellinie fahren, damit sie oben bei Fahrer auftauchen.
+    return const HelpBox(
+        """- Mit den Teilnehmern einmal über die Ziellinie fahren, damit sie oben bei Fahrer auftauchen.
 - Spiel starten. Bei 'nächste Farbe' erscheint eine Controllerfarbe.
 - Richtiges Auto muss als nächstes über die Zielline, dann gibt es Punkte. Falsches Auto gibt Minuspunkt.
-- 5 Minuten Zeit zum Punkte sammeln.""",
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
-        ),
-      ),
-    );
+- 5 Minuten Zeit zum Punkte sammeln.""");
   }
 }
