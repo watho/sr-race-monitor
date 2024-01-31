@@ -1,11 +1,25 @@
-# smart_race_monitor
+![Logo](assets/icon_small.png)
 
-Race monitor.
+# SR Race Monitor
 
-## Getting Started
+**Tests:**
+![Build and release for android.](https://github.com/watho/sr-race-monitor/workflows/Build%20apk%20and%20appbundle/badge.svg)
 
-This project is a starting point for a Flutter application.
+Race monitor and little game utilizing the [SmartRace-App](https://smartrace.de) for slotcar racing.
 
+This app receives events from the smartrace app for slotcar racing. See [smartrace.de](https://www.smartrace.de/en/)
+and [buy them a coffee](https://www.smartrace.de/en/buy-me-a-coffee/).
+The adapter uses the [data interface](https://www.smartrace.de/en/the-smartrace-manual/data-interface/) which is a paid
+feature, so if you don't have a slotcar racetrack and don't use the
+smartrace app or don't want to pay for the data interface then this app is not for you.
+
+## Screenshots
+
+## Changelog
+
+## Contribute
+
+This project is a Flutter application.
 A few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)

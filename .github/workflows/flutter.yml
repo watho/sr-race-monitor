@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Build apk and appbundle.
+name: Build apk and appbundle
 
 on:
   push:
