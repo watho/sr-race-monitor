@@ -29,7 +29,7 @@ void main() async {
   //   await windowManager.focus();
   // });
 
-  SmartRaceMessageHandler srmh = getIt<SmartRaceMessageHandler>();
+  //SmartRaceMessageHandler srmh = getIt<SmartRaceMessageHandler>();
   runApp(MyApp());
 }
 

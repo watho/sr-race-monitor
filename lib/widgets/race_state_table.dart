@@ -78,8 +78,12 @@ class RaceStateBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //var log = Logger(printer: PrettyPrinter(methodCount: 1));
     return BlocBuilder<IncomingRaceMessageBloc, IncomingRaceMessageState>(
+      buildWhen: (previous, current) =>
+          previous != current && current is RaceEventStatusChange,
       builder: (context, state) {
+        //log.e("Called with state $state");
         Color c1 = switch (state) {
           RaceEventStatusChange() => raceStatusToColor(state.newState).color,
           _ => Colors.grey
@@ -104,6 +108,8 @@ class RaceStateText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<IncomingRaceMessageBloc, IncomingRaceMessageState>(
+      buildWhen: (previous, current) =>
+          previous != current && current is RaceEventStatusChange,
       builder: (context, state) {
         String label = switch (state) {
           RaceEventStatusChange() => raceStatusToColor(state.newState).label,

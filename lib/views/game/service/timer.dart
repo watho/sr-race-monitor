@@ -1,6 +1,6 @@
-/**
- * Simple Countdown Timer which counts $ticks seconds down.
- */
+///
+/// Simple Countdown Timer which counts $ticks seconds down.
+///
 class GameTimer {
   const GameTimer();
   Stream<int> tick({required int ticks}) {

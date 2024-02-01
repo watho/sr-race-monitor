@@ -4,7 +4,7 @@ import 'package:smart_race_monitor/views/game/presentation/ui/game_page_widgets.
 import 'package:smart_race_monitor/widgets/race_state_table.dart';
 
 class GameMobilePage extends StatelessWidget {
-  GameMobilePage({super.key, required this.drawer});
+  const GameMobilePage({super.key, required this.drawer});
 
   final Widget drawer;
 

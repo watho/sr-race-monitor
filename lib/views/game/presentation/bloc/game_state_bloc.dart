@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
 import 'package:smart_race_monitor/event_model/bloc/incoming_race_message_bloc.dart';
-import 'package:smart_race_monitor/views/game/service/Timer.dart';
+import 'package:smart_race_monitor/views/game/service/timer.dart';
 
 part 'game_state_bloc.freezed.dart';
 part 'game_state_event.dart';

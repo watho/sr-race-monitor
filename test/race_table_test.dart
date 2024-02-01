@@ -182,5 +182,52 @@ void main() {
       expect(find.text("os"), findsOneWidget);
       expect(find.text("fr"), findsOneWidget);
     });
+
+    testWidgets('Test RaceStatusTable RaceStatus still there after lap_update',
+        (WidgetTester tester) async {
+      // Wrap the widget to test with MaterialApp to provide directional hints + bloc;
+      var irmBloc = IncomingRaceMessageBloc();
+      await tester.pumpWidget(MaterialApp(
+          home: BlocProvider(
+        create: (context) {
+          return irmBloc;
+        },
+        child: const RaceStatusTableBox(),
+      )));
+      // Expect initial ui.
+      expect(find.text("Race Status"), findsOneWidget);
+      expect(find.text("unbekannt"), findsOneWidget);
+      expect(find.text("Läuft"), findsNothing);
+      expect(find.text("os"), findsNothing);
+      // Add "RaceStatus is running"-Event to bloc
+      irmBloc.add(IncomingRaceMessageEvent.eventStatusChanged(DateTime.now(),
+          EventChangeStatus(oldState: "unknown", newState: "running")));
+
+      // Wait for all changes and animations finished
+      await tester.pumpAndSettle();
+      // Expect changed ui.
+      expect(find.text("Race Status"), findsOneWidget);
+      expect(find.text("unbekannt"), findsNothing);
+      expect(find.text("Läuft"), findsOneWidget);
+      expect(find.text("os"), findsNothing);
+
+      // Add "LapUpdate"-Event to bloc
+      irmBloc.add(IncomingRaceMessageEvent.uiLapUpdated(
+          DateTime.now(),
+          UiLapUpdate(
+              laptime: '00:07:12',
+              lap: 7,
+              controllerId: "2",
+              controllerData: ControllerData(
+                  colorBg: "rgb(254, 56, 39)", colorText: "rgb(255, 255, 255)"),
+              driverData: DriverData(name: "Osc", id: 1, nameShort: "os"))));
+      // Wait for all changes and animations finished
+      await tester.pumpAndSettle();
+      // Expect changed ui.
+      expect(find.text("Race Status"), findsOneWidget);
+      expect(find.text("unbekannt"), findsNothing);
+      expect(find.text("Läuft"), findsOneWidget);
+      expect(find.text("os"), findsOneWidget);
+    });
   });
 }

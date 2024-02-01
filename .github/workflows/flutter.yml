@@ -3,29 +3,229 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Build apk and appbundle
+name: Build, test, package and deploy
 
 on:
+  # Runs on push on main or tags with version_number
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    tags:
+      # normal versions
+      - "v[0-9]+.[0-9]+.[0-9]+"
+      # pre-releases
+      - "v[0-9]+.[0-9]+.[0-9]+-**"
+  # and all PRs
+  pull_request: { }
+
+# Cancel previous PR/branch runs when a new commit is pushed
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
 
+  # Checking code format. Fails if not correctly formatted.
+  analysis:
+    name: format
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Flutter
+        uses: ./.github/actions/init-flutter
+      - name: Check Code Format
+        run: dart format . --set-exit-if-changed
+      - name: Analyze code
+        run: dart analyze .
+
+  # Run tests. Fails if test fails.
+  widget-tests:
+    name: widget-tests
+    runs-on: ubuntu-20.04
+    needs: analysis
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Flutter
+        uses: ./.github/actions/init-flutter
+      - name: Run tests
+        run: flutter test
+
+  # Build linux executable. Needs analysis and widget-tests.
+  build-linux:
+    name: build for linux
+    runs-on: ubuntu-20.04
+    needs: widget-tests
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Flutter
+        uses: ./.github/actions/init-flutter
+      - name: Install build dependencies via apt
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y ninja-build libgtk-3-dev cmake
+      - run: flutter config --enable-linux-desktop
+      - run: flutter build linux
+      - name: Archive Release
+        uses: thedoctor0/zip-release@0.7.6
+        with:
+          type: 'zip'
+          filename: 'linux-release.zip'
+          directory: build/linux/x64/release/bundle/
+          path: .
+          exclusions: '*.git* /*node_modules/* .editorconfig'
+      - name: Upload release zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux_latest
+          path: build/linux/x64/release/bundle/linux-release.zip
+
+  # Build apk and appbundle for android. Needs analysis and widget-tests.
+  build-android:
+    name: build for android
+    runs-on: ubuntu-20.04
+    needs: widget-tests
     # https://github.com/marketplace/actions/flutter-action
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '21'
-      - uses: subosito/flutter-action@v2
+          cache: 'gradle'
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
         with:
-          channel: stable
-      - run: flutter pub get
-      - run: flutter test
-      - run: flutter build apk
-      - run: flutter build appbundle
+          log-accepted-android-sdk-licenses: false
+      - name: Install Flutter
+        uses: ./.github/actions/init-flutter
+      - name: Build apk
+        run: flutter build apk
+      - name: Build apk
+        run: flutter build apk --split-per-abi
+      - name: Build appbundle
+        run: flutter build appbundle
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android_latest
+          path: |
+            build/app/outputs/flutter-apk/*.apk
+            build/app/outputs/bundle/release/*.aab
+
+  # Build windows executable. Needs analysis and widget-tests. Only on new tags.
+  build-windows:
+    name: build for windows
+    runs-on: windows-2019
+    needs:
+      - widget-tests
+      - build-android
+      - build-linux
+    # Trigger this step only when a commit on any branch is tagged with a version number
+    if: |
+      contains(github.event.head_commit.message, '[skip ci]') == false &&
+      github.event_name == 'push'
+      &&
+      startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Flutter
+        uses: ./.github/actions/init-flutter
+      - run: flutter config --enable-windows-desktop
+      - run: flutter build windows
+      - name: Archive Release
+        uses: thedoctor0/zip-release@0.7.6
+        with:
+          type: 'zip'
+          filename: 'windows-release.zip'
+          directory: build/windows/x64/runner/Release/
+          path: .
+          exclusions: '*.git* /*node_modules/* .editorconfig'
+      - name: Upload release zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows_release
+          path: build/windows/x64/runner/Release/windows-release.zip
+
+  # Build macOS executable. Needs analysis and widget-tests. Only on new tags.
+  build-macos:
+    name: build for macos
+    runs-on: macos-latest
+    needs:
+      - widget-tests
+      - build-android
+      - build-linux
+    # Trigger this step only when a commit on any branch is tagged with a version number
+    if: |
+      contains(github.event.head_commit.message, '[skip ci]') == false &&
+      github.event_name == 'push'
+      &&
+      startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Flutter
+        uses: ./.github/actions/init-flutter
+      - run: flutter config --enable-macos-desktop
+      - run: flutter build macos
+      - name: Archive Release
+        uses: thedoctor0/zip-release@0.7.6
+        with:
+          type: 'zip'
+          filename: 'macos-release.zip'
+          directory: build/macos/Build/Products/Release/
+          path: .
+          exclusions: '*.git* /*node_modules/* .editorconfig'
+      - name: Upload release zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos_release
+          path: build/macos/Build/Products/Release/macos-release.zip
+
+  # Release latest package after push to main and successful test + build
+  release-latest:
+    name: Release latest app
+    runs-on: ubuntu-20.04
+    needs:
+      - build-android
+      - build-linux
+    if: |
+      contains(github.event.head_commit.message, '[skip ci]') == false &&
+      github.event_name == 'push' 
+      &&
+      startsWith(github.ref, 'refs/tags/v') == false
+    steps:
+      - name: Get build output.
+        uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+      - name: Release
+        uses: marvinpinto/action-automatic-releases@v1.2.1
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: '**/*'
+
+  # Release tagged package after push tag with v... and successful test + build
+  release:
+    name: Release app
+    runs-on: ubuntu-20.04
+    needs:
+      - build-android
+      - build-linux
+      - build-macos
+      - build-windows
+    if: |
+      contains(github.event.head_commit.message, '[skip ci]') == false &&
+      github.event_name == 'push' &&
+      startsWith(github.ref, 'refs/tags/v') == true
+    steps:
+      - name: Get build output.
+        uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+      - name: Release
+        uses: marvinpinto/action-automatic-releases@v1.2.1
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: '**/*'

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:bloc_test/bloc_test.dart';
@@ -152,7 +151,8 @@ Future<void> _postTestData(String testJsonFileName) async {
 
     if (response.statusCode == 200) {
       // Successful POST request, handle the response here
-      final responseData = jsonDecode(response.body);
+      //final responseData = jsonDecode(response.body);
+      log.d("Test request finished with 200");
     } else {
       // If the server returns an error response, throw an exception
       throw Exception('Failed to post data. Statuscode ${response.statusCode}');

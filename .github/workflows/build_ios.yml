@@ -1,0 +1,71 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Build iOS app
+
+on:
+  workflow_dispatch
+
+
+# not automatic yet
+#on:
+#  # Runs on push on main or tags with version_number
+#  push:
+#    branches: [ "main" ]
+#    tags:
+#      # normal versions
+#      - "v[0-9]+.[0-9]+.[0-9]+"
+#      # pre-releases
+#      - "v[0-9]+.[0-9]+.[0-9]+-**"
+#  # and all PRs
+#  pull_request: { }
+
+# Cancel previous PR/branch runs when a new commit is pushed
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  # Checking code format. Fails if not correctly formatted.
+  analysis:
+    name: check and test
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Flutter
+        uses: ./.github/actions/init-flutter
+      - name: Check Code Format
+        run: dart format . --set-exit-if-changed
+      - name: Analyze code
+        run: dart analyze .
+      - name: Run tests
+        run: flutter test
+
+  # Build ios app. Needs analysis and widget-tests.
+  build-ios:
+    name: build for ios
+    runs-on: macos-latest
+    needs:
+      - analysis
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install Flutter
+      uses: ./.github/actions/init-flutter
+    - run: flutter build ios --release --no-codesign
+    - name: Archive Release
+      uses: thedoctor0/zip-release@0.7.6
+      with:
+        type: 'zip'
+        filename: 'ios-release.zip'
+        # probably wron
+        directory: /Users/runner/work/sr-race-monitor-workflow-test/sr-race-monitor-workflow-test/build/ios/iphoneos/
+        path: .
+        exclusions: '*.git* /*node_modules/* .editorconfig'
+    - name: Upload release zip
+      uses: actions/upload-artifact@v4
+      with:
+        name: ios_release
+        path: /Users/runner/work/sr-race-monitor-workflow-test/sr-race-monitor-workflow-test/build/ios/iphoneos/ios-release.zip

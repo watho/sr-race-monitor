@@ -1,7 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:logger/logger.dart';
 import 'package:shelf_plus/shelf_plus.dart' as shelf_plus;
 
 void main() {
+  var log = Logger(printer: PrettyPrinter());
   group('Test Shelf Server', () {
     test('Test start and stop', () async {
       var context1 = await shelf_plus.shelfRun(
@@ -10,7 +12,7 @@ void main() {
         defaultBindPort: 8085,
         defaultEnableHotReload: false,
       );
-      await context1.close().whenComplete(() => print("context 1 closed"));
+      await context1.close().whenComplete(() => log.d("context 1 closed"));
       //await Future.delayed(const Duration(seconds: 5));
       var context2 = await shelf_plus.shelfRun(
         init,
@@ -18,7 +20,7 @@ void main() {
         defaultBindPort: 8085,
         defaultEnableHotReload: false,
       );
-      await context2.close().whenComplete(() => print("context 2 closed"));
+      await context2.close().whenComplete(() => log.d("context 2 closed"));
     });
   });
 }
@@ -30,5 +32,5 @@ shelf_plus.Handler init() {
   // postReceiver.use(corsHeaders());
   //postReceiver.post('/', (request) => '"${request.method}" at "${request.url}" with length "${request.contentLength}" ');
   app.get('/<ignored|.*>', (request) => 'Congratulation! This works.');
-  return app;
+  return app.call;
 }

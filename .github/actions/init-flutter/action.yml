@@ -1,0 +1,17 @@
+name: "Init Flutter"
+description: "Initializes Flutter repo"
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v4
+    - name: Install Flutter
+      uses: watho/flutter-action@3230cc972e94c89cdc82f99bb670ce7512058cf3
+      with:
+        channel: stable
+        architecture: x64
+        cache: true
+        cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:' # optional, change this to force refresh cache
+        cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:' # optional, change this to specify the cache path
+    - name: Generate code
+      shell: bash
+      run: dart run build_runner build --delete-conflicting-outputs

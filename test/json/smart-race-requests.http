@@ -10,6 +10,12 @@ Content-Type: application/json
 
 < ./event.change_status_2.json
 
+### Event.change_status 3
+POST http://{{host}}:{{port}}/
+Content-Type: application/json
+
+< ./event.change_status_3.json
+
 ### Event.end 1
 POST http://{{host}}:{{port}}/
 Content-Type: application/json

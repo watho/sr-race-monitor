@@ -202,7 +202,7 @@ class TimerText extends StatelessWidget {
           TimerRunComplete() => 0,
           _ => -1,
         };
-        Color color = Colors.green;
+
         var style = Theme.of(context).textTheme.displayMedium;
         if (duration < 60) {
           style = style?.copyWith(color: Colors.red);

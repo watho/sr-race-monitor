@@ -44,6 +44,7 @@ class SettingsPage extends StatelessWidget {
                               if (value == null || value.isNaN) {
                                 return 'Valid port is required.';
                               }
+                              return null;
                             },
                             onSaved: (value) => port = value!,
                           ),

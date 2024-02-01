@@ -10,13 +10,10 @@ class EventChangeStatus {
   @JsonKey(name: 'new')
   final String newState;
 
-
-  EventChangeStatus({
-    required this.oldState,
-    required this.newState
-  });
+  EventChangeStatus({required this.oldState, required this.newState});
 
   Map<String, dynamic> toJson() => _$EventChangeStatusToJson(this);
 
-  static EventChangeStatus fromJson(Map<String, dynamic> json) => _$EventChangeStatusFromJson(json);
+  static EventChangeStatus fromJson(Map<String, dynamic> json) =>
+      _$EventChangeStatusFromJson(json);
 }

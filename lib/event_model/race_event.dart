@@ -12,14 +12,10 @@ class RaceEvent {
   @JsonKey(name: 'event_data')
   final Map<String, dynamic> eventData;
 
-
-  RaceEvent({
-    required this.time,
-    this.eventType,
-    required this.eventData
-  });
+  RaceEvent({required this.time, this.eventType, required this.eventData});
 
   Map<String, dynamic> toJson() => _$RaceEventToJson(this);
 
-  static RaceEvent fromJson(Map<String, dynamic> json) => _$RaceEventFromJson(json);
+  static RaceEvent fromJson(Map<String, dynamic> json) =>
+      _$RaceEventFromJson(json);
 }
