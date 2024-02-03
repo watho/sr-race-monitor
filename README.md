@@ -13,9 +13,38 @@ The adapter uses the [data interface](https://www.smartrace.de/en/the-smartrace-
 feature, so if you don't have a slotcar racetrack and don't use the
 smartrace app or don't want to pay for the data interface then this app is not for you.
 
+## Changelog
+
+### 1.0.0
+
+- first working version
+
 ## Screenshots
 
-## Changelog
+![Logo](doc/mobile_screen.png)
+
+## Usage
+
+- Under releases, you find prebuilt packages for Android, Windows, Linux and macOS.
+    - Windows: Extract and start executable.
+    - Linux: Extract and start executable.
+    - Android: Install package for your architecture or try app-release.apk
+    - macOS: I don't know. Look into macos-release.zip. Feedback welcome.
+    - ioOS. I don't know. I can build an iosApp, but don't know which files are necessary to install. Contact me if you
+      can provide any help.
+- Start SmartRace-App
+    - Enable and configure data interface according to https://www.smartrace.de/en/the-smartrace-manual/data-interface/
+    - URL needs to be the url or ip of the device on which this app runs. Port is 8085.
+- Start this app.
+    - On starting or stopping the control unit the current state should be visible under `Race Status`
+    - On driving over the finish line the driver should appear under `Race Status`. You can reset this list with the
+      little `x`-Button.
+- Playing the game.
+    - All driver have to work together to get points.
+    - After each driver is recognized. Hit the `Play` button.
+    - The game chooses a random driver and shows the controller color. This driver is the next to cross the finish line
+      to get points. If a wrong driver crosses the line first you loose a point.
+    - The game duration is 5 minutes. Try to get as many points as possible.
 
 ## Contribute
 
